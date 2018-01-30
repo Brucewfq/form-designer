@@ -1,0 +1,35 @@
+<!-- label属性编辑控件 -->
+<p-panel>
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Label setting</span>
+    </div>
+  </p-header>
+  <p-tabView>
+    <p-tabPanel header="GENERAL">
+      <h3 class="first">Label<span style="color: red">*</span></h3>
+      <input type="text" size="30" placeholder="label" pInputText [(ngModel)]="label.label">
+
+      <h3 class="first">Name<span style="color: red">*</span></h3>
+      <input type="text" size="30"  placeholder="label" pInputText [(ngModel)]="label.name">
+
+      <h3 class="first">Hint</h3>
+      <input type="text" size="30"  placeholder="Hint" pInputText [(ngModel)]="label.Hint">
+
+    </p-tabPanel>
+    <p-tabPanel header="ADVANCED">
+      <h3 class="first">Access Control</h3>
+      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="label.access"></p-inputSwitch>
+
+      <h3 class="first">Data Type<span style="color: red">*</span></h3>
+      <p-dropdown [options]="dataTypes" [(ngModel)]="selectedDataType" placeholder="Select a Data Type" [style]="{'width':'150px'}"></p-dropdown>
+
+      <h3 class="first">Format</h3>
+      <input type="text" size="30" placeholder="Format" pInputText [(ngModel)]="label.rormat">
+
+    </p-tabPanel>
+  </p-tabView>
+  <p-footer>
+    <app-wiget-property-bottom (cFinish)="clickFinish(e)" (cQuickFinish)="clickQuickFinish(e)"></app-wiget-property-bottom>
+  </p-footer>
+</p-panel>

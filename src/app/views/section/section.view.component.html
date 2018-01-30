@@ -1,0 +1,10 @@
+<!-- 区域选择器 -->
+<ngx-dnd-container dropZone="builder-target"
+                   class="section-view-border"
+                   [model]="model"
+                   [removeOnSpill]="true"
+                   [template]="template"
+                   [droppableItemClass]="droppableItemClass"
+                   (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
+                   (remove)="log($event)">
+</ngx-dnd-container>

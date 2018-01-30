@@ -1,0 +1,18 @@
+<!-- Choose Object控件 -->
+<p-panel>
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Choose Object</span>
+    </div>
+  </p-header>
+  <p-messages [(value)]="msgs"></p-messages>
+  <p-dataTable [value]="objectDatas" selectionMode="single" [(selection)]="selectedObject" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" dataKey="id">
+    <p-column field="name" header="object名称"></p-column>
+    <p-column field="nameDec" header="中文名"></p-column>
+    <p-column field="ver" header="版本号"></p-column>
+    <p-column field="type" header="类型"></p-column>
+  </p-dataTable>
+  <p-footer>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="clickFinish(e)"></app-wiget-property-bottom>
+  </p-footer>
+</p-panel>

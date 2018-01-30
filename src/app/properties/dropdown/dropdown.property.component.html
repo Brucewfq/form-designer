@@ -1,0 +1,71 @@
+<!-- dropdown属性编辑控件 -->
+<p-panel>
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Dropdown setting</span>
+    </div>
+  </p-header>
+  <p-tabView>
+    <p-tabPanel header="GENERAL">
+      <h3 class="first">Label<span style="color: red">*</span></h3>
+      <input type="text" size="30" placeholder="dropdown" pInputText [(ngModel)]="dropdown.label">
+      <span>Type your label.</span>
+
+      <h3 class="first">Name<span style="color: red">*</span></h3>
+      <input type="text" size="30"  placeholder="dropdown" pInputText [(ngModel)]="dropdown.name">
+
+      <h3 class="first">Hint</h3>
+      <input type="text" size="30"  placeholder="Hint" pInputText [(ngModel)]="dropdown.Hint">
+
+      <h3 class="first"></h3>
+      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="dropdown.required"></p-inputSwitch><span>Required (Prevent submission if this value is empty.)</span>
+    </p-tabPanel>
+    <p-tabPanel header="ADVANCED">
+      <h3 class="first">Access Control</h3>
+      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="dropdown.access"></p-inputSwitch>
+
+      <h3 class="first">Multiple</h3>
+      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="dropdown.multiple"></p-inputSwitch>
+
+      <div *ngIf="dropdown.multiple">
+        <h3 class="first">Columns<span style="color: red">*</span></h3>
+        <p-dropdown [options]="columns" [(ngModel)]="selectedColumn" placeholder="Select a Column" [style]="{'width':'150px'}"></p-dropdown>
+      </div>
+
+      <h3 class="first">DataSource Type</h3>
+      <p-dropdown [options]="dataSourceTypes" [(ngModel)]="selectedDataSourceType" placeholder="Select a DataSource Type" [style]="{'width':'150px'}"></p-dropdown>
+
+    </p-tabPanel>
+    <p-tabPanel header="OPTION" *ngIf="selectedDataSourceType==='1'">
+      <h3 class="first">Options</h3>
+      <input type="text" size="30" placeholder="Options" pInputText [(ngModel)]="dropdown.options">
+
+    </p-tabPanel>
+    <p-tabPanel header="DATA SOURCE" *ngIf="selectedDataSourceType==='2'">
+      <h3 class="first">URL</h3>
+      <input type="text" size="30" placeholder="URL" pInputText [(ngModel)]="dropdown.URL">
+
+      <h3 class="first">Content Type</h3>
+      <input type="text" size="30" placeholder="Content Type" pInputText [(ngModel)]="dropdown.contentType">
+
+      <h3 class="first">Type</h3>
+      <p-dropdown [options]="reqTypes" [(ngModel)]="selectedType" placeholder="Select a Type" [style]="{'width':'150px'}"></p-dropdown>
+
+      <h3 class="first">Display Field<span style="color: red">*</span></h3>
+      <input type="text" size="30" placeholder="Display Field" pInputText [(ngModel)]="dropdown.displayField">
+
+      <h3 class="first">Value Field</h3>
+      <input type="text" size="30" placeholder="Value Field" pInputText [(ngModel)]="dropdown.valueField">
+
+    </p-tabPanel>
+    <p-tabPanel header="CUSTOM CODE">
+      <app-wiget-select-event (chooseOk)="chooseEvent($event)" [parentType]="dropdown"></app-wiget-select-event>
+      <h3 class="first"></h3>
+
+      <app-blockly *ngIf="divShow"></app-blockly>
+    </p-tabPanel>
+  </p-tabView>
+  <p-footer>
+    <app-wiget-property-bottom (cFinish)="clickFinish(e)" (cQuickFinish)="clickQuickFinish(e)"></app-wiget-property-bottom>
+  </p-footer>
+</p-panel>

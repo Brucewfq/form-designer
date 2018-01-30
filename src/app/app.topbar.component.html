@@ -1,0 +1,45 @@
+<div class="layout-topbar">
+    <img alt="logo" src="assets/layout/images/k2.png" class="mobile-logo"/>
+    
+    <a href="#" class="menu-btn" (click)="app.onMenuButtonClick($event)">
+        <i class="material-icons">&#xE5D2;</i>
+    </a>
+
+    <a href="#" class="topbar-menu-btn" (click)="app.onTopbarMobileMenuButtonClick($event)">
+        <i class="material-icons">&#xE853;</i>
+    </a>
+    <div class="layout-topbar-menu-wrapper">
+        <ul class="topbar-menu fadeInDown" [ngClass]="{'topbar-menu-active': app.topbarMenuActive}" (click)="app.onTopbarMenuClick($event)">
+            <li #settings [ngClass]="{'active-topmenuitem':app.activeTopbarItem === settings}" (click)="app.onTopbarRootItemClick($event, settings)">
+                <a href="#">
+                    <i class="topbar-icon material-icons">content_copy</i>
+                    <span class="topbar-item-name">Settings</span>
+                </a>
+            </li> 
+            <li #undo [ngClass]="{'active-topmenuitem':app.activeTopbarItem === undo}" (click)="app.onTopbarRootItemClick($event, settings)">
+                <a href="#">
+                    <i class="topbar-icon material-icons">undo</i>
+                    <span class="topbar-item-name">undo</span>
+                </a>
+            </li>
+            <li #redo [ngClass]="{'active-topmenuitem':app.activeTopbarItem === redo}" (click)="app.onTopbarRootItemClick($event, settings)">
+                <a href="#">
+                    <i class="topbar-icon material-icons">redo</i>
+                    <span class="topbar-item-name">redo</span>
+                </a>
+            </li>
+            <li #redo [ngClass]="{'active-topmenuitem':app.activeTopbarItem === redo}" (click)="app.onTopbarRootItemClick($event, settings)">
+                <a href="#">
+                    <i class="topbar-icon material-icons">content_paste</i>
+                    <span class="topbar-item-name">content_paste</span>
+                </a>
+            </li>
+            <li #share [ngClass]="{'active-topmenuitem':app.activeTopbarItem === redo}" (click)="app.onTopbarRootItemClick($event, settings)">
+                <a href="#">
+                    <i class="easyui-icon icon-save"></i>
+                    <span class="topbar-item-name">share</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="layout-wrapper" (click)="onWrapperClick()" [ngClass]="{'layout-wrapper-static': layoutStatic,
+                'layout-wrapper-active': mobileMenuActive}">
+    <!-- app-menu 开始 -->
+    <div class="layout-sidebar" [ngClass]="{'layout-sidebar-active': app.sidebarActive, 'layout-sidebar-dark': app.darkMenu}"
+        (click)="app.onSidebarClick($event)" (mouseover)="app.sidebarActive=true" (mouseleave)="app.sidebarActive=false">
+        <div class="sidebar-logo">
+            <a routerLink="/">
+                <img alt="logo" src="assets/layout/images/k2.png" />
+                <span class="app-name">Form Designer</span>
+            </a>
+            <a href="#" class="sidebar-anchor" title="Toggle Menu" (click)="app.onToggleMenuClick($event)"></a>
+        </div>
+
+        <div #layoutMenuScroller class="nano">
+            <div class="nano-content sidebar-scroll-content">
+                <div class="layout-menu-container" (click)="updateNanoScroll()">
+                  <app-menucomp></app-menucomp>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- app-menu 结束 -->
+    <!-- <app-menu></app-menu> -->
+
+    <div class="layout-main">
+        <app-topbar></app-topbar>
+
+        <!-- <app-breadcrumb></app-breadcrumb> -->
+
+        <!-- <div class="layout-content">
+            <router-outlet></router-outlet>
+        </div> -->
+
+
+        <!-- 主体部分开始 -->
+        <ngx-section class="shadow builder" sectionTitle="Builder Demo">
+            <div fxLayout="row" fxLayoutWrap="nowrap" fxFill>
+                <div fxFlex="100%">
+                      <app-main-panel [targetBuilderTools] = "targetBuilderTools"></app-main-panel>
+                </div>
+            </div>
+            <div fxFlex>
+
+              <button type="text" (click)="showDialog('app-textbox-property')" pButton icon="fa-external-link-square" label="Textbox"></button>
+              <button type="text" (click)="showDialog('app-number-property')" pButton icon="fa-external-link-square" label="Number"></button>
+              <p-dialog [(visible)]="display" modal="modal" width="800" [responsive]="true">
+                <ng-template #compContainer></ng-template>
+
+              </p-dialog>
+              <button type="text" (click)="showDialog('app-blockly')" pButton icon="fa-external-link-square" label="Blockly"></button>
+              <pre><code>{{targetBuilderTools | json}}</code></pre>
+            </div>
+        </ngx-section>
+
+        <!-- 主体部分结束 -->
+
+        <!-- <app-footer></app-footer> -->
+        <div class="layout-main-mask" *ngIf="mobileMenuActive"></div>
+    </div>
+
+</div>

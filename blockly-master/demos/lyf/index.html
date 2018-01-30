@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Toolbox</title>
+	
+	<link href="../../Commons/Ext/Styles/ext-all.css" rel="Stylesheet" type="text/css" />
+	<link href="../../Commons/Ext/Styles/ux-all.css" rel="stylesheet" type="text/css" />
+	<script src="../../Commons/Ext/Scripts/ext-base-debug.js"></script>
+  <script src="../../Commons/Ext/Scripts/ext-all-debug.js" type="text/javascript"></script>
+  <script src="../../Commons/Scripts/Utility/GlobalFunction.source.js" type="text/javascript"></script>
+	<script src="../../demos/lyf/EventCodeGen.js"></script>  
+	
+    <script src="../../blockly_compressed-format.js"></script>
+  <script src="../../blocks_compressed-format.js"></script>
+  <script src="../../javascript_compressed.js"></script>
+  <script src="../../csharp_compressed.js"></script>
+  <script src="../../msg/js/zh-hans.js"></script>
+  	<script src="../../demos/lyf/blocks/basic.js"></script>
+	<script src="../../demos/lyf/blocks/window.js"></script>
+	<script src="../../demos/lyf/blocks/field.js"></script>
+	<script src="../../demos/lyf/blocks/grid.js"></script>
+	<script src="../../demos/lyf/blocks/store.js"></script>  
+	<script src="../../demos/lyf/blocks/field.js"></script>  
+  
+
+  
+	<script type='text/javascript'>
+		function runCode() {   					 
+		  var code = document.getElementById('codeGen').value;
+		  try {
+		    eval(code);
+		  } catch (e) {
+		    alert(e);
+		  }
+		}
+	
+		Ext.onReady(function () {			
+			  //测试控件											
+				var store = new Ext.data.ArrayStore({
+			    storeId: 'st',
+			    fields: ['name', 'age', 'gender'],
+			    data: [
+			        ['aaaa', '12', '男'],
+			        ['bbbb', '13', '男'],
+			        ['cccc', '15', '男'],
+			        ['ddd', '12', '女']
+			    ]
+				});
+			var colModel = new Ext.grid.ColumnModel([
+	        { header: "姓名", dataIndex: 'name', width: 70},
+	        { header: '年龄', width: 70, dataIndex: 'age' },
+	        { header: '性别', width: 70, dataIndex: 'gender' }
+	     ]);
+	    var grid = new Ext.grid.GridPanel({
+	    		id:'grid',
+	        store: store,
+	        singleSelect: true,
+	        stripeRows: true,
+	        colModel: colModel,
+	        height:500,
+	        viewConfig: { forceFit: true, columnsText: '显示列', sortAscText: '升序', sortDescText: '降序' }, //自动间距
+	        stripeRows: true, //交替
+	        loadMask: true, //遮罩
+	        enableDragDrop: true
+	    });        
+	      
+	   var p=new Ext.Panel({
+			    title: '测试结果',
+			    //x: 100,
+			    //y: 100,
+			    renderTo: 'zzdx',
+			    //floating: true,//true
+			    width: 400,
+			    height: 500,
+			    items:[{xtype:'textfield', id:'text', value:'id is text'},
+			    	{xtype:'numberfield', id:'num', value:'12'},
+			    	grid
+			    
+			    ]
+			})
+	      
+	  });
+	  
+	  
+		
+		//blockly选择控件		
+		var mytree=new Ext.tree.TreePanel({			
+			animate:true,//以动画形式伸展,收缩子节点		
+			enableDD: true,	
+			title:"控件树",			
+			collapsible:true,			
+			rootVisible:true,//是否显示根节点			
+			autoScroll:true,			
+			width:500,			
+			height:300,		
+			lines:true,//节点之间连接的横竖线			
+			loader:new Ext.tree.TreeLoader(),//		
+			root:new Ext.tree.AsyncTreeNode({			
+			id:"root",		
+			text:"根节点",//节点名称			
+			expanded:true,//展开			
+			leaf:false,//是否为叶子节点			
+			children:[{text:'文本框(id:text)', id:'text',leaf:true}, 
+			{text:'Number(id:num)', id:'num',leaf:true},
+			{id:'2',text:'子节点二',children:[{text:"窗体lg", id:'lg',leaf:true}]}]			
+		})			
+		});
+		
+		var _panel=new Ext.Window({
+			id:'lg',
+			title:"选择",
+			//renderTo: 'shownn',
+			//modal:true,
+			width:560,
+			height:300,
+			layout:"form",
+			lableWidth:45,
+			defaults:{xtype:"textfield",width:180},
+			items:[mytree],
+			closeAction: 'hide',
+			buttons:[{text:"确定",handler: function(){
+				var sm = mytree.getSelectionModel();
+				var s = sm.selNode;
+				
+				var b = ff.contentWindow.workspace.getBlockById(_panel.blockId);
+				b.setFieldValue(s.id, 'cmpid');
+				//b.getField('NUM').setText('32');
+				//b.getField('NUM').setValue('12');
+				_panel.hide();
+			}},{text:"取消",handler: function(){
+				_panel.hide();
+			}}]
+		
+		})
+		//_panel.show();
+	</script>
+
+</head>
+<body>
+  
+
+  <p>
+    <button onclick="EventCodeGen.Gen()">show Blockly</button>
+  </p>
+  <p>
+    <button onclick="runCode()">Run JavaScript</button>
+  </p>
+  <p>
+    <textarea id="codeGen" style="width: 26%; height: 12em"></textarea>	
+  </p>
+
+  <div id="shownn" style="height: 300px; width: 800px;">
+  	<p>
+    <input type="button" value="Export to XML" onclick="toXml()">
+    &nbsp;
+    <input type="button" value="Import from XML" onclick="fromXml()" id="import">
+    <br>
+    <textarea id="importExport" style="width: 26%; height: 12em"
+      onchange="taChange();" onkeyup="taChange()"></textarea>	
+    </p>
+  </div>
+  <div id="zzdx" style="height: 600px; width: 700px;"></div>
+
+</body>
+</html>

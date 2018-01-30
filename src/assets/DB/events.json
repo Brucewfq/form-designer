@@ -1,0 +1,7 @@
+{"data" : [
+  {"label": "", "value": ""},
+  {"label": "Change event", "value": "1"},
+  {"label": "Blur event", "value": "2"},
+  {"label": "Init", "value": "3"},
+  {"label": "Keyup", "value": "4"}
+]}

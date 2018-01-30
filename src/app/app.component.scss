@@ -1,0 +1,124 @@
+/** 重写ngx-dnd-container的样式 */
+:host /deep/ .root-container > div {
+  min-height: 480px;
+  margin: 10px;
+  border: 4px dashed #b1b3b8 !important;
+}
+
+:host /deep/ .ngx-dnd-container {
+  margin: 0px;
+}
+
+:host /deep/ .ngx-section-content {
+  .ngx-dnd-container {
+    //border: 1px dotted red;
+    border: none;
+  }
+}
+
+:host /deep/ .ngx-dnd-container.gu-empty {
+  //border: 1px dotted red;
+  border: none;
+}
+
+:host /deep/ .ngx-dnd-container:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+:host /deep/ .ngx-dnd-item {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+:host /deep/ .form-designer-section-border, :host /deep/ .section-view-border > div {
+  border: 1px dashed rgba(128, 128, 128, 0.2) !important;
+  min-height: 72px;
+}
+
+:host /deep/ .section-wrap {
+  position: relative;
+}
+
+:host /deep/ .controls-container {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  height: 30px;
+  display: none;
+  pointer-events: none;
+}
+
+:host /deep/ .section-wrap.active > .controls-container {
+  display: block;
+}
+
+:host /deep/ .setting-controls {
+  float: right;
+  pointer-events: fill;
+}
+
+/* 重写左侧工具栏 */
+
+:host /deep/ .layout-wrapper .layout-sidebar .layout-menu > li > ul {
+  li {
+    float: left;
+    color: #cfd0d3;
+    height: 33.3333%;
+    width: 33.3333%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /* 定义 ngx-dnd-container 控件 */
+    .ngx-dnd-container {
+      border: 0;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      .ngx-dnd-item {
+        border: 1px solid transparent;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        .material-icons {
+          font-size: 50px;
+          display: block;
+          text-align: center;
+          width: auto;
+        }
+        .menuitem-text {
+          text-align: center;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+/*:host /deep/ .layout-wrapper .layout-sidebar .layout-menu>li>ul {
+    font-size: 0;
+    / * 一行n列配置 * /
+    li {
+        font-size: 14px;
+        display: inline-block;
+        width: 33.3333%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        / * 定义 ngx-dnd-container 控件 * /
+        .ngx-dnd-container {
+            border: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            .ngx-dnd-item {
+                border: 1px solid transparent;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+}
+*/

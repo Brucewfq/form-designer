@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Toolbox</title>
+	
+	<link href="../../Commons/Ext/Styles/ext-all.css" rel="Stylesheet" type="text/css" />
+	<link href="../../Commons/Ext/Styles/ux-all.css" rel="stylesheet" type="text/css" />
+  
+  <script src="../../blockly_compressed-format.js"></script>
+  <script src="../../blocks_compressed-format.js"></script>
+  <script src="../../javascript_compressed.js"></script>
+  <script src="../../csharp_compressed.js"></script>
+  <script src="../../msg/js/zh-hans.js"></script>
+	<script src="../../Commons/Ext/Scripts/ext-base-debug.js"></script>
+  <script src="../../Commons/Ext/Scripts/ext-all-debug.js" type="text/javascript"></script>
+  <script src="../../Commons/Scripts/Utility/GlobalFunction.source.js" type="text/javascript"></script>
+  
+	<script src="../../demos/lyf/blocks/basic.js"></script>
+	<script src="../../demos/lyf/blocks/window.js"></script>
+	<script src="../../demos/lyf/blocks/field.js"></script>
+	<script src="../../demos/lyf/blocks/grid.js"></script>
+	<script src="../../demos/lyf/blocks/store.js"></script>  
+	<script src="../../demos/lyf/blocks/field.js"></script>  
+	<script src="../../demos/lyf/blocks/logic/logic.js"></script>  
+	<script src="../../demos/lyf/EventCodeGen.js"></script>  
+   
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+<body>
+  
+
+  <div id="blocklyDiv" style="height: 600px; width: 800px;position:relative"></div>
+
+  <xml id="toolbox" style="display: none">
+    <category name="逻辑">
+      <block type="logicexp"></block>
+      <block type="compareexp"></block>
+      <block type="expitem"></block>
+      <block type="not"></block>
+	  </category>
+    <!--<category name="Boolean表达式" expanded="true">
+	    <category name="项">
+	      <block type="logic_compare"></block>
+	      <block type="logic_operation"></block>
+	      <block type="logic_negate"></block>
+	      <block type="logic_boolean"></block>
+	      <block type="logic_null"></block>
+		  </category>
+	  </category></-->
+  </xml>
+
+  <script>
+  	var csd =function (){
+  							
+	    //var x = fxml;
+	    //if(x)
+	    	//fromXml(x);
+  	}
+  	
+  	var toCsharp = function(){
+  		//Blockly.CSharp.INFINITE_LOOP_TRAP = null;
+		  var code = Blockly.CSharp.workspaceToCode(workspace);  
+		  document.getElementById('codeGen').value = code;
+  	}
+  	
+  	
+    var workspace = Blockly.inject('blocklyDiv',
+        {media: '../../media/',
+         toolbox: document.getElementById('toolbox')}
+     );
+     csd();
+    function onchange(event) {   	
+    	var b = workspace.getBlockById(event.blockId);
+    	//element	string	One of 'selected', 'click', 'commentOpen', 'mutatorOpen', 'warningOpen'
+    	//if(event instanceof Blockly.Events.Ui && event.element == 'click' && b && (b.type == 'expitem'))
+    	//{
+    		//alert(1);//EDITABLE
+	    //}
+	  }
+    workspace.removeChangeListener(onchange);
+		workspace.addChangeListener(onchange);
+		//onchange();		
+  </script>
+  <p>
+    <button onclick="toCsharp();">C#代码</button>
+  </p>
+  <p>
+    <textarea id="codeGen" style="width: 26%; height: 12em"></textarea>	
+  </p>
+</body>
+</html>

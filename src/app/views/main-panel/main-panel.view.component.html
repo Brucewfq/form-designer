@@ -1,0 +1,89 @@
+<!-- 空间存放主区域 -->
+<ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true"
+                   [droppableItemClass]="droppableItemClass" (drag)="log($event)" (drop)="log($event)"
+                   (over)="log($event)"
+                   (out)="log($event)" (remove)="log($event)">
+  <ng-template let-model="model" let-template="template">
+
+    <div [ngSwitch]="model.inputType">
+      <div *ngSwitchCase="'section'">
+        <div class="section-wrap" appControlContainer>
+          <app-section-view [model]="model.children" [template]="template"></app-section-view>
+          <div class="controls-container">
+            <div class="setting-controls">
+              <button pButton type="button" (click)="app.showDialog('')"></button>
+              <button pButton type="button" (click)="app.showDialog('')"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'section-cols'" class="section-wrap">
+        <div (mouseenter)="show($event)" (mouseleave)="hide($event)" class="section-wrap">
+          <app-section-cols-view [model]="model.children" [template]="template"></app-section-cols-view>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <button pButton type="button" (click)="app.showDialog('')"></button>
+              <button pButton type="button" (click)="app.showDialog('')"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'textbox'">
+        <div (mouseenter)="show($event)" (mouseleave)="hide()" class="section-wrap">
+          <app-textbox-view [model]="model" [template]="template"></app-textbox-view>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <button pButton type="button" (click)="app.showDialog('app-textbox-property')"></button>
+              <button pButton type="button" (click)="app.showDialog('app-textbox-property')"></button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div *ngSwitchCase="'number'">
+        <div (mouseenter)="op2.show($event)" (mouseleave)="op2.hide()">
+          <app-number-view [model]="model" [template]="template"></app-number-view>
+          <p-overlayPanel #op2>
+            <button pButton type="button" (click)="app.showDialog('app-number-property')" icon="fa-arrows-alt"></button>
+          </p-overlayPanel>
+        </div>
+      </div>
+      <div *ngSwitchCase="'checkbox'">
+        <div (mouseenter)="op2.show($event)" (mouseleave)="op2.hide()">
+          <app-checkbox-view [model]="model" [template]="template"></app-checkbox-view>
+          <p-overlayPanel #op2>
+            <button pButton type="button" (click)="app.showDialog('app-checkbox-property')"
+                    icon="fa-arrows-alt"></button>
+          </p-overlayPanel>
+        </div>
+      </div>
+      <div *ngSwitchCase="'dropdown'">
+        <div (mouseenter)="op2.show($event)" (mouseleave)="op2.hide()">
+          <app-dropdown-view [model]="model" [template]="template"></app-dropdown-view>
+          <p-overlayPanel #op2>
+            <button pButton type="button" (click)="app.showDialog('app-dropdown-property')"
+                    icon="fa-arrows-alt"></button>
+          </p-overlayPanel>
+        </div>
+      </div>
+      <div *ngSwitchCase="'label'">
+        <div (mouseenter)="op2.show($event)" (mouseleave)="op2.hide()">
+          <app-label-view [model]="model" [template]="template"></app-label-view>
+          <p-overlayPanel #op2>
+            <button pButton type="button" (click)="app.showDialog('app-label-property')" icon="fa-arrows-alt"></button>
+          </p-overlayPanel>
+        </div>
+      </div>
+      <div *ngSwitchDefault>
+        <ngx-input
+          [type]="model.inputType"
+          [hint]="model.name"
+          [autofocus]="false"
+          [ngModel]="model.data">
+        </ngx-input>
+      </div>
+    </div>
+  </ng-template>
+</ngx-dnd-container>

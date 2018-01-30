@@ -1,0 +1,15 @@
+<!-- 多列区域选择器 -->
+<div fxLayout="row" fxLayoutWrap="nowrap" fxFill>
+  <ng-template ngFor let-child let-i="index" [ngForOf]="model">
+    <div fxFlex="{{(100/model.length) + '%'}}" class="form-designer-section-border">
+    <ngx-dnd-container dropZone="builder-target"
+                       [model]="child.children"
+                       [removeOnSpill]="true"
+                       [template]="template"
+                       [droppableItemClass]="droppableItemClass"
+                       (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
+                       (remove)="log($event)">
+    </ngx-dnd-container>
+    </div>
+  </ng-template>
+</div>
