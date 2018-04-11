@@ -1,0 +1,17 @@
+<!-- textbox -->
+<div class="component-view-wrap-container" [ngStyle]="{'height': model.attr.height +'px'}">
+  <h3 class="title" [ngStyle]="{'textAlign': model.attr.labelAlign }">
+    <span style="color:red" *ngIf="model.attr.required">*</span>
+    {{ model.attr.fieldLabel }}:
+  </h3>
+  <div class="content choose-box-content">
+    <span>...</span>
+  </div>
+  <!--<input type="text" pInputText
+         maxLength='{{model.attr.maxLength||2000}}'
+         [minLength]='model.attr.minLength'
+         placeholder="{{ model.attr.placeHolder ? model.attr.placeHolder : '' }}"
+         class="content">-->
+  <!--<label>{{model.attr?(model.attr.fieldLabel?model.attr.fieldLabel:'Textbox'):'Textbox'}}</label>-->
+</div>
+<!-- textbox -->

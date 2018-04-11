@@ -1,0 +1,8 @@
+<!--  Textarea -->
+<div class="component-view-wrap-container" [ngStyle]="{'height': model.attr.height +'px'}">
+  <h3 class="title"><span style="color:red"
+                          *ngIf="model.attr.required">*</span>{{ model.attr.fieldLabel }}:</h3>
+  <textarea [rows]="model.attr.rows" cols="30" maxLength="{{model.attr.maxLength||2000}}" class="content" pInputTextarea
+            autoResize="autoResize"></textarea>
+</div>
+<!--  Textarea -->

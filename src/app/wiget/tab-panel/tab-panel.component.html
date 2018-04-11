@@ -1,0 +1,27 @@
+<h2 class="title">{{selectedTab}}</h2>
+<div class="tab-panel-container">
+  <p-tabView orientation="left" (onChange)="handleChange($event)">
+    <p-tabPanel header="componentTree" [selected]="true" headerStyleClass="tree" *ngIf="isShowTree">
+      <!--安放组件-->
+      <app-inspector [targetBuilderTools]='targetBuilderTools'
+                     [selectedViewMode]='selectedViewMode'
+                     [(pullCopyTemp)]='pullCopyTemp'></app-inspector>
+    </p-tabPanel>
+    <p-tabPanel header="smartDs" headerStyleClass="smart-ds" *ngIf="isShowSmartDs">
+      <!--安放组件-->
+      <app-smart-tree [targetBuilderTools]='targetBuilderTools' [curPomBindSmartDs]="curPomBindSmartDs"
+                      [treeData]="smartDsData"></app-smart-tree>
+
+    </p-tabPanel>
+    <p-tabPanel header="service" headerStyleClass="service" *ngIf="isShowService">
+      <!--安放组件-->
+      <app-service-tree [targetBuilderTools]='targetBuilderTools' [curPomBindService]="curPomBindService"
+                        [treeData]="serviceDatas"></app-service-tree>
+
+    </p-tabPanel>
+    <!--<p-tabPanel header="context" headerStyleClass="context" *ngIf="isShowContext">
+      &lt;!&ndash;安放组件&ndash;&gt;
+     <app-context-tree></app-context-tree>
+    </p-tabPanel>-->
+  </p-tabView>
+</div>

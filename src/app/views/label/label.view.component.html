@@ -1,3 +1,8 @@
 <!-- label -->
-<h3 class="first">Label</h3>
+<div class="component-view-wrap-container">
+  <h3 class="first title"><span style="color:red"
+                                *ngIf="model.attr.required">*</span>{{ model.attr.fieldLabel }}:</h3>
+  <span class="content">{{ model.attr.initValue ? model.attr.initValue : '' }}</span>
+</div>
+
 <!-- label -->

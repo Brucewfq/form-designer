@@ -1,0 +1,48 @@
+<!--选择表单界面-->
+<div class="service-tree-dialog-container load-form-list-container">
+  <div style="display: flex;" class="rest-label-tree">
+    <div style="flex: 1;">
+      <p-tree [value]="formDatas" selectionMode="single" [(selection)]="selectedForm" [contextMenu]="cm"
+              (onNodeContextMenuSelect)="change($event)"
+              (onNodeSelect)="onFromSelect($event)"></p-tree>
+      <p-contextMenu #cm [model]="items"></p-contextMenu>
+    </div>
+
+    <div style="flex: 4;">
+      <p-panel *ngIf="formList">
+        <p-dataTable [value]="formList" selectionMode="single" [(selection)]="selectedVersion" [rows]="7"
+                     [paginator]="true" dataKey="id">
+          <p-column field="ver" header="version"></p-column>
+          <p-column field="id" header="id"></p-column>
+        </p-dataTable>
+      </p-panel>
+    </div>
+  </div>
+
+  <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="clickFinish(e)"
+                             (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+</div>
+<div class="data-bind-wrap smart-ds-tree-dialog-container" *ngIf="displayDialog">
+  <p-dialog header="New Project" [(visible)]="displayDialog" width="754" (onHide)="doCloseDialog()">
+    <p-panel>
+      <div class="item">
+        <h3 class="item-title"><span style="color: red">*</span>NAME:</h3>
+        <input type="text" pInputText class="content" [(ngModel)]="project.name">
+      </div>
+      <div class="item">
+        <h3 class="item-title">description:</h3>
+        <input class="content"
+               type="text"
+               size="30"
+               placeholder=""
+               pInputText
+               (click)="showMultilingual($event)"
+               [(ngModel)]="project.description">
+      </div>
+      <app-multilingual (doClose)="closeMultilingual()" [top]="top"
+                        [visible]="displayMultilingual"></app-multilingual>
+    </p-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>

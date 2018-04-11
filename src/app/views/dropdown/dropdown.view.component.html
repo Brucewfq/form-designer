@@ -1,4 +1,14 @@
 <!-- dropdown -->
-<h3 class="first">Dropdown</h3>
-<p-dropdown [options]="options" [(ngModel)]="selectedOption" placeholder="Select a Option" [style]="{'width':'150px'}"></p-dropdown>
-<!-- dropdown -->
+<div class="component-view-wrap-container">
+  <h3 class="first title"><span style="color:red"
+                                *ngIf="model.attr.required">*</span>{{ model.attr.fieldLabel }}:</h3>
+  <div class="content">
+    <p-dropdown
+      [options]="(model.attr.dataSource &&  model.attr.dataSource.options && model.attr.dataSource.options.length > 0) ? model.attr.dataSource.options : options"
+      [(ngModel)]="selectedOption"
+      placeholder="{{ model.attr.placeHolder ? model.attr.placeHolder : 'Select a Option'}}"
+      [style]="{'width':'150px'}" appendTo="body">
+    </p-dropdown>
+  </div>
+</div>
+<!-- dropdown dataSource options-->

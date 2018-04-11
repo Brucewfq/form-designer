@@ -1,0 +1,69 @@
+<!-- file -->
+<h3 class="section-title">
+  {{(model.attr && model.attr.title) ? model.attr.title : ''}}
+</h3>
+<div class="component-view-wrap-container">
+  <div class="content file-component">
+    <div class="ui-fileupload ui-widget ng-star-inserted" style="width: 100%;">
+      <div class="ui-fileupload-buttonbar ui-widget-header ui-corner-top">
+                <span
+                  class="ui-fileupload-choose ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"
+                  icon="fa-plus" pbutton="">
+                    <input type="file" accept="undefined">
+                <span class="ui-button-icon-left ui-clickable fa fa-fw fa-plus"></span><span
+                  class="ui-button-text ui-clickable">Choose</span></span>
+        <button icon="fa-upload" pbutton="" type="button" disabled=""
+                class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ng-star-inserted">
+          <span class="ui-button-icon-left ui-clickable fa fa-fw fa-upload"></span><span
+          class="ui-button-text ui-clickable">Upload</span></button>
+        <button icon="fa-close" pbutton="" type="button" disabled=""
+                class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ng-star-inserted">
+          <span class="ui-button-icon-left ui-clickable fa fa-fw fa-close"></span><span
+          class="ui-button-text ui-clickable">Cancel</span></button>
+      </div>
+      <div class="ui-fileupload-content ui-widget-content ui-corner-bottom">
+        <table width="100%" border="1" rules="all" style="border-color: #ccc">
+          <thead>
+          <tr>
+            <th>name</th>
+            <th>time</th>
+            <th>user</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr align="center">
+            <td>logo.png</td>
+            <td>2018.2.8 12:00:30</td>
+            <td>admin</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--功能代码-->
+    <!--<p-fileUpload name="myfile[]" url="./upload.php"-->
+    <!--[multiple]="model.attr.simpleValue"-->
+    <!--(onSelect)="onSelect($event)"-->
+    <!--(onRemove)="onRemove($event)"-->
+    <!--maxFileSize="1000000"-->
+    <!--[style]="{'width': '100%'}">-->
+    <!--<ng-template pTemplate="content">-->
+    <!--<div class="ui-fileupload-files">-->
+    <!--<div>-->
+    <!--<div class="ui-fileupload-row" #tabhead>-->
+    <!--<div>name</div>-->
+    <!--<div>size</div>-->
+    <!--<div>remove</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</ng-template>-->
+    <!--<ng-template let-file let-files pTemplate="file">-->
+    <!--<div>{{file.name}}</div>-->
+    <!--<div>{{getFileAttr(files, 'lastModified')}}</div>-->
+    <!--<div>delete</div>-->
+    <!--</ng-template>-->
+    <!--</p-fileUpload>-->
+  </div>
+</div>
+<!-- file -->

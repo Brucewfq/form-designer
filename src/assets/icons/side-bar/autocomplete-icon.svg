@@ -1,0 +1,35 @@
+<svg width="73px" height="73px" viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Choosebox</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="73" height="73"></rect>
+    </defs>
+    <g id="Custom-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Element-Icons" transform="translate(-27.000000, -1072.000000)"></g>
+        <g id="Choosebox">
+            <g id="Icon-Skeleton">
+                <g id="Group-" stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle">
+                        <use fill-opacity="0" fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke-opacity="0.5" stroke="#333333" stroke-width="1" x="0.5" y="0.5" width="72" height="72"></rect>
+                    </g>
+                </g>
+                <text id="Icon-Label" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#CFD0D3">
+                    <tspan x="6.99853516" y="67">Choose  box</tspan>
+                </text>
+            </g>
+            <g id="Icon" transform="translate(22.000000, 16.000000)" fill="#CFD0D3">
+                <g id="Page-1">
+                    <path d="M13.5,3 L0,3 L0,27 L13.5,27 L13.5,30 L16.5,30 L16.5,0 L13.5,0 L13.5,3 Z M3,24 L3,6 L13.5,6 L13.5,24 L3,24 Z" id="Fill-1"></path>
+                    <polygon id="Fill-2" points="19.5 6 22.5 6 22.5 3 19.5 3"></polygon>
+                    <polygon id="Fill-3" points="27 13.5 30 13.5 30 10.5 27 10.5"></polygon>
+                    <polygon id="Fill-4" points="27 19.5 30 19.5 30 16.5 27 16.5"></polygon>
+                    <polygon id="Fill-5" points="25.5 3 25.5 6 27 6 27 7.5 30 7.5 30 3"></polygon>
+                    <polygon id="Fill-6" points="19.5 27 22.5 27 22.5 24 19.5 24"></polygon>
+                    <polygon id="Fill-7" points="27 24 25.5 24 25.5 27 30 27 30 22.5 27 22.5"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

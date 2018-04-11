@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="73px" height="73px" viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Hyperlink</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="73" height="73"></rect>
+    </defs>
+    <g id="Custom-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Element-Icons" transform="translate(-26.000000, -1487.000000)"></g>
+        <g id="Hyperlink">
+            <g id="Icon-Skeleton">
+                <g id="Group-" stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle">
+                        <use fill-opacity="0" fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke-opacity="0.5" stroke="#333333" stroke-width="1" x="0.5" y="0.5" width="72" height="72"></rect>
+                    </g>
+                </g>
+                <text id="Icon-Label" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#CFD0D3">
+                    <tspan x="16.4929199" y="67">Hyperlink</tspan>
+                </text>
+            </g>
+            <g id="Icon" transform="translate(23.000000, 18.000000)" fill="#CFD0D3">
+                <path d="M1.70775,21.3621618 L5.63799706,25.2924088 C6.55155,26.2059618 7.78147941,26.6821147 9.01299706,26.6821147 C10.2445147,26.6821147 11.4356912,26.2059618 12.3879971,25.2924088 L17.4302471,20.2501588 L15.1673294,17.9872412 L10.1250794,23.0294912 C9.48915,23.6654206 8.49650294,23.6654206 7.86216176,23.0294912 L3.97066765,19.0992441 C3.33473824,18.4633147 3.33473824,17.4706676 3.97066765,16.8363265 L9.01291765,11.7940765 L6.75,9.56991176 L1.70775,14.6121618 C-0.158108824,16.4780206 -0.158108824,19.4963824 1.70775,21.3621618 Z" id="Fill-1"></path>
+                <path d="M25.29225,5.63783824 L21.3620029,1.70759118 C19.4961441,-0.158267647 16.4777824,-0.158267647 14.6120029,1.70759118 L9.56975294,6.74984118 L11.8326706,9.01275882 L16.8749206,3.97050882 C17.51085,3.33457941 18.5034971,3.33457941 19.1378382,3.97050882 L23.0680853,7.90075588 C23.7040147,8.53668529 23.7040147,9.52933235 23.0680853,10.1636735 L17.9869235,15.1674088 L20.2498412,17.4303265 L25.2920912,12.3880765 C27.15795,10.5222176 27.15795,7.50385588 25.2920912,5.63807647 L25.29225,5.63783824 Z" id="Fill-2"></path>
+                <polygon id="Fill-3" points="8.44663235 16.3072059 16.3072059 8.44663235 18.55305 10.6924765 10.6924765 18.55305"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

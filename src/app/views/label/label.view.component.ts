@@ -1,25 +1,15 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BaseComponent} from '../../base/baseComponent';
 
 @Component({
     selector: 'app-label-view',
     templateUrl: './label.view.component.html'
 })
 
-export class LabelViewComponent {
-
-  @Input() model: any;
-
-  @Input() template: any;
-
-  constructor() {
-
-  };
-
-  drop(e: any) {
-    this.log(e);
-  };
-
-  log(e: any) {
-    console.log(e.type, e);
+export class LabelViewComponent extends BaseComponent implements OnInit {
+  ngOnInit() {
+    if (this.model.attr && !this.model.attr.fieldLabel) {
+      this.model.attr.fieldLabel = 'Label';
+    }
   }
 }

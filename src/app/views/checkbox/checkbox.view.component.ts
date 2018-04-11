@@ -1,27 +1,22 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BaseComponent} from '../../base/baseComponent';
 
 @Component({
     selector: 'app-checkbox-view',
     templateUrl: './checkbox.view.component.html'
 })
 
-export class CheckboxViewComponent {
+export class CheckboxViewComponent extends BaseComponent implements OnInit {
 
-  checkboxValues: any;
-
-  @Input() model: any;
-
-  @Input() template: any;
-
-  constructor() {
-
+  defaults: any = {
+    fieldLabel: 'CheckBox',
+    labelAlign: 'left',
+    editable: true
   };
 
-  drop(e: any) {
-    this.log(e);
-  };
-
-  log(e: any) {
-    console.log(e.type, e);
+  ngOnInit() {
+    if (this.model.attr) {
+      this.beforeInitDefault(this.model, this.defaults);
+    }
   }
 }

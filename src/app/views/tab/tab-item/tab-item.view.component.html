@@ -1,0 +1,11 @@
+<!-- 区域选择器 -->
+<ngx-dnd-container dropZone="{{selectedViewMode === 'edit' && judgeTab ?'builder-target-section':''}}"
+                   class="section-view-border"
+                   [model]="model"
+                   [removeOnSpill]="true"
+                   [template]="template"
+                   [droppableItemClass]="droppableItemClass"
+                   (drag)="log($event)" (drop)="dropped($event)" (over)="judge($event)" (out)="judgeTab=true"
+                   (remove)="log($event)">
+</ngx-dnd-container>
+

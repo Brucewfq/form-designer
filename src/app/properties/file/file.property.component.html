@@ -1,0 +1,60 @@
+<!-- File属性编辑控件 -->
+<div style="height:100%;overflow: auto">
+  <p-tabView [styleClass]="property-container">
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">Title</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]" pInputText
+               [(ngModel)]="file.title">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Name</h3>
+        <input class="value" type="text" size="30" placeholder="" pInputText
+               [(ngModel)]="file.name"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="file.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Width</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="file.width" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="file.height" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Flex</h3>
+        <input class="value" type="number" min="0.0" size="30" placeholder="" pInputText
+               [(ngModel)]="file.flex"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <!--<div class="property-item">-->
+      <!--<h3 class="first">setting</h3>-->
+      <!--<button class="value ui-button-info"-->
+      <!--[disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]" pButton-->
+      <!--(click)="setting($event)"-->
+      <!--type="button" label="setting">-->
+      <!--</button>-->
+      <!--</div>-->
+    </p-tabPanel>
+    <!--<p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventData" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
+    </p-tabPanel>-->
+  </p-tabView>
+</div>

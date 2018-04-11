@@ -1,0 +1,25 @@
+<div>
+  <p-tabView [styleClass]="property-container">
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">Tab-item Title</h3>
+        <input class="value" type="text" size="30" placeholder="" [(ngModel)]='tabItem.title' (ngModelChange)="onChange()" pInputText>
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">Name</h3>
+        <input class="value" type="text" size="30" placeholder=""
+               [(ngModel)]='tabItem.name'  pInputText
+               (ngModelChange)="onChange('name', {variable: true})">
+      </div>
+    </p-tabPanel>
+    <p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventData" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
+    </p-tabPanel>
+  </p-tabView>
+</div>

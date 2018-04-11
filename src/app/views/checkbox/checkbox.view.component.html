@@ -1,6 +1,21 @@
 <!-- checkbox -->
-<h3 class="first">Checkbox</h3>
-<div class="ui-g" style="width:250px;margin-bottom:10px">
-  <div class="ui-g-12"><p-checkbox name="group1" value="checkbox" label="checkbox" [(ngModel)]="checkboxValues" inputId="checkbox"></p-checkbox></div>
+<div class="component-view-wrap-container">
+  <h3 class="first" style="float: left;margin:0;font-weight: normal;">
+    <span style="color:red" *ngIf="model.attr.required">*</span>
+    {{ model.attr.fieldLabel }}:
+  </h3>
+  <div class="ui-g" style="float: left;margin-left: 5px;">
+    <div class="ui-g-12" style="padding:0;"
+         *ngIf="model.attr.dataSource&&model.attr.dataSource.options.length>0">
+      <p-checkbox *ngFor="let item of model.attr.dataSource.options" name="{{index}}" value="{{item.value}}"
+                  label="{{item.label}}" [(ngModel)]="value"
+                  inputId="{{index}}"></p-checkbox>
+    </div>
+    <div class="ui-g-12" style="padding:0;"
+         *ngIf="model.attr.dataSource&&model.attr.dataSource.options.length==0">
+      <p-checkbox name="group1" value="checkbox1" label="checkbox" [(ngModel)]="value"
+                  inputId="technology"></p-checkbox>
+    </div>
+  </div>
 </div>
 <!-- checkbox -->

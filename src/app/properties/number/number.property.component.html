@@ -1,50 +1,186 @@
 <!-- Number属性编辑控件 -->
-<p-panel>
-  <p-header>
-    <div class="ui-helper-clearfix">
-      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Number setting</span>
-    </div>
-  </p-header>
+<div class="component-property-content">
   <p-tabView>
-    <p-tabPanel header="GENERAL">
-      <h3 class="first">Label<span style="color: red">*</span></h3>
-      <input type="text" size="30" placeholder="Number" pInputText [(ngModel)]="number.label">
-      <span>Type your label.</span>
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">FieldLabel</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="number.fieldLabel">
+      </div>
 
-      <h3 class="first">Name<span style="color: red">*</span></h3>
-      <input type="text" size="30"  placeholder="Number" pInputText [(ngModel)]="number.name">
+      <div class="property-item">
+        <h3 class="first">PlaceHolder</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText
+               [(ngModel)]="number.placeHolder">
+      </div>
+      <div class="property-item">
+        <h3 class="first">InitValue</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="number.initValue">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="number.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Required</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="number.required"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Editable</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="number.editable"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">AllowDecimals</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="number.allowDecimals"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">MinValue</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="number.minValue" [min]="" [max]="number.maxValue"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">MaxValue</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="number.maxValue" [min]="number.minValue" [max]=""
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">MinLength</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="number.minLength" [min]="0" [max]="number.maxLength"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">MaxLength</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="number.maxLength" [min]="number.minLength" [max]=""
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelAlign</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.labelAligns"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="number.labelAlign"
+                      placeholder="Select align" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelWidth</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="number.labelWidth" [min]="0" [max]=""
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Width</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="number.width" [min]="0" [max]=""
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="number.height" [min]="0" [max]=""
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Cls</h3>
+        <div class="value">
+          <input class="value" type="text" size="30" placeholder="" pInputText
+                 [(ngModel)]="number.cls"
+                 [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                 (ngModelChange)="onChange('name', {variable: true})">
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">EmptyText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="number.emptyText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">InvalidText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="number.invalidText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Regex</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="number.regex">
+      </div>
+      <div class="property-item last">
+        <h3 class="first">DataBind</h3>
+        <div class="value">
+          <input type="text" class="value" pInputText placeholder="" [ngModel]="number.bindPath" readonly
+                 style="width:60%;float: left;">
+          <button pButton class="value" type="button" label="Bind" style="width:35%;" (click)='showBind()'
+                  [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"></button>
+        </div>
+      </div>
 
-      <h3 class="first">Hint</h3>
-      <input type="text" size="30"  placeholder="Hint" pInputText [(ngModel)]="number.Hint">
+      <div>
 
-      <h3 class="first"></h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="number.required"></p-inputSwitch><span>Required (Prevent submission if this value is empty.)</span>
+      </div>
     </p-tabPanel>
-    <p-tabPanel header="ADVANCED">
-      <h3 class="first">Access Control</h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="number.access"></p-inputSwitch>
-
-      <h3 class="first">Decimal Places<span style="color: red">*</span></h3>
-      <p-spinner size="30" [(ngModel)]="number.places"></p-spinner>
-
-      <h3 class="first"></h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="number.limit"></p-inputSwitch><span>Limit Entry (Limit the maximum number of characters allowed for this field.)</span>
-
-      <h3 class="first">Minimum</h3>
-      <p-spinner size="30" [(ngModel)]="number.minimum"></p-spinner>
-
-      <h3 class="first">Maximum</h3>
-      <p-spinner size="30" [(ngModel)]="number.maximum"></p-spinner>
-
-    </p-tabPanel>
-    <p-tabPanel header="CUSTOM CODE">
-      <app-wiget-select-event (chooseOk)="chooseEvent($event)" [parentType]="number"></app-wiget-select-event>
-      <h3 class="first"></h3>
-
-      <app-blockly *ngIf="divShow"></app-blockly>
+    <p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventDatas" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
     </p-tabPanel>
   </p-tabView>
-  <p-footer>
-    <app-wiget-property-bottom (cFinish)="clickFinish(e)" (cQuickFinish)="clickQuickFinish(e)"></app-wiget-property-bottom>
-  </p-footer>
-</p-panel>
+</div>
+<div *ngIf="displayDialog" class="data-bind-wrap">
+  <p-dialog header="DataBind" [(visible)]="displayDialog" width="800" height="450">
+    <app-tab-panel [isShowTree]="false"
+                   [isShowService]="false"
+                   [defaultTabTitle]="defaultTabTitle"
+                   [smartDsData]="treeData"
+                   [curPomBindSmartDs]="number.bindPath"
+                   [(pullCopyTemp)]='pullCopyTemp'></app-tab-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>
+

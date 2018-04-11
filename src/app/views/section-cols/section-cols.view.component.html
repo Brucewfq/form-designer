@@ -1,15 +1,21 @@
 <!-- 多列区域选择器 -->
+<h3 class="section-title"
+    [ngStyle]="{'textAlign': realModel.attr.titleAlign,
+               'fontSize': realModel.attr.titleSize + 'px',
+               'fontWeight': realModel.attr.titleWeight}">
+  {{componentAttr?(componentAttr.title?componentAttr.title:''):''}}
+</h3>
 <div fxLayout="row" fxLayoutWrap="nowrap" fxFill>
   <ng-template ngFor let-child let-i="index" [ngForOf]="model">
     <div fxFlex="{{(100/model.length) + '%'}}" class="form-designer-section-border">
-    <ngx-dnd-container dropZone="builder-target"
-                       [model]="child.children"
-                       [removeOnSpill]="true"
-                       [template]="template"
-                       [droppableItemClass]="droppableItemClass"
-                       (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
-                       (remove)="log($event)">
-    </ngx-dnd-container>
+      <ngx-dnd-container dropZone="builder-target-section"
+                         [model]="child.children"
+                         [removeOnSpill]="true"
+                         [template]="template"
+                         [droppableItemClass]="droppableItemClass"
+                         (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
+                         (remove)="log($event)">
+      </ngx-dnd-container>
     </div>
   </ng-template>
 </div>

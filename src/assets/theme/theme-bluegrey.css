@@ -3864,7 +3864,8 @@ body {
       table-layout: fixed;
       border-spacing: 0;
       border-collapse: collapse;
-      font-size: 12px; }
+      font-size: 12px;
+	  background-color: #fff}
     body .ui-datepicker thead tr {
       color: #ffffff;
       background: #607D8B; }
@@ -4673,7 +4674,7 @@ body .ui-paginator {
     vertical-align: middle;
     margin: 0 .375em 0 .375em; }
     body .ui-paginator .ui-paginator-pages a {
-      padding: 0;
+      padding: 4px;
       color: #ffffff;
       min-width: 1.714em;
       min-height: 1.714em;

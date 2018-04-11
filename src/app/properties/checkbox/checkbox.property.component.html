@@ -1,38 +1,163 @@
 <!-- checkbox属性编辑控件 -->
-<p-panel>
-  <p-header>
-    <div class="ui-helper-clearfix">
-      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Checkbox setting</span>
-    </div>
-  </p-header>
+<div class="component-property-content">
   <p-tabView>
-    <p-tabPanel header="GENERAL">
-      <h3 class="first">Label<span style="color: red">*</span></h3>
-      <input type="text" size="30" placeholder="Checkbox" pInputText [(ngModel)]="checkbox.label">
-      <span>Type your label.</span>
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">FieldLabel</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText
+               [(ngModel)]="checkbox.fieldLabel">
+      </div>
 
-      <h3 class="first">Name<span style="color: red">*</span></h3>
-      <input type="text" size="30"  placeholder="checkbox" pInputText [(ngModel)]="checkbox.name">
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="checkbox.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
 
-      <h3 class="first"></h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="checkbox.required"></p-inputSwitch><span>Required (Prevent submission if this value is empty.)</span>
+      <div class="property-item">
+        <h3 class="first">Required</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="checkbox.required"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Editable</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="checkbox.editable"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">SimpleValue</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="checkbox.simpleValue"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelWidth</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="checkbox.labelWidth" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelAlign</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.labelAligns"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="checkbox.labelAlign"
+                      placeholder="Select align" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Width</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="checkbox.width" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="checkbox.height" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">DataBind:</h3>
+        <div class="value">
+          <input type="text" class="value" pInputText placeholder="" [ngModel]="checkbox.bindPath" readonly
+                 style="width:60%;float: left;">
+          <button pButton class="value" type="button" label="Bind" style="width:35%;" (click)='showBind()'
+                  [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"></button>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">DataSource Type</h3>
+        <div class="value">
+          <p-dropdown [options]="dataSourceTypes"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="checkbox.dataSource.selectedDataSourceType"
+                      placeholder="Select a DataSource Type" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item" *ngIf="checkbox.dataSource.selectedDataSourceType==='Options'">
+        <h3 class="first">options</h3>
+        <button class="value ui-button-info"
+                [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]" pButton
+                type="button"
+                (click)="onSetting()" label="setting"></button>
+      </div>
 
-      <h3 class="first"></h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="checkbox.readOnly"></p-inputSwitch><span>Read-only (Prevent entry into this field.)</span>
+      <div class="property-item" *ngIf="checkbox.dataSource.selectedDataSourceType==='Options'">
+        <h3 class="first">ValueField<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30" readonly="readonly"
+               pInputText value="value">
+      </div>
+      <div class="property-item" *ngIf="checkbox.dataSource.selectedDataSourceType==='Options'">
+        <h3 class="first">DisplayField<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30" readonly="readonly" pInputText
+               value="label">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Cls</h3>
+        <div class="value">
+          <input class="value" type="text" size="30" placeholder="" pInputText
+                 [(ngModel)]="checkbox.cls"
+                 [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                 (ngModelChange)="onChange('name', {variable: true})">
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">EmptyText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="checkbox.emptyText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item last">
+        <h3 class="first">InvalidText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="checkbox.invalidText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+
+      <app-data-source-property [dataSourcePost]="checkbox"></app-data-source-property>
     </p-tabPanel>
-    <p-tabPanel header="ADVANCED">
-      <h3 class="first">Access Control</h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="checkbox.access"></p-inputSwitch>
 
-    </p-tabPanel>
-    <p-tabPanel header="CUSTOM CODE">
-      <app-wiget-select-event (chooseOk)="chooseEvent($event)" [parentType]="checkbox"></app-wiget-select-event>
-      <h3 class="first"></h3>
-
-      <app-blockly *ngIf="divShow"></app-blockly>
+    <p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventDatas" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
     </p-tabPanel>
   </p-tabView>
-  <p-footer>
-    <app-wiget-property-bottom (cFinish)="clickFinish(e)" (cQuickFinish)="clickQuickFinish(e)"></app-wiget-property-bottom>
-  </p-footer>
-</p-panel>
+</div>
+<div *ngIf="displayDialog" class="data-bind-wrap">
+  <p-dialog header="DataBind" [(visible)]="displayDialog" width="800" height="450">
+    <app-tab-panel [isShowTree]="false"
+                   [isShowService]="false"
+                   [defaultTabTitle]="defaultTabTitle"
+                   [smartDsData]="treeData"
+                   [curPomBindSmartDs]="checkbox.bindPath"
+                   [(pullCopyTemp)]='pullCopyTemp'></app-tab-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>
+

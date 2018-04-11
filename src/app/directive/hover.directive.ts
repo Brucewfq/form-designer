@@ -9,12 +9,14 @@ export class HoverDirective {
   }
 
   @HostListener('mouseover') onMouseOver() {
-    this.toggleClass(this.el.nativeElement, 'active');
+    const el = this.el.nativeElement;
+    this.toggleClass(el, 'active');
     event.stopPropagation();
   }
 
   @HostListener('mouseout') onMouseOut() {
-    this.toggleClass(this.el.nativeElement, 'active');
+    const el = this.el.nativeElement;
+    this.toggleClass(el, 'active');
     event.stopPropagation();
   }
 
@@ -42,5 +44,4 @@ export class HoverDirective {
       this.addClass(obj, cls);
     }
   }
-
 }

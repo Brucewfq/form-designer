@@ -1,0 +1,32 @@
+<ngx-dnd-container
+  [model]="bindsource"
+  (drop)="drop($event)"
+  (over)='over($event)'
+  (out)='out($event)'
+  dropZone="builder-bind-source">
+  <ng-template let-model="model" let-template="template">
+    <div [ngSwitch]="model.inputType">
+      <div *ngSwitchCase="'section-cols'">
+        <div class="section-wrap data-source-container">
+          <app-section-cols-auto-view
+            [model]="model.children"
+            [template]="template"
+            (innerDrop)="onInnerDrop($event)">
+          </app-section-cols-auto-view>
+        </div>
+      </div>
+      <div *ngSwitchCase="'bindsource'">
+        <div class="section-wrap data-source-container" style='position: relative;' title='{{model.name}}'>
+          <div (click)="doBind(model)">
+            <button class='database'>
+            </button>
+            <p class='text'>
+              {{model.name}}
+            </p>
+          </div>
+          <span class="deleteSource" type="button" (click)="delete(model)"></span>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ngx-dnd-container>

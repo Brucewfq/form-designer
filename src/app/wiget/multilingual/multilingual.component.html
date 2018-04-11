@@ -1,0 +1,14 @@
+<div class="multilingual-container" *ngIf="visible" [ngStyle]="{'top':top+'px'}">
+  <p-dialog header="多语言编辑" [(visible)]="visible" (onHide)="doCloseDialog()">
+    <p-dataTable [(value)]="items" [editable]="true" styleClass="data-source-options-dialog">
+      <p-column field="label" header="语种"></p-column>
+      <p-column field="value" header="值" [editable]="true"></p-column>
+    </p-dataTable>
+
+    <div class="bottom-container">
+      <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                                 (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+    </div>
+  </p-dialog>
+</div>
+

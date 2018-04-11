@@ -1,0 +1,40 @@
+<div id='smartDsTree'>
+  <p-tree [value]="datas" selectionMode="single" [draggableNodes]="true" [droppableNodes]="true"
+          [draggable]="false"
+          [(selection)]="selectedData" [contextMenu]="cm" (onNodeDrop)="nodeDrop($event)"
+          (onNodeContextMenuSelect)="change($event)" (onNodeSelect)="nodeSelect($event)">
+    <ng-template let-node pTemplate="default">
+      <span class="folder" style="width:100%"
+            *ngIf="node.sign!=='data'">{{node.label}}</span>
+      <span *ngIf="node.sign==='data'" class="data"  style="width:100%">{{node.label}}</span>
+    </ng-template>
+  </p-tree>
+  <p-contextMenu #cm [model]="items"></p-contextMenu>
+</div>
+<div class="data-bind-wrap smart-ds-tree-dialog-container" *ngIf="displayDialog">
+  <p-dialog header="smartDs" [(visible)]="displayDialog" width="754" (onHide)="doCloseDialog()">
+    <p-panel>
+      <div class="item">
+        <h3 class="item-title"><span style="color: red">*</span>NAME:</h3>
+        <input type="text" pInputText class="content" [(ngModel)]="smartDs.name">
+      </div>
+      <div class="item"
+           *ngIf="checkSign()">
+        <h3 class="first item-title">TYPE:</h3>
+        <div class="content">
+          <p-dropdown [options]="dataTypes" [(ngModel)]="smartDs.type" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="item" *ngIf="(nextNode&&nextNode.sign==='data')||curNode.sign==='data'">
+        <h3 class="item-title">VALIDATE:</h3>
+        <input type="text" pInputText class="content" [(ngModel)]="smartDs.validateFunc">
+      </div>
+      <div class="item" *ngIf="(nextNode&&nextNode.sign==='data')||curNode.sign==='data'">
+        <h3 class="item-title">CALCULATE:</h3>
+        <input type="text" pInputText class="content" [(ngModel)]="smartDs.calculateFunc">
+      </div>
+    </p-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>

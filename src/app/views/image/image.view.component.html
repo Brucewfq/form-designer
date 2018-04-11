@@ -1,0 +1,8 @@
+<div class="component-view-wrap-container">
+  <!--<h3 class="title">{{(model.attr && model.attr.text) ? model.attr.text : 'image'}}</h3>-->
+  <div class="content">
+    <img [src]="getSrc"
+         [ngStyle]="{'width':getWidth, 'height': getHeight}"
+         alt="not found">
+  </div>
+</div>

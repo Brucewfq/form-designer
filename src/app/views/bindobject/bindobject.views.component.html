@@ -1,0 +1,20 @@
+<section class='boxer content-section implementation' style="width:700px;">
+  <p-dataTable
+    [value]="objectDatas"
+    [styleClass]="'autoTable'"
+    [(selection)]="selectedObject"
+    (onRowSelect)="onRowSelect($event)"
+    [rows]="5"
+    [paginator]="true"
+    selectionMode="single"
+    [globalFilter]="gb"
+    dataKey="objectId"
+    #dt>
+    <p-column field="objectName"
+              header="objectName"
+              [filter]="true"
+              filterPlaceholder="search">
+    </p-column>
+    <p-column field="nameDesc" header="nameDesc"></p-column>
+  </p-dataTable>
+</section>

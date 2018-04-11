@@ -1,0 +1,53 @@
+<div class="layout-sub-menu-wrapper">
+  <ul class="sub-menu" [ngClass]="{'topbar-menu-active': app.topbarMenuActive}"
+      (click)="app.onTopbarMenuClick($event)">
+    <li #new [ngClass]="{'active-topmenuitem':app.activeTopbarItem === new}"
+        (click)="app.onTopbarRootItemClick($event, settings, 'new')">
+      <a href="#">
+        <img class="item-icon" src="../assets/icons/new.svg" alt="">
+        <span class="item-name">new</span>
+      </a>
+    </li>
+    <li #load [ngClass]="{'active-topmenuitem':app.activeTopbarItem === load}"
+        (click)="app.onTopbarRootItemClick($event, settings, 'load')">
+      <a href="#">
+        <img class="item-icon" src="../assets/icons/open.svg" alt="">
+        <span class="item-name">open</span>
+      </a>
+    </li>
+    <li #saveAs [ngClass]="{'active-topmenuitem':app.activeTopbarItem === saveAs}">
+      <a href="#">
+        <img class="item-icon" src="../assets/icons/forms.svg" alt="">
+        <span class="item-name">import</span>
+      </a>
+    </li>
+    <li #save [ngClass]="{'active-topmenuitem':app.activeTopbarItem === save}"
+        (click)="app.onTopbarRootItemClick($event, settings, 'save')">
+      <a href="#">
+        <img class="item-icon" src="../assets/icons/save.svg" alt="">
+        <span class="item-name">save</span>
+      </a>
+    </li>
+    <li #saveAs [ngClass]="{'active-topmenuitem':app.activeTopbarItem === saveAs}"
+        (click)="app.onTopbarRootItemClick($event, settings, 'save-as')">
+      <a href="#">
+        <img class="item-icon" src="../assets/icons/forms.svg" alt="">
+        <span class="item-name">saveAs</span>
+      </a>
+    </li>
+    <li #deploy [ngClass]="{'active-topmenuitem':app.activeTopbarItem === deploy}"
+        (click)="app.onTopbarRootItemClick($event, settings, 'deploy')">
+      <a href="#">
+        <img class="item-icon" src="../assets/icons/cloud_upload.svg" alt="">
+        <span class="item-name">deploy</span>
+      </a>
+    </li>
+    <li #preview [ngClass]="{'active-topmenuitem':app.activeTopbarItem === preview}"
+        (click)="app.onTopbarRootItemClick($event, settings, 'preview')">
+      <a href="#">
+        <img class="item-icon" src="../assets/icons/preview.svg" alt="">
+        <span class="item-name">preview</span>
+      </a>
+    </li>
+  </ul>
+</div>

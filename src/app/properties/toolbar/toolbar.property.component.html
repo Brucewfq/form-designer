@@ -1,0 +1,32 @@
+<!-- section属性编辑控件 -->
+<div>
+  <p-tabView>
+    <p-tabPanel header="" headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">Title</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="toolbar.title"
+               ((ngModelChange)="onChange('title', {required: false, variable: true})">
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="toolbar.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="" headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventDatas" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+

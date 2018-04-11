@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="73px" height="73px" viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Data Grid</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="73" height="73"></rect>
+    </defs>
+    <g id="Custom-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Element-Icons" transform="translate(-26.000000, -1253.000000)"></g>
+        <g id="Data-Grid">
+            <g id="Icon-Skeleton">
+                <g id="Group-" stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle">
+                        <use fill-opacity="0" fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke-opacity="0.5" stroke="#333333" stroke-width="1" x="0.5" y="0.5" width="72" height="72"></rect>
+                    </g>
+                </g>
+                <text id="Icon-Label" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#CFD0D3">
+                    <tspan x="16.7456055" y="67">Data Grid</tspan>
+                </text>
+            </g>
+            <g id="Icon" transform="translate(22.000000, 18.000000)" fill="#CFD0D3">
+                <path d="M1,0 L1,29 L30,29 L30,0 L1,0 Z M28.01756,11.5014 L20.29979,11.5014 L20.29979,7.38601 L28.01756,7.38601 L28.01756,11.5014 Z M19.705,16.90932 L11.295,16.90932 L11.295,12.09474 L19.70384,12.09474 L19.705,16.90932 Z M11.295,11.5014 L11.295,7.38601 L19.705,7.38601 L19.705,11.5014 L11.295,11.5014 Z M10.005863,7.38601 L10.700268,7.38601 L10.700268,11.5014 L2.98249829,11.5014 L2.98249829,7.38601 L10.005863,7.38601 Z M10.700268,12.09503 L10.700268,16.90961 L2.98249829,16.90961 L2.98249829,12.09503 L10.700268,12.09503 Z M2.98249829,17.50208 L10.700268,17.50208 L10.700268,22.30854 L2.98249829,22.30854 L2.98249829,17.50208 Z M11.295058,17.50208 L19.703898,17.50208 L19.703898,22.30854 L11.295058,22.30854 L11.295058,17.50208 Z M20.299848,17.50208 L28.017618,17.50208 L28.017618,22.30854 L20.299848,22.30854 L20.299848,17.50208 Z M20.299848,16.90961 L20.299848,12.09503 L28.017618,12.09503 L28.017618,16.90961 L20.299848,16.90961 Z M2.98249829,27.0175603 L2.98249829,22.90536 L10.700268,22.90536 L10.700268,27.0175603 L2.98249829,27.0175603 Z M11.295058,27.0175603 L11.295058,22.90536 L19.703898,22.90536 L19.703898,27.0175603 L11.295058,27.0175603 Z M20.299848,22.90536 L28.017618,22.90536 L28.017618,27.0175603 L20.299848,27.0175603 L20.299848,22.90536 Z" id="Page-1"></path>
+            </g>
+        </g>
+    </g>
+</svg>

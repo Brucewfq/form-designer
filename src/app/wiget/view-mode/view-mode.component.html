@@ -1,0 +1,15 @@
+<p-dataTable [(value)]="viewModeList" [editable]="true" styleClass="data-source-options-dialog">
+  <p-column field="label" header="viewMode"></p-column>
+  <p-column styleClass="col-button" header="delete">
+    <ng-template let-item="rowData" let-i="rowIndex" pTemplate="body">
+      <button type="button" pButton (click)="deleteItem(i)" icon="fa-close"></button>
+    </ng-template>
+  </p-column>
+</p-dataTable>
+<div class="add-view-mode-container">
+  <input type="text" pInputText style="width:50%;" class="text-input" [(ngModel)]="newViewMode"/>
+  <button type="button" pButton (click)="addItem()" label="Add view mode"></button>
+</div>
+
+<app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="clickFinish(items)"
+                           (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>

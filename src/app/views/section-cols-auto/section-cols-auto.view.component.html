@@ -1,0 +1,10 @@
+<!-- 多列区域选择器 -->
+<ngx-dnd-container dropZone="{{selectedViewMode === 'edit' && judgeBtn ? 'builder-target-section': ''}}"
+                   class="section-view-border toolbarStyle"
+                   [model]="model"
+                   [removeOnSpill]="true"
+                   [template]="template"
+                   [droppableItemClass]="droppableItemClass"
+                   (drag)="log($event)" (drop)="drop($event)" (over)="judge($event)" (out)="judgeBtn = true"
+                   (remove)="log($event)">
+</ngx-dnd-container>

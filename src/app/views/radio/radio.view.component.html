@@ -1,0 +1,18 @@
+<!-- radio -->
+<div class="component-view-wrap-container">
+  <h3 class="first" style="float: left;margin:0;font-weight: normal;"><span style="color:red" *ngIf="model.attr.required">*</span>{{model.attr.fieldLabel }}:</h3>
+  <div class="ui-g" style="float: left;margin-left: 5px;">
+    <div class="ui-g-12" style="padding:0;"
+         *ngIf="model.attr.dataSource&&model.attr.dataSource.options.length>0">
+      <p-radioButton *ngFor="let item of model.attr.dataSource.options" name="group1" value="item.display"
+                     label="{{item.label}}" [(ngModel)]="value"
+                     inputId="opt1"></p-radioButton>
+    </div>
+    <div class="ui-g-12" style="padding:0;"
+         *ngIf="model.attr.dataSource&&model.attr.dataSource.options.length==0">
+      <p-radioButton name="group1" value="Option 2" label="Option 2" [(ngModel)]="value"
+                     inputId="opt2"></p-radioButton>
+    </div>
+  </div>
+</div>
+<!-- radio -->

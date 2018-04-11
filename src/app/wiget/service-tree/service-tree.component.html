@@ -1,0 +1,21 @@
+<div id='serviceTree'>
+  <p-tree [value]="datas" selectionMode="single" [(selection)]="selectedData" [contextMenu]="cm"
+          (onNodeContextMenuSelect)="change($event)"
+          (onNodeSelect)="nodeSelect($event)"></p-tree>
+  <p-contextMenu #cm [model]="items"></p-contextMenu>
+  <div class="data-bind-wrap smart-ds-tree-dialog-container service-tree-dialog-container" *ngIf="displayDialog">
+    <p-dialog header="service" [(visible)]="displayDialog" width="800" height="480" (onHide)="doCloseDialog()">
+      <div class="item" style="margin:19px 46px 0 46px;color:#000;">
+        <h3 class="item-title" style="text-align: left;"><span style="color: red">*</span>name:
+        </h3>
+        <input type="text" pInputText placeholder="" class="content" [(ngModel)]="service.name">
+      </div>
+      <div style="padding:0;padding-left: 46px;">
+        <h3 style="display: block;margin:1em 0 0.5em 0;color:#000;">ChooseObject:</h3>
+        <app-bind-object [(selectedObject)]="selectedObject"></app-bind-object>
+      </div>
+      <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                                 (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+    </p-dialog>
+  </div>
+</div>

@@ -1,61 +1,131 @@
+<app-message></app-message>
+<p-confirmDialog class="confirm-dialog-container"></p-confirmDialog>
+<!--<app-loading></app-loading>-->
+<p-growl [(value)]="growlMsgs"></p-growl>
 <div class="layout-wrapper" (click)="onWrapperClick()" [ngClass]="{'layout-wrapper-static': layoutStatic,
                 'layout-wrapper-active': mobileMenuActive}">
-    <!-- app-menu 开始 -->
-    <div class="layout-sidebar" [ngClass]="{'layout-sidebar-active': app.sidebarActive, 'layout-sidebar-dark': app.darkMenu}"
-        (click)="app.onSidebarClick($event)" (mouseover)="app.sidebarActive=true" (mouseleave)="app.sidebarActive=false">
-        <div class="sidebar-logo">
-            <a routerLink="/">
-                <img alt="logo" src="assets/layout/images/k2.png" />
-                <span class="app-name">Form Designer</span>
-            </a>
-            <a href="#" class="sidebar-anchor" title="Toggle Menu" (click)="app.onToggleMenuClick($event)"></a>
-        </div>
-
-        <div #layoutMenuScroller class="nano">
-            <div class="nano-content sidebar-scroll-content">
-                <div class="layout-menu-container" (click)="updateNanoScroll()">
-                  <app-menucomp></app-menucomp>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- app-menu 结束 -->
-    <!-- <app-menu></app-menu> -->
-
-    <div class="layout-main">
-        <app-topbar></app-topbar>
-
-        <!-- <app-breadcrumb></app-breadcrumb> -->
-
-        <!-- <div class="layout-content">
-            <router-outlet></router-outlet>
-        </div> -->
-
-
-        <!-- 主体部分开始 -->
-        <ngx-section class="shadow builder" sectionTitle="Builder Demo">
-            <div fxLayout="row" fxLayoutWrap="nowrap" fxFill>
-                <div fxFlex="100%">
-                      <app-main-panel [targetBuilderTools] = "targetBuilderTools"></app-main-panel>
-                </div>
-            </div>
-            <div fxFlex>
-
-              <button type="text" (click)="showDialog('app-textbox-property')" pButton icon="fa-external-link-square" label="Textbox"></button>
-              <button type="text" (click)="showDialog('app-number-property')" pButton icon="fa-external-link-square" label="Number"></button>
-              <p-dialog [(visible)]="display" modal="modal" width="800" [responsive]="true">
-                <ng-template #compContainer></ng-template>
-
-              </p-dialog>
-              <button type="text" (click)="showDialog('app-blockly')" pButton icon="fa-external-link-square" label="Blockly"></button>
-              <pre><code>{{targetBuilderTools | json}}</code></pre>
-            </div>
-        </ngx-section>
-
-        <!-- 主体部分结束 -->
-
-        <!-- <app-footer></app-footer> -->
-        <div class="layout-main-mask" *ngIf="mobileMenuActive"></div>
+  <!-- app-menu 开始 -->
+  <div class="layout-sidebar"
+       [ngClass]="{'layout-sidebar-active': app.sidebarActive, 'layout-sidebar-dark': app.darkMenu}"
+       (click)="app.onSidebarClick($event)" (mouseover)="app.sidebarActive=true" (mouseleave)="app.sidebarActive=false">
+    <div class="sidebar-logo">
+      <a routerLink="/">
+        <img alt="logo" src="assets/layout/images/k2.png"/>
+        <span class="app-name">Form Designer</span>
+      </a>
+      <a href="#" class="sidebar-anchor" title="Toggle Menu" (click)="app.onToggleMenuClick($event)"></a>
     </div>
 
+    <div #layoutMenuScroller class="nano">
+      <div class="nano-content sidebar-scroll-content">
+        <p-tabMenu [model]="sidebarItems" [activeItem]="sidebarItems[0]" (click)="tabItemSelect($event)"></p-tabMenu>
+        <div class="layout-menu-container" (click)="updateNanoScroll()" *ngIf="activeItem.label==='Toolbox'">
+          <app-menucomp></app-menucomp>
+        </div>
+
+        <div *ngIf="activeItem.label==='Setting'">
+          <app-sub-menu-component></app-sub-menu-component>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- app-menu 结束 -->
+  <!-- <app-menu></app-menu> -->
+  <div class="layout-main">
+    <app-topbar></app-topbar>
+    <!--视图部分-->
+    <div class="form-info">
+      <ul>
+        <li>
+          <span class="title">formName:</span>
+          <span>{{formHostMsg.formName}}</span>
+        </li>
+        <li>
+          <span class="title">version:</span>
+          <span>{{formHostMsg.formVersion}}</span>
+        </li>
+        <li>
+          <span class="title">viewMode:</span>
+          <p-dropdown [options]="viewModeOfForm" [(ngModel)]="selectedViewMode" (ngModelChange)="onSelectView()"
+                      placeholder="Select a view" [style]="{'width':'150px'}"></p-dropdown>
+          <span (click)="showEditViewMode()" class="edit-view-mode-btn">editViewMode</span>
+        </li>
+      </ul>
+    </div>
+
+    <p-messages [(value)]="msgs"></p-messages>
+    <!-- 主体部分开始 -->
+    <ngx-section class="builder">
+      <div fxLayout="row" fxLayoutWrap="nowrap" fxFill>
+        <div fxFlex="100%">
+          <app-main-panel
+            [targetBuilderTools]="targetBuilderTools"
+            (leftMenuDrop)='onLeftMenuDrop($event)'
+            (createHyperModule)='onCreateHyperModule()'
+            (regretBindSource)='onRegretBindSource()'
+            [currentSelectView]='currentSelectView'
+            [(pullCopyTemp)]='pullCopyTemp'
+            (perpareCopy)='onPerpareCopy($event)'></app-main-panel>
+        </div>
+      </div>
+      <div fxFlex class="page-dialog-container">
+        <p-dialog [(visible)]="display" [header]="modelType" modal="modal" width="800" [resizable]="false"
+                  [responsive]="true">
+          <ng-template #blocklyContainer></ng-template>
+        </p-dialog>
+      </div>
+
+      <div class="modal-shadow" [ngClass]="{'active':selectedViewMode!=='edit'}"></div>
+    </ngx-section>
+
+    <pre><code>{{targetBuilderTools|formatJson|json}}</code></pre>
+    <!-- 主体部分结束 -->
+    <!-- <app-footer></app-footer> -->
+    <div class="layout-main-mask" *ngIf="mobileMenuActive"></div>
+  </div>
+
+  <!--设置控件属性部分-->
+  <div class="property-container">
+    <div class="tan-panel-wrap">
+
+      <!--页面右上角tab组件-->
+      <app-tab-panel [targetBuilderTools]="targetBuilderTools"
+                     [serviceTreeSource]='serviceTreeSource'
+                     [(pullCopyTemp)]='pullCopyTemp'></app-tab-panel>
+    </div>
+
+    <!--页面右边控件属性部分-->
+    <div class="component-property">
+      <!--<h2 class="title">属性</h2>-->
+      <ng-template #compContainer style="height:100%;overflow-y: scroll"></ng-template>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+
+  <!--登录模态框-->
+  <div class="login-modal-container" *ngIf="displayLogin">
+    <p-dialog [(visible)]="displayLogin" [header]="'login'" modal="modal" width="500" [closable]="false"
+              [responsive]="true">
+      <div class="content">
+        <div class="item user-name">
+          <input type="text" pInputText="" [(ngModel)]="username">
+        </div>
+        <div class="item password">
+          <input type="password" pInputText="" [(ngModel)]="password">
+        </div>
+        <div class="ui-g-12 item">
+          <p-checkbox name="group1" value="New York" label="记住密码"></p-checkbox>
+        </div>
+
+        <!--<p-button label="login"></p-button>-->
+        <button pButton type="button" label="login" class="login-btn" (click)="login()"></button>
+        <div class="third-login-container">
+          <span class="qq">QQ</span>
+          <span class="wechat">微信</span>
+          <span class="code">二维码</span>
+        </div>
+      </div>
+    </p-dialog>
+  </div>
 </div>

@@ -1,27 +1,32 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {BaseComponent} from '../../base/baseComponent';
 
 @Component({
-    selector: 'app-section-view',
-    templateUrl: './section.view.component.html'
+  selector: 'app-section-view',
+  templateUrl: './section.view.component.html'
 })
 
-export class SectionViewComponent {
+export class SectionViewComponent extends BaseComponent implements OnInit {
 
-  @Input() model: any;
+  @Input() componentAttr: any;
+  @Input() readOnly: any;
+  @Input() realModel: any;
+  @Output() innerDrop: EventEmitter<any> = new EventEmitter();
 
-  @Input() template: any;
-
-  buttonShow: boolean;
-
-  constructor() {
-
+  defaults: any = {
+    title: '',
+    layout: 'float',
+    layoutColumns: 1,
+    layoutGap: 5
   };
 
   drop(e: any) {
-    this.log(e);
+    this.innerDrop.emit(e);
   };
 
-  log(e: any) {
-    console.log(e.type, e);
+  ngOnInit() {
+    if (this.realModel.attr) {
+      this.beforeInitDefault(this.realModel, this.defaults);
+    }
   }
 }

@@ -1,0 +1,50 @@
+<div *ngIf="dataSourcePost.dataSource.selectedDataSourceType==='Advanced'">
+  <div class="property-item">
+    <h3 class="first">dataSource</h3>
+    <div class="value">
+      <input type="text" class="value" pInputText placeholder=""
+             [ngModel]="dataSourcePost.dataSource.bindData&&dataSourcePost.dataSource.bindData.objectName?dataSourcePost.dataSource.bindData.objectName:''"
+             readonly
+             style="width:60%;float: left;">
+      <button pButton class="value" type="button" label="source" style="width:35%;" (click)='showBind()'></button>
+    </div>
+  </div>
+  <div class="property-item">
+    <h3 class="first">Value Field<span style="color: red">*</span></h3>
+    <div class="value">
+      <p-dropdown [options]="dataSourceProperties" [(ngModel)]="dataSourcePost.valueField"
+                  [disabled]="dataSourceProperties.length===0"
+                  placeholder="Select a Type"
+                  [style]="{'width':'150px'}"></p-dropdown>
+    </div>
+  </div>
+  <div class="property-item">
+    <h3 class="first">Display Field<span style="color: red">*</span></h3>
+    <div class="value">
+      <p-dropdown [options]="dataSourceProperties" [(ngModel)]="dataSourcePost.displayField"
+                  [disabled]="dataSourceProperties.length===0"
+                  placeholder="Select a Type"
+                  [style]="{'width':'150px'}"></p-dropdown>
+    </div>
+  </div>
+  <div class="property-item">
+    <h3 class="first">isLang<span style="color: red">*</span></h3>
+    <div class="value">
+      <p-inputSwitch [(ngModel)]="dataSourcePost.dataSource.isLang"></p-inputSwitch>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="displayDialog" class="data-bind-wrap">
+  <p-dialog header="DataSource" [(visible)]="displayDialog" width="800" height="450">
+    <app-tab-panel [isShowTree]="false"
+                   [isShowContext]="false"
+                   [isShowSmartDs]="false"
+                   [defaultTabTitle]="defaultTabTitle"
+                   [curPomBindService]="dataSourcePost.dataSource.bindData"
+                   [(pullCopyTemp)]='pullCopyTemp'></app-tab-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>
+

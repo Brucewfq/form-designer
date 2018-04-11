@@ -1,0 +1,16 @@
+<p-dataTable [(value)]="items" [editable]="true" styleClass="data-source-options-dialog">
+  <p-column field="label" header="display" [editable]="true"></p-column>
+  <p-column field="value" header="value" [editable]="true"></p-column>
+  <p-column styleClass="col-button" header="delete">
+    <ng-template let-item="rowData" let-i="rowIndex" pTemplate="body">
+      <button type="button" pButton (click)="deleteItem(i)" icon="fa-close"></button>
+    </ng-template>
+  </p-column>
+  <p-footer>
+    <div class="ui-helper-clearfix" style="width:100%;text-align: center;">
+      <button type="button" pButton (click)="addItem()" label="Add"></button>
+    </div>
+  </p-footer>
+</p-dataTable>
+<app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="clickFinish(items)"
+                           (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>

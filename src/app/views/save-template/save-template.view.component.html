@@ -1,0 +1,68 @@
+<div class=" saveas-view-container">
+  <p-panel *ngIf='!descStatus'>
+    <div class="item">
+      <h3 class="item-title">TemplateName:<span style="color: red">*</span></h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="requestDTO.TemplateName">
+    </div>
+    <div class="item">
+      <h3 class="item-title">description:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="requestDTO.description">
+    </div>
+    <div class="item">
+      <h3 class="item-title">lev:</h3>
+      <p-radioButton name="lev" value=1 label="私有" [(ngModel)]="requestDTO.lev"></p-radioButton>
+      <p-radioButton name="lev" value=0 label="全局" [(ngModel)]="requestDTO.lev"></p-radioButton>
+      <p-radioButton name="lev" value=2 label="项目" [(ngModel)]="requestDTO.lev"></p-radioButton>
+      <p-dropdown *ngIf="requestDTO.lev==='2'"
+                  placeholder="Select a project"
+                  [options]="projectOptions"
+                  [(ngModel)]="requestDTO.projectId"
+                  [style]="{'width':'150px'}" appendTo="body">
+      </p-dropdown>
+    </div>
+    <div class="item">
+      <h3 class="item-title">category:</h3>
+
+      <p-dropdown placeholder="Select a category"
+                  [options]="categoryOptions"
+                  [(ngModel)]="requestDTO.category"
+                  [style]="{'width':'150px'}" appendTo="body">
+      </p-dropdown>
+    </div>
+    <button pButton type="button" (click)="saveTemplate($event)" label="saveTemplate"
+            class="ui-button-success"></button>
+  </p-panel>
+  <p-panel *ngIf='descStatus'>
+    <div class="item">
+      <h3 class="item-title">en:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="description.en">
+    </div>
+    <div class="item">
+      <h3 class="item-title">zh-CN:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="description.zh_CN">
+    </div>
+    <button pButton type="button" (click)="saveDesc($event, description)" label="save"
+            class="ui-button-success"></button>
+    <button pButton type="button" (click)="descStatus=false" label="cancel" class="ui-button-warning"></button>
+  </p-panel>
+</div>

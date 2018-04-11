@@ -1,88 +1,303 @@
 <!-- 空间存放主区域 -->
-<ngx-dnd-container class="root-container" [model]="targetBuilderTools" dropZone="builder-target" [removeOnSpill]="true"
-                   [droppableItemClass]="droppableItemClass" (drag)="log($event)" (drop)="log($event)"
-                   (over)="log($event)"
-                   (out)="log($event)" (remove)="log($event)">
+<!-- dropZone="{{app.selectedViewMode === 'edit'?'builder-target':''}}" -->
+<ngx-dnd-container class="root-container"
+                   [ngClass]='{"selectBoard": pullCopyTemp && pullCopyTemp.name ==="form"}'
+                   [model]="targetBuilderTools"
+                   [removeOnSpill]="true"
+                   [droppableItemClass]="droppableItemClass"
+                   (click)='clickBoard($event)'
+                   (drag)="drag($event)"
+                   (drop)="drop($event)"
+                   (over)="over($event)"
+                   (out)="out($event)"
+                   (remove)="log($event)">
   <ng-template let-model="model" let-template="template">
 
-    <div [ngSwitch]="model.inputType">
-      <div *ngSwitchCase="'section'">
-        <div class="section-wrap" appControlContainer>
-          <app-section-view [model]="model.children" [template]="template"></app-section-view>
+    <div [ngSwitch]="model.inputType" (click)='onClickToCopy($event, model)'>
+      <div *ngSwitchCase='"form"'>
+        <div class='secition-wrap' *ngIf="currentSelectView === model.name">
+          <app-form-view
+            [model]="model.children"
+            [componentAttr]="model.attr?model.attr:''"
+            [pullCopyTemp]='pullCopyTemp'
+            (ondeleteModel)='delete($event)'
+            [template]="template"
+            (innerDrop)="onInnerDrop($event)"
+            [readOnly]='model.attr.readOnly[app.selectedViewMode]'>
+          </app-form-view>
+        </div>
+      </div>
+      <div *ngSwitchCase='"window"' (click)='onClickToCopy($event, model)'>
+        <div class='secition-wrap' *ngIf="currentSelectView === model.name">
+          <app-window-view
+            [model]="model.children"
+            [componentAttr]="model.attr?model.attr:''"
+            [pullCopyTemp]='pullCopyTemp'
+            (ondeleteModel)='delete($event)'
+            [template]="template"
+            (innerDrop)="onInnerDrop($event)"
+            [readOnly]='model.attr.readOnly[app.selectedViewMode]'>
+          </app-window-view>
+        </div>
+      </div>
+      <div *ngSwitchCase="'section'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-section-view
+            [model]="model.children"
+            [realModel]="model"
+            [componentAttr]="model.attr?model.attr:''"
+            [template]="template"
+            (innerDrop)="onInnerDrop($event)"
+            [readOnly]='model.attr.readOnly[app.selectedViewMode]'>
+          </app-section-view>
           <div class="controls-container">
             <div class="setting-controls">
-              <button pButton type="button" (click)="app.showDialog('')"></button>
-              <button pButton type="button" (click)="app.showDialog('')"></button>
+              <span class="fourth-btn" type="button" (click)="saveAsTemplate(model)"></span>
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
             </div>
           </div>
         </div>
       </div>
-      <div *ngSwitchCase="'section-cols'" class="section-wrap">
-        <div (mouseenter)="show($event)" (mouseleave)="hide($event)" class="section-wrap">
-          <app-section-cols-view [model]="model.children" [template]="template"></app-section-cols-view>
-
+      <div *ngSwitchCase="'section-cols'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-section-cols-view
+            [model]="model.children"
+            [realModel]="model"
+            [componentAttr]="model.attr?model.attr:''"
+            [template]="template"
+            (innerDrop)="onInnerDrop($event)">
+          </app-section-cols-view>
           <div class="controls-container">
             <div class="setting-controls">
-              <button pButton type="button" (click)="app.showDialog('')"></button>
-              <button pButton type="button" (click)="app.showDialog('')"></button>
+              <span class="fourth-btn" type="button" (click)="saveAsTemplate(model)"></span>
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
             </div>
           </div>
         </div>
       </div>
-      <div *ngSwitchCase="'textbox'">
-        <div (mouseenter)="show($event)" (mouseleave)="hide()" class="section-wrap">
+      <div *ngSwitchCase="'toolbar'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-toolbar-view
+            [model]="model.children"
+            [template]="template"
+            (innerDrop)="onInnerDrop($event)">
+          </app-toolbar-view>
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="fourth-btn" type="button" (click)="saveAsTemplate(model)"></span>
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'textbox'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
           <app-textbox-view [model]="model" [template]="template"></app-textbox-view>
 
           <div class="controls-container">
             <div class="setting-controls">
-              <button pButton type="button" (click)="app.showDialog('app-textbox-property')"></button>
-              <button pButton type="button" (click)="app.showDialog('app-textbox-property')"></button>
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
             </div>
           </div>
 
         </div>
       </div>
-      <div *ngSwitchCase="'number'">
-        <div (mouseenter)="op2.show($event)" (mouseleave)="op2.hide()">
+      <div *ngSwitchCase="'number'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
           <app-number-view [model]="model" [template]="template"></app-number-view>
-          <p-overlayPanel #op2>
-            <button pButton type="button" (click)="app.showDialog('app-number-property')" icon="fa-arrows-alt"></button>
-          </p-overlayPanel>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+
         </div>
       </div>
-      <div *ngSwitchCase="'checkbox'">
-        <div (mouseenter)="op2.show($event)" (mouseleave)="op2.hide()">
+      <div *ngSwitchCase="'checkbox'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
           <app-checkbox-view [model]="model" [template]="template"></app-checkbox-view>
-          <p-overlayPanel #op2>
-            <button pButton type="button" (click)="app.showDialog('app-checkbox-property')"
-                    icon="fa-arrows-alt"></button>
-          </p-overlayPanel>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
         </div>
       </div>
-      <div *ngSwitchCase="'dropdown'">
-        <div (mouseenter)="op2.show($event)" (mouseleave)="op2.hide()">
+      <div *ngSwitchCase="'textarea'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-textarea-view [model]="model" [template]="template"></app-textarea-view>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'dropdown'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
           <app-dropdown-view [model]="model" [template]="template"></app-dropdown-view>
-          <p-overlayPanel #op2>
-            <button pButton type="button" (click)="app.showDialog('app-dropdown-property')"
-                    icon="fa-arrows-alt"></button>
-          </p-overlayPanel>
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
         </div>
       </div>
-      <div *ngSwitchCase="'label'">
-        <div (mouseenter)="op2.show($event)" (mouseleave)="op2.hide()">
+      <div *ngSwitchCase="'label'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
           <app-label-view [model]="model" [template]="template"></app-label-view>
-          <p-overlayPanel #op2>
-            <button pButton type="button" (click)="app.showDialog('app-label-property')" icon="fa-arrows-alt"></button>
-          </p-overlayPanel>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'tab'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'>
+          <app-tab-view [model]="model"
+                        [template]="template"
+                        [(pullCopyTemp)]='pullCopyTemp'
+                        (addNewVersion)='addNewVersion($event)'
+                        (showProperty)='showProperty($event)'
+                        (innerDrop)="onInnerDrop($event)"></app-tab-view>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="fourth-btn" type="button" (click)="saveAsTemplate(model)"></span>
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'file'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-file-view [model]="model" [template]="template" (innerDrop)="onInnerDrop($event)"></app-file-view>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'image'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-image-view [model]="model" [template]="template"></app-image-view>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'radio'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-radio-view [model]="model" [template]="template"></app-radio-view>
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'datetime'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-date-view [model]="model" [template]="template"></app-date-view>
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'button'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-button-view [model]="model" [template]="template"></app-button-view>
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'submit'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-submit-view [model]="model" [template]="template"></app-submit-view>
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'data-grid'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-data-grid-view [model]="model" [template]="template"></app-data-grid-view>
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="fourth-btn" type="button" (click)="saveAsTemplate(model)"></span>
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'choosebox'" (click)='onClickToCopy($event, model)'>
+        <div class="section-wrap" appControlContainer
+             [ngClass]='{"showChild": pullCopyTemp && pullCopyTemp.name == model.name,"error":model.attr.hasOwnProperty("isValid")&&!model.attr.isValid,"enabled":model.attr.readOnly[app.selectedViewMode]}'
+             *ngIf='!model.attr.visible.hasOwnProperty(app.selectedViewMode)||model.attr.visible[app.selectedViewMode]'>
+          <app-choosebox-view [model]="model" [template]="template"></app-choosebox-view>
+
+          <div class="controls-container">
+            <div class="setting-controls">
+              <span class="third-btn" type="button" (click)="delete(model)"></span>
+            </div>
+          </div>
         </div>
       </div>
       <div *ngSwitchDefault>
-        <ngx-input
-          [type]="model.inputType"
-          [hint]="model.name"
-          [autofocus]="false"
-          [ngModel]="model.data">
-        </ngx-input>
+
       </div>
     </div>
   </ng-template>

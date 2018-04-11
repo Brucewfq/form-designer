@@ -1,64 +1,142 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BaseComponent} from '../../base/baseComponent';
 
 @Component({
-    selector: 'app-dropdown-property',
-    templateUrl: './dropdown.property.component.html'
+  selector: 'app-dropdown-property',
+  templateUrl: './dropdown.property.component.html'
 })
 
-export class DropdownPropertyComponent {
-    dropdown: any;
+export class DropdownPropertyComponent extends BaseComponent implements OnInit {
+  dataSource: any[];
 
-    selectedColumn: any;
+  dropdown: any = {};
 
-    selectedDataSourceType: any;
+  dataSourceTypes = [
+    {label: 'Options', value: 'Options'},
+    {label: 'Advanced', value: 'Advanced'},
+    {label: 'DataDict', value: 'DataDict'},
+  ];
 
-    selectedType: any;
+  msgs: any[] = [];
 
-    columns: any[];
+  selectedEvent: any = {};
 
-    dataSourceTypes: any[];
+  displayDialog: Boolean = false;
 
-    reqTypes: any[];
+  selectedData: any;
 
-    divShow: boolean = false;
-    constructor() {
-      this.selectedColumn = '3';
-      this.columns = [
-        {label: '2', value: '2'},
-        {label: '3', value: '3'},
-        {label: '4', value: '4'}
-      ];
+  treeData: any[] = [];
 
-      this.selectedDataSourceType = '1';
-      this.dataSourceTypes = [
-        {label: 'Options', value: '1'},
-        {label: 'Advanced', value: '2'}
-      ];
+  // tab panel组件默认显示的title
+  defaultTabTitle = 'smartDs';
 
-      this.selectedType = 'GET';
-      this.reqTypes = [
-        {label: 'GET', value: 'GET'},
-        {label: 'POST', value: 'POST'}
-      ];
+  eventData = [
+    {'name': 'Change', 'desc': 'set event', id: 1}
+  ];
 
-      this.dropdown = {
-        options: 'Option 1   Option 2   Option 3'
-      }
+  get eventDatas() {
+    const arr = this.getEventData(this.eventData);
+    return arr;
+  }
+
+  init() {
+    this.dropdown.dataSource = {};
+    this.dropdown.dataSource.options = [];
+
+    this.dropdown.dataSource.selectedDataSourceType = 'Options';
+
+    this.dropdown.displayField = 'label';
+    this.dropdown.valueField = 'value';
+    this.dropdown.required = false;
+    this.dropdown.editable = false;
+  }
+
+  onChange(field?: string, type = {}) {
+    if (field) {
+      this.validate(field, this.dropdown, type);
+    }
+
+    // 组件属性发生改变时，name发生改变时通知相应的smartDs同时修改;
+    if (field && this.dropdown) {
+      this.subjectService.broadcastData(this.constantService.subKey.PROPERTY_CHANGE, {id: this.dataName, model: this.dropdown});
+    }
+  }
+
+  chooseEvent(e) {
+    if (this.selectedViewMode === 'edit') {
+      this.showDialog.emit({inputType: 'app-blockly', name: this.dataName, key: this.selectedEvent.name});
+    }
+  };
+
+  onSetting() {
+    const retData = {
+      dataName: this.dataName,
+      attr: this.dropdown
     };
 
-    clickFinish () {
-      alert('clickFinish');
-    };
+    this.editData.emit(retData);
+    this.showDialog.emit({inputType: 'options', name: this.dataName});
+  }
 
-    clickQuickFinish () {
-      alert('clickQuickFinish');
-    };
+  showBind() {
+    this.displayDialog = true;
+  }
 
-    chooseEvent (e) {
-      if (e) {
-        this.divShow = true;
+  doClickFinish() {
+    if (this.selectedData) {
+      if (this.selectedData.data &&
+        (this.selectedData.data.type === 'Object'
+          || this.selectedData.data.type === 'List'
+          || this.selectedData.data.type === 'DateTime')) {
+        this.subjectService.broadcastData(this.subKey.ALERT_MESSAGE, {
+          severity: 'error',
+          summary: '不能绑定list、DateTime、Object类型的属性',
+          detail: ''
+        });
+        return;
       } else {
-        this.divShow = false;
+        this.dropdown.bindPath = this.selectedData.path;
+        this.onChange();
+        this.displayDialog = false;
       }
-    };
+    }
+  }
+
+  doCloseDialog() {
+    this.displayDialog = false;
+  }
+
+  ngOnInit() {
+    if (this.dataModel && this.dataModel.attr) {
+      if (!this.dataModel.attr.fieldLabel) {
+        this.dataModel.attr.fieldLabel = 'Dropdown';
+      }
+      this.dropdown = this.dataModel.attr;
+    }
+
+    if (this.dataModel && (!this.dataModel.attr || (this.dataModel.attr && !this.dataModel.attr.dataSource))) {
+      this.init();
+    }
+
+    if (this.dataModel && this.dataModel.scripts) {
+      this.checkEventName(this.eventDatas, this.dataModel.scripts);
+    }
+
+    this.treeData = this.constantService.getDataByKey(this.subKey.smartDsChange);
+    this.registerSubject(this.subKey.nodeChoose);
+    this.registerSubject(this.subKey.smartDsChange);
+    this.registerSubject(this.subKey.SET_EVENT);
+    this.showInitValidate();
+  };
+
+  onSubResult(key: string, data: any) {
+
+    if (key === this.subKey.smartDsChange) {
+      this.treeData = data;
+    } else if (key === this.subKey.nodeChoose) {
+      this.selectedData = data;
+    } else if (key === this.subKey.SET_EVENT) {
+      this.checkEventName(this.eventDatas, data);
+    }
+  }
 }

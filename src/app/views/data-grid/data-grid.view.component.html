@@ -1,0 +1,33 @@
+<!-- data grid-->
+<p-dataTable [value]="items" [editable]="!model.attr.readOnly[selectedViewMode] && model.attr.editable" [rows]="1"
+             [scrollable]="true" [scrollWidth]="600" [style]="{'min-height':''+model.attr.minHeight+'px'}"
+             [paginator]="model.attr.hasPagingtoolbar">
+  <p-column [field]="column.dataIndex" [header]="column.text" [editable]="!model.attr.dataSource"
+            [style]="{'width':column.minWidth+'px','flex':column.flex}"
+            *ngFor="let column of model.attr.columns; index as i;" [hidden]="visible(column.visible)">
+
+    <ng-template let-col let-row="rowData" pTemplate="body" style="width: 100px;"
+                 *ngIf="column.editorType==='datefield'">
+      {{row[col.field]|date }}
+    </ng-template>
+    <ng-template pTemplate="editor" let-col let-row="rowData" style="width: 100px;"
+                 *ngIf="column.editorType==='datefield'">
+      <p-calendar [(ngModel)]="row[col.field] " dateFormat="yy/dd/mm" appendTo="body"></p-calendar>
+    </ng-template>
+  </p-column>
+
+  <p-column field="cloumnA" header="defaultColumnA" [editable]="true" *ngIf="!model.attr.columns"
+            [hidden]="model.attr.columns"></p-column>
+  <p-column field="cloumnB" header="defaultColumnB" [editable]="true" *ngIf="!model.attr.columns"
+            [hidden]="model.attr.columns"></p-column>
+  <p-column field="cloumnC" header="defaultColumnC" [editable]="true" *ngIf="!model.attr.columns"
+            [hidden]="model.attr.columns"></p-column>
+
+  <p-footerColumnGroup *ngIf="showFooter">
+    <p-row>
+      <p-column footer="Totals:"></p-column>
+      <p-column footer="$506,202"></p-column>
+      <p-column footer="$531,020"></p-column>
+    </p-row>
+  </p-footerColumnGroup>
+</p-dataTable>

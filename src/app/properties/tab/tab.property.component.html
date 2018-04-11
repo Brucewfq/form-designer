@@ -1,0 +1,69 @@
+<!-- tab属性编辑控件 -->
+<div class="component-property-content">
+  <p-tabView [styleClass]="property-container">
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <!-- <div class="property-item">
+         <h3 class="first">Tab Title</h3>
+         <input class="value" type="text" size="30" placeholder="" pInputText
+                [(ngModel)]="tab.title"
+                [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                (ngModelChange)="onChange()">
+       </div>-->
+
+      <div class="property-item">
+        <h3 class="first">Name</h3>
+        <input class="value" type="text" size="30" placeholder=""
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="tab.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <input class="value" type="number" size="30" placeholder="" pInputText
+               [(ngModel)]="tab.height"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">Width</h3>
+        <input class="value" type="text" size="30" placeholder="" pInputText
+               [(ngModel)]="tab.width"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">ActiveTab</h3>
+        <input class="value" type="text" size="30" placeholder="" pInputText
+               [(ngModel)]="tab.activeTab"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">AnimScroll</h3>
+        <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="tab.animScroll"
+                       [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                       (ngModelChange)="onChange()"></p-inputSwitch>
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">EnableTabScroll</h3>
+        <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="tab.enableTabScroll"
+                       [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                       (ngModelChange)="onChange()"></p-inputSwitch>
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">TabPosition</h3>
+        <p-dropdown class="value" [options]="tabPositions" [(ngModel)]="tab.tabPosition"
+                    (ngModelChange)="onChange()"
+                    [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                    placeholder="Select a TabPosition"></p-dropdown>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

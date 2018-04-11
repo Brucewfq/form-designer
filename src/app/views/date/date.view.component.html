@@ -1,0 +1,13 @@
+<!-- date -->
+<div class="ui-g ui-fluid" [ngStyle]="{'height': model.attr.height +'px'}">
+  <div class="ui-g-12 component-view-wrap-container">
+    <h3 class="title"><span style="color:red"
+                            *ngIf="model.attr.required">*</span>{{ model.attr.fieldLabel }}:</h3>
+    <div class="content">
+      <p-calendar [(ngModel)]="date" dateFormat="{{model.attr.format}}"
+                  [showIcon]="true"></p-calendar>
+    </div>
+    <!--<span style="margin-left:35px"></span>-->
+  </div>
+</div>
+<!-- date -->

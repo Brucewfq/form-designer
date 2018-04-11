@@ -1,0 +1,19 @@
+<div class="tab-component-container">
+  <p-tabView (onChange)="onTabChange($event)"
+             (onClose)='onTabClose($event)'
+             [activeIndex]="tabIndex"
+             orientation="{{(model.attr && model.attr.tabPosition) ? model.attr.tabPosition : 'top'}}">
+    <p-tabPanel *ngFor="let item of model.children; index as i;"
+                [header]="item.attr.title || item.attr.name || 'tab'"
+                [headerStyleClass] ="item.attr.isValid ?'error': ''"
+                [selected]=" pullCopyTemp.name === item.name|| (pullCopyTemp.parentArr&&pullCopyTemp.parentArr.includes(item.name)) || tabIndex == i"
+                [closable]="i===0 || i=== 1 ? false : true">
+      <app-tab-item-view [model]="item.children"
+                         [template]="template"
+                         (dropAddVersion)="drop($event)">
+      </app-tab-item-view>
+    </p-tabPanel>
+    <p-tabPanel header="" leftIcon="fa-plus">
+    </p-tabPanel>
+  </p-tabView>
+</div>

@@ -1,35 +1,40 @@
 import {Component, Output, EventEmitter, Input} from '@angular/core';
-import {AppComponent} from '../../app.component';
 
 @Component({
-    selector: 'app-wiget-property-bottom',
-    template: `
-      <button pButton type="button" icon="fa-check" label="Finish" class="ui-button-success"  (click)="doFinish()"></button>
-      <button pButton type="button" icon="fa-plus" label="Save As Quick Field" class="ui-button-info"  (click)="doQuickFinish()" *ngIf="!dontShowQuick"></button>
-      <button pButton type="button" icon="fa-close" label="Cancel" class="ui-button-info" (click)="app.closeDialog()"></button>
-    `
+  selector: 'app-wiget-property-bottom',
+  template: `
+    <div style="text-align: center;margin-top:16px;">
+      <button pButton type="button" icon="fa-plus" label="Finish" class="ui-button-success" (click)="doFinish()"></button>
+      <button pButton type="button" icon="fa-plus" label="Save As Quick Field" class="ui-button-info" (click)="doQuickFinish()"
+              *ngIf="!dontShowQuick"></button>
+      <button pButton type="button" icon="fa-close" label="Cancel" class="ui-button-info" (click)="closeDialog()"></button>
+    </div>
+  `
 })
 
 export class PropertyBottomWigetComponent {
 
-    @Output()
-    cFinish = new EventEmitter();
+  @Output()
+  cFinish = new EventEmitter();
 
-    @Output()
-    cQuickFinish = new EventEmitter();
+  @Output()
+  cQuickFinish = new EventEmitter();
 
-    @Input()
-    dontShowQuick: boolean = false;
+  @Output()
+  docloseDialog = new EventEmitter();
 
-    constructor(private app: AppComponent) {
+  @Input()
+  dontShowQuick: boolean = false;
 
-    };
+  doFinish() {
+    this.cFinish.emit();
+  };
 
-    doFinish () {
-      this.cFinish.emit();
-    };
+  doQuickFinish() {
+    this.cQuickFinish.emit();
+  };
 
-    doQuickFinish () {
-      this.cQuickFinish.emit();
-    };
+  closeDialog() {
+    this.docloseDialog.emit();
+  };
 }

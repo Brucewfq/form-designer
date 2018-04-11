@@ -1,0 +1,33 @@
+<svg width="73px" height="73px" viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Label</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="73" height="73"></rect>
+    </defs>
+    <g id="Custom-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Element-Icons" transform="translate(-202.000000, -896.000000)"></g>
+        <g id="Label">
+            <g id="Icon-Skeleton">
+                <g id="Group-" stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle">
+                        <use fill-opacity="0" fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke-opacity="0.5" stroke="#333333" stroke-width="1" x="0.5" y="0.5" width="72" height="72"></rect>
+                    </g>
+                </g>
+                <text id="Icon-Label" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#CFD0D3">
+                    <tspan x="25.2468262" y="67">Label</tspan>
+                </text>
+            </g>
+            <g id="Icon" transform="translate(27.000000, 21.000000)" fill="#CFD0D3">
+                <g id="Page-1">
+                    <polygon id="Fill-1" points="8.66220389 22.8401208 11.3761728 22.8401208 11.3761728 2.35132815 8.66220389 2.35132815"></polygon>
+                    <polygon id="Fill-2" points="0.138647887 3.66605976 19.8998157 3.66605976 19.8998157 0.159962195 0.138647887 0.159962195"></polygon>
+                    <polygon id="Fill-3" points="17.1858033 6.35032805 19.8997723 6.35032805 19.8997723 0.159962195 17.1858033 0.159962195"></polygon>
+                    <polygon id="Fill-4" points="0.138647887 6.35032805 2.85261683 6.35032805 2.85261683 0.159962195 0.138647887 0.159962195"></polygon>
+                    <polygon id="Fill-5" points="5.71505073 22.840122 14.323326 22.840122 14.323326 19.3340244 5.71505073 19.3340244"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

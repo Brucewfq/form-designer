@@ -1,0 +1,165 @@
+<!-- Radio属性编辑控件 -->
+<div class="component-property-content">
+  <p-tabView>
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">FieldLabel</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="radio.fieldLabel">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="radio.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+      <!--<div class="property-item">-->
+        <!--<h3 class="first">InitValue</h3>-->
+        <!--<input class="value" type="text" size="30"-->
+               <!--[disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"-->
+               <!--(ngModelChange)="onChange()" pInputText [(ngModel)]="radio.initValue">-->
+      <!--</div>-->
+      <div class="property-item">
+        <h3 class="first">Required</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="radio.required"></p-inputSwitch>
+        </div>
+
+      </div>
+      <div class="property-item">
+        <h3 class="first">Editable</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="radio.editable"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">SimpleValue</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="radio.simpleValue"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelWidth</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="radio.labelWidth" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelAlign</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.labelAligns"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="radio.labelAlign"
+                      placeholder="Select align" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Width</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="radio.width" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="radio.height" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">DataBind:</h3>
+        <div class="value">
+          <input type="text" class="value" pInputText placeholder="" [ngModel]="radio.bindPath" readonly
+                 style="width:60%;float: left;">
+          <button pButton class="value" type="button" label="Bind" style="width:35%;" (click)='showBind()'
+                  [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"></button>
+        </div>
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">DataSource Type</h3>
+        <div class="value">
+          <p-dropdown [options]="dataSourceTypes" [(ngModel)]="radio.dataSource.selectedDataSourceType"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      placeholder="Select a DataSource Type" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+
+      <div class="property-item" *ngIf="radio.dataSource.selectedDataSourceType==='Options'">
+        <h3 class="first">options</h3>
+        <button class="value ui-button-info"
+                [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]" pButton
+                type="button"
+                (click)="onSetting()" label="setting"></button>
+      </div>
+
+      <div class="property-item" *ngIf="radio.dataSource.selectedDataSourceType==='Options'">
+        <h3 class="first">ValueField<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30" readonly="readonly"
+               pInputText value="value">
+      </div>
+      <div class="property-item" *ngIf="radio.dataSource.selectedDataSourceType==='Options'">
+        <h3 class="first">DisplayField<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30" readonly="readonly" pInputText
+               value="label">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Cls</h3>
+        <div class="value">
+          <input class="value" type="text" size="30" placeholder="" pInputText
+                 [(ngModel)]="radio.cls"
+                 [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                 (ngModelChange)="onChange('name', {variable: true})">
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">EmptyText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="radio.emptyText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item last">
+        <h3 class="first">InvalidText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="radio.invalidText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <app-data-source-property [dataSourcePost]="radio"></app-data-source-property>
+    </p-tabPanel>
+    <p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventDatas" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+<div *ngIf="displayDialog" class="data-bind-wrap">
+  <p-dialog header="DataBind" [(visible)]="displayDialog" width="800" height="450">
+    <app-tab-panel [isShowTree]="false"
+                   [isShowService]="false"
+                   [defaultTabTitle]="defaultTabTitle"
+                   [smartDsData]="treeData"
+                   [curPomBindSmartDs]="radio.bindPath"
+                   [(pullCopyTemp)]='pullCopyTemp'></app-tab-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>

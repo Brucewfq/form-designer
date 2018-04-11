@@ -1,0 +1,32 @@
+<div id='contextTree'>
+  <p-tree [value]="datas" selectionMode="single" [(selection)]="selectedData" [contextMenu]="cm"
+          (onNodeContextMenuSelect)="change($event)" (onNodeSelect)="nodeSelect($event)"></p-tree>
+</div>
+<!--<p-contextMenu #cm [model]="items"></p-contextMenu>-->
+<!--<div class="data-bind-wrap smart-ds-tree-dialog-container" *ngIf="displayDialog">-->
+  <!--<p-dialog header="smartDs" [(visible)]="displayDialog" width="600" height="320">-->
+    <!--<p-panel>-->
+      <!--<div class="item">-->
+        <!--<h3 class="item-title">name<span style="color: red">*</span>:</h3>-->
+        <!--<input type="text" pInputText class="content" [(ngModel)]="smartDs.name">-->
+      <!--</div>-->
+      <!--<div class="item">-->
+        <!--<h3 class="first item-title">type:</h3>-->
+        <!--<div class="content">-->
+          <!--<p-dropdown [options]="dataTypes" [(ngModel)]="smartDs.type" [style]="{'width':'150px'}"></p-dropdown>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="item">-->
+        <!--<h3 class="item-title">validate:</h3>-->
+        <!--<input type="text" pInputText class="content" [(ngModel)]="smartDs.validateFunc">-->
+      <!--</div>-->
+      <!--<div class="item">-->
+        <!--<h3 class="item-title">calculate:</h3>-->
+        <!--<input type="text" pInputText class="content" [(ngModel)]="smartDs.calculateFunc">-->
+        <!--&lt;!&ndash;<label>{{model.attr?(model.attr.fieldLabel?model.attr.fieldLabel:'Textbox'):'Textbox'}}</label>&ndash;&gt;-->
+      <!--</div>-->
+    <!--</p-panel>-->
+    <!--<app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"-->
+                               <!--(docloseDialog)="docloseDialog()"></app-wiget-property-bottom>-->
+  <!--</p-dialog>-->
+<!--</div>-->

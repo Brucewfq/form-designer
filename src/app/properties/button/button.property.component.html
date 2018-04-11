@@ -1,0 +1,39 @@
+<!-- button属性编辑控件 -->
+<div class="component-property-content">
+  <p-tabView>
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">Text</h3>
+        <input class="value" type="text" size="30" [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="button.text">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="button.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Width</h3>
+        <input class="value" type="text" size="30" [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="button.width">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <input class="value" type="text" size="30" [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="button.height">
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventDatas" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+

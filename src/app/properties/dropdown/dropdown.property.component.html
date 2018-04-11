@@ -1,71 +1,114 @@
 <!-- dropdown属性编辑控件 -->
-<p-panel>
-  <p-header>
-    <div class="ui-helper-clearfix">
-      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Dropdown setting</span>
-    </div>
-  </p-header>
+<div class="component-property-content">
   <p-tabView>
-    <p-tabPanel header="GENERAL">
-      <h3 class="first">Label<span style="color: red">*</span></h3>
-      <input type="text" size="30" placeholder="dropdown" pInputText [(ngModel)]="dropdown.label">
-      <span>Type your label.</span>
-
-      <h3 class="first">Name<span style="color: red">*</span></h3>
-      <input type="text" size="30"  placeholder="dropdown" pInputText [(ngModel)]="dropdown.name">
-
-      <h3 class="first">Hint</h3>
-      <input type="text" size="30"  placeholder="Hint" pInputText [(ngModel)]="dropdown.Hint">
-
-      <h3 class="first"></h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="dropdown.required"></p-inputSwitch><span>Required (Prevent submission if this value is empty.)</span>
-    </p-tabPanel>
-    <p-tabPanel header="ADVANCED">
-      <h3 class="first">Access Control</h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="dropdown.access"></p-inputSwitch>
-
-      <h3 class="first">Multiple</h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="dropdown.multiple"></p-inputSwitch>
-
-      <div *ngIf="dropdown.multiple">
-        <h3 class="first">Columns<span style="color: red">*</span></h3>
-        <p-dropdown [options]="columns" [(ngModel)]="selectedColumn" placeholder="Select a Column" [style]="{'width':'150px'}"></p-dropdown>
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">FieldLabel</h3>
+        <input class="value" type="text" size="30" pInputText
+               (ngModelChange)="onChange()"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               [(ngModel)]="dropdown.fieldLabel">
       </div>
 
-      <h3 class="first">DataSource Type</h3>
-      <p-dropdown [options]="dataSourceTypes" [(ngModel)]="selectedDataSourceType" placeholder="Select a DataSource Type" [style]="{'width':'150px'}"></p-dropdown>
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30" pInputText
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               [(ngModel)]="dropdown.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
 
+      <div class="property-item">
+        <h3 class="first">PlaceHolder</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText
+               [(ngModel)]="dropdown.placeHolder">
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">InitValue</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="dropdown.initValue">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Required</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="dropdown.required"></p-inputSwitch>
+        </div>
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">Editable</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="dropdown.editable"></p-inputSwitch>
+        </div>
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">DataBind:</h3>
+        <div class="value">
+          <input type="text" class="value" pInputText placeholder="" [ngModel]="dropdown.bindPath" readonly
+                 style="width:60%;float: left;">
+          <button pButton class="value" type="button" label="Bind" style="width:35%;" (click)='showBind()'
+                  [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"></button>
+        </div>
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">DataSource Type</h3>
+        <div class="value">
+          <p-dropdown [options]="dataSourceTypes" [(ngModel)]="dropdown.dataSource.selectedDataSourceType"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      placeholder="Select a DataSource Type" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+
+      <div class="property-item" *ngIf="dropdown.dataSource&&dropdown.dataSource.selectedDataSourceType==='Options'">
+        <h3 class="first">options</h3>
+        <button class="value ui-button-info" pButton type="button"
+                [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                (click)="onSetting()" label="setting"></button>
+      </div>
+
+      <div class="property-item" *ngIf="dropdown.dataSource&&dropdown.dataSource.selectedDataSourceType==='Options'">
+        <h3 class="first">ValueField<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30" readonly="readonly" value="value" pInputText>
+      </div>
+      <div class="property-item last"
+           *ngIf="dropdown.dataSource&&dropdown.dataSource.selectedDataSourceType==='Options'">
+        <h3 class="first">DisplayField<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30" readonly="readonly" pInputText value="label">
+      </div>
+
+      <app-data-source-property [dataSourcePost]="dropdown"></app-data-source-property>
+      <app-data-dict [dataDictPost]="dropdown"></app-data-dict>
     </p-tabPanel>
-    <p-tabPanel header="OPTION" *ngIf="selectedDataSourceType==='1'">
-      <h3 class="first">Options</h3>
-      <input type="text" size="30" placeholder="Options" pInputText [(ngModel)]="dropdown.options">
 
-    </p-tabPanel>
-    <p-tabPanel header="DATA SOURCE" *ngIf="selectedDataSourceType==='2'">
-      <h3 class="first">URL</h3>
-      <input type="text" size="30" placeholder="URL" pInputText [(ngModel)]="dropdown.URL">
-
-      <h3 class="first">Content Type</h3>
-      <input type="text" size="30" placeholder="Content Type" pInputText [(ngModel)]="dropdown.contentType">
-
-      <h3 class="first">Type</h3>
-      <p-dropdown [options]="reqTypes" [(ngModel)]="selectedType" placeholder="Select a Type" [style]="{'width':'150px'}"></p-dropdown>
-
-      <h3 class="first">Display Field<span style="color: red">*</span></h3>
-      <input type="text" size="30" placeholder="Display Field" pInputText [(ngModel)]="dropdown.displayField">
-
-      <h3 class="first">Value Field</h3>
-      <input type="text" size="30" placeholder="Value Field" pInputText [(ngModel)]="dropdown.valueField">
-
-    </p-tabPanel>
-    <p-tabPanel header="CUSTOM CODE">
-      <app-wiget-select-event (chooseOk)="chooseEvent($event)" [parentType]="dropdown"></app-wiget-select-event>
-      <h3 class="first"></h3>
-
-      <app-blockly *ngIf="divShow"></app-blockly>
+    <p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventDatas" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
     </p-tabPanel>
   </p-tabView>
-  <p-footer>
-    <app-wiget-property-bottom (cFinish)="clickFinish(e)" (cQuickFinish)="clickQuickFinish(e)"></app-wiget-property-bottom>
-  </p-footer>
-</p-panel>
+</div>
+<div *ngIf="displayDialog" class="data-bind-wrap">
+  <p-dialog header="DataBind" [(visible)]="displayDialog" width="800" height="450">
+    <app-tab-panel [isShowTree]="false"
+                   [isShowService]="false"
+                   [defaultTabTitle]="defaultTabTitle"
+                   [smartDsData]="treeData"
+                   [curPomBindSmartDs]="dropdown.bindPath"
+                   [(pullCopyTemp)]='pullCopyTemp'></app-tab-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>

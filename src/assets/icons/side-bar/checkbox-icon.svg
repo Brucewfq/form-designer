@@ -1,0 +1,27 @@
+<svg width="73px" height="73px" viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Checkbox</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="73" height="73"></rect>
+    </defs>
+    <g id="Custom-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Element-Icons" transform="translate(-26.000000, -896.000000)"></g>
+        <g id="Checkbox">
+            <g id="Icon-Skeleton">
+                <g id="Group-" stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle">
+                        <use fill-opacity="0" fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke-opacity="0.5" stroke="#333333" stroke-width="1" x="0.5" y="0.5" width="72" height="72"></rect>
+                    </g>
+                </g>
+                <text id="Icon-Label" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#CFD0D3">
+                    <tspan x="15.4931641" y="67">Checkbox</tspan>
+                </text>
+            </g>
+            <g id="Icon" transform="translate(23.000000, 18.000000)" fill="#CFD0D3">
+                <path d="M0,5.70371144 C0,2.97934972 2.19152829,0.76959258 4.93411886,0.76959258 L21.2962886,0.76959258 C24.0206503,0.76959258 26.2304074,2.96112087 26.2304074,5.70371144 L26.2304074,22.0658812 C26.2304074,24.7902429 24.0388791,27 21.2962886,27 L4.93411886,27 C2.20975714,27 0,24.8084717 0,22.0658812 L0,5.70371144 M8.59195543,21.508524 C9.25792509,22.2851258 10.4638099,22.2687329 11.1082721,21.4757383 L21.7636293,8.36145258 C22.3343105,7.65860555 22.2277438,6.62687847 21.5238844,6.05517429 C20.8210373,5.48449304 19.7893103,5.59105972 19.2176061,6.29491917 L9.83485923,17.9849935 L6.16076095,13.6389192 C5.57266392,12.952465 4.53582226,12.8715236 3.84936809,13.4616717 C3.16291392,14.0497688 3.08197255,15.0866104 3.67212065,15.7730646 L8.58997779,21.5105646" id="Page-1"></path>
+            </g>
+        </g>
+    </g>
+</svg>

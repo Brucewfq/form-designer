@@ -1,0 +1,113 @@
+<p-dataTable [(value)]="items" [editable]="true" styleClass="data-grid-column-dialog">
+  <p-column field="text" header="colName" [editable]="true"></p-column>
+  <p-column field="dataIndex" header="dataIndex" [editable]="!dataModel.attr.dataSource"></p-column>
+  <p-column field="type" header="dataType" [hidden]="!dataModel.attr.dataSource"></p-column>
+  <p-column field="type" header="dataType" [editable]="true" [hidden]="dataModel.attr.dataSource">
+    <ng-template let-col let-item="rowData" pTemplate="editor">
+      <p-dropdown [(ngModel)]="item[col.field]" [options]="dataTypes" [autoWidth]="false" [style]="{'width':'100%'}"
+                  required="true" appendTo="body" (ngModelChange)="onTypeChange(item, col.field)"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="editorType" header="editorType" [hidden]="!dataModel.attr.dataSource"></p-column>
+  <p-column field="needJsonRender" header="multiLanguage" [editable]="true" [hidden]="!dataModel.attr.dataSource">
+    <ng-template let-col let-item="rowData" pTemplate="editor">
+      <p-inputSwitch [(ngModel)]="item[col.field]"></p-inputSwitch>
+    </ng-template>
+  </p-column>
+  <p-column field="editorType" header="editorType" [editable]="true" [hidden]="dataModel.attr.dataSource">
+    <ng-template let-col let-item="rowData" pTemplate="editor">
+      <p-dropdown [(ngModel)]="item[col.field]" [options]="editorTypes" [editable]="true" [autoWidth]="false"
+                  [style]="{'width':'100%'}"
+                  appendTo="body" (ngModelChange)="onEditTypeChange(item, col.field)"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="summaryType" header="sum/count" [editable]="true">
+    <ng-template let-col let-item="rowData" pTemplate="editor">
+      <p-dropdown [(ngModel)]="item[col.field]" [options]="processTypes" [autoWidth]="false" [style]="{'width':'100%'}"
+                  appendTo="body"></p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="flex" header="flex" [editable]="true"></p-column>
+  <p-column field="minWidth" header="minWidth" [editable]="true"></p-column>
+  <p-column field="format" header="format" [editable]="true"></p-column>
+  <p-column field="renderStr" header="summaryRender" [editable]="true"></p-column>
+  <p-column field="visible" header="visible">
+    <ng-template let-col let-item="rowData" let-i="rowIndex" pTemplate="body">
+      <p-multiSelect [options]="visibleTypes" [(ngModel)]="item[col.field]" [filter]="false"
+                     appendTo="body" [defaultLabel]="'All'"
+                     [panelStyle]="{minWidth:'50px'}"></p-multiSelect>
+    </ng-template>
+  </p-column>
+  <p-column field="dataBind" header="datasource">
+    <ng-template let-item="rowData" let-i="rowIndex" pTemplate="body">
+      <button type="button" pButton (click)="showWin(i)" label="{{item.butVal}}" *ngIf="item.butVal"></button>
+    </ng-template>
+  </p-column>
+  <p-column styleClass="col-button" header="delete">
+    <ng-template let-item="rowData" let-i="rowIndex" pTemplate="body">
+      <button type="button" pButton (click)="deleteItem(i)" icon="fa-close"></button>
+    </ng-template>
+  </p-column>
+  <p-footer>
+    <div class="ui-helper-clearfix" style="width:100%;text-align: center;">
+      <button type="button" pButton (click)="addItem()" label="Add"></button>
+    </div>
+  </p-footer>
+</p-dataTable>
+
+<div *ngIf="displayPanel" class="smart-ds-tree-dialog-container data-grid-column-container">
+  <p-panel>
+    <div class="property-item">
+      <h3 class="first">DataSource Type</h3>
+      <div class="value">
+        <p-dropdown [options]="dataSourceTypes"
+                    [(ngModel)]="curColumn.dataSource&&curColumn.dataSource.selectedDataSourceType"
+                    placeholder="Select a DataSource Type" [style]="{'width':'150px'}"></p-dropdown>
+      </div>
+    </div>
+
+    <div class="property-item" *ngIf="curColumn.dataSource&&curColumn.dataSource.selectedDataSourceType==='Options'">
+      <h3 class="first">options</h3>
+      <button class="value ui-button-info" pButton type="button"
+              (click)="onSetting()" label="setting"></button>
+    </div>
+
+    <div class="property-item" *ngIf="curColumn.dataSource&&curColumn.dataSource.selectedDataSourceType==='Options'">
+      <h3 class="first">valueField<span style="color: red">*</span></h3>
+      <input class="value" type="text" size="30" readonly="readonly" value="value" pInputText>
+    </div>
+    <div class="property-item last"
+         *ngIf="curColumn.dataSource&&curColumn.dataSource.selectedDataSourceType==='Options'">
+      <h3 class="first">displayField<span style="color: red">*</span></h3>
+      <input class="value" type="text" size="30" readonly="readonly" pInputText value="label">
+    </div>
+
+    <app-data-source-property [dataSourcePost]="curColumn"></app-data-source-property>
+    <app-data-dict [dataDictPost]="curColumn"></app-data-dict>
+  </p-panel>
+  <div class="ui-dialog-buttonpane ui-helper-clearfix">
+    <button type="button" pButton icon="fa-close" (click)="deleteDataBind()" label="Delete"></button>
+    <button type="button" pButton icon="fa-check" (click)="saveDataBind()" label="Save"></button>
+  </div>
+</div>
+<app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                           (docloseDialog)="docloseDialog()"></app-wiget-property-bottom>
+
+<p-dialog header="options" [(visible)]="displayDialog" width="800">
+  <p-dataTable [(value)]="comboColumnOptions" [editable]="true" styleClass="data-source-options-dialog">
+    <p-column field="label" header="display" [editable]="true"></p-column>
+    <p-column field="value" header="value" [editable]="true"></p-column>
+    <p-column styleClass="col-button" header="delete">
+      <ng-template let-item="rowData" let-i="rowIndex" pTemplate="body">
+        <button type="button" pButton (click)="deleteItem(i)" icon="fa-close"></button>
+      </ng-template>
+    </p-column>
+    <p-footer>
+      <div class="ui-helper-clearfix" style="width:100%;text-align: center;">
+        <button type="button" pButton (click)="addComboOption()" label="Add"></button>
+      </div>
+    </p-footer>
+  </p-dataTable>
+  <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="clickFinish()"
+                             (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+</p-dialog>

@@ -1,0 +1,39 @@
+<div id='inspector'>
+  <p-tree [value]="datas" selectionMode="single" [(selection)]="selectedFiles2"
+          [contextMenu]="cm"
+          (onNodeContextMenuSelect)="change($event)"
+          (onNodeSelect)="nodeSelect($event)">
+    <ng-template let-node pTemplate="default">
+      <div>
+			 	<span class='detailMsg'
+              [ngClass]='{detailSelected: pullCopyTemp && pullCopyTemp.name === node.name, detailDisable: node.isSubSection}'
+              (click)='checkModel(node)'>
+			 		  {{node.attr.name||node.name || node.inputType}}
+			 	</span>
+        <div *ngIf='!node.isSubSection' [ngClass]='{"detailSelected": pullCopyTemp && pullCopyTemp.name === node.name}'
+             style='margin:0; padding:0; float:right; width:45px; height:27px; line-height:27px; border-right: 1px solid #ccc'>
+          <div class="ui-chkbox ui-widget" (click)='doExcute($event, "visible", node)'>
+            <div class="ui-helper-hidden-accessible">
+              <input type="checkbox" value="checkbox" title='disabled'>
+            </div>
+            <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
+              <span class="ui-chkbox-icon ui-clickable visible"
+                    [ngClass]='{fa:!node.attr.visible.hasOwnProperty(app.selectedViewMode)||node.attr.visible[app.selectedViewMode], "active": !node.attr.visible.hasOwnProperty(app.selectedViewMode)||node.attr.visible[app.selectedViewMode]}'></span>
+            </div>
+          </div>
+          <div class="ui-chkbox ui-widget" (click)='doExcute($event, "readOnly", node)'>
+            <div class="ui-helper-hidden-accessible">
+              <input type="checkbox" value="checkbox" title='enable'>
+            </div>
+            <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
+              <span class="ui-chkbox-icon ui-clickable read-only"
+                    [ngClass]='{fa:node.attr.readOnly[app.selectedViewMode], "disable":node.attr.readOnly[app.selectedViewMode]}'></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-tree>
+
+  <p-contextMenu #cm [model]="items"></p-contextMenu>
+</div>

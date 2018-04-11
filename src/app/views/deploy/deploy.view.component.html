@@ -1,0 +1,120 @@
+<!-- 数据绑定属性 -->
+<div class='deploy-view-container'>
+  <p-panel *ngIf='!descStatus && !verDescStatus'>
+    <div class="item">
+      <h3 class="item-title">formName:<span class='required'>*</span></h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="requestDTO.formName">
+    </div>
+    <div class="item">
+      <h3 class="item-title">route:<span class='required'>*</span></h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="requestDTO.route">
+    </div>
+    <div class="item">
+      <h3 class="item-title">formDesc:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             (focus)='descStatus=true'
+             (blur)='descStatus=false'
+             [(ngModel)]="requestDTO.formDesc.zh_CN">
+    </div>
+    <div class="item">
+      <h3 class="item-title">verDesc:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             (focus)='verDescStatus=true'
+             (blur)='verDescStatus=false'
+             pInputText
+             [(ngModel)]="requestDTO.verDesc.zh_CN">
+    </div>
+    <div class="item">
+      <div style="float: left;width:50%;">
+        <h3 class="item-title" style="margin-right:60px;">project:</h3>
+        <p-dropdown
+          [options]="projectOptions"
+          [(ngModel)]="requestDTO.projectId"
+          (onChange)="change()"
+          [style]="{'width':'150px'}" appendTo="body">
+        </p-dropdown>
+      </div>
+      <div style="float: left;width:50%;">
+        <h3 class="item-title" style="margin-right:60px;">category:</h3>
+        <p-dropdown
+          [options]="categoryOptions"
+          (onChange)="change()"
+          [(ngModel)]="requestDTO.category"
+          [style]="{'width':'150px'}" appendTo="body">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <button *ngIf='dataName==="deploy"' pButton type="button" (click)="save($event,1)" label="deploy"
+            class="ui-button-success"></button>
+    <button *ngIf='dataName==="deploy"' pButton type="button" (click)="save($event,2)" label="redeploy"
+            class="ui-button-warning"></button>
+  </p-panel>
+  <p-panel *ngIf='descStatus'>
+    <div class="item">
+      <h3 class="item-title">en:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="formDesc.en">
+    </div>
+    <div class="item">
+      <h3 class="item-title">zh-CN:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="formDesc.zh_CN">
+    </div>
+    <div class="item">
+      <button pButton type="button" (click)="saveDesc($event, formDesc)" label="save"
+              class="ui-button-success"></button>
+      <button pButton type="button" (click)="descStatus=false" label="cancel" class="ui-button-warning"></button>
+    </div>
+  </p-panel>
+  <p-panel *ngIf='verDescStatus'>
+    <div class="item">
+      <h3 class="item-title">en:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="verDesc.en">
+    </div>
+    <div class="item">
+      <h3 class="item-title">zh-CN:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="verDesc.zh_CN">
+    </div>
+    <div class="item">
+      <button pButton type="button" (click)="saveVerDesc($event, verDesc)" label="save"
+              class="ui-button-success"></button>
+      <button pButton type="button" (click)="verDescStatus=false" label="cancel" class="ui-button-warning"></button>
+    </div>
+  </p-panel>
+</div>

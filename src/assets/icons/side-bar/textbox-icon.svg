@@ -1,0 +1,32 @@
+<svg width="73px" height="73px" viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Textbox</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="73" height="73"></rect>
+    </defs>
+    <g id="Custom-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Element-Icons" transform="translate(-26.000000, -720.000000)"></g>
+        <g id="Textbox">
+            <g id="Icon" transform="translate(18.000000, 18.000000)" fill="#CFD0D3">
+                <path d="M34.8333333,0.212121212 L3.16666667,0.212121212 C1.43488,0.212121212 0,1.65386667 0,3.39393939 L0,24.6060606 C0,26.3461333 1.43488,27.7878788 3.16666667,27.7878788 L34.8333333,27.7878788 C36.56512,27.7878788 38,26.3461333 38,24.6060606 L38,3.39393939 C38,1.65386667 36.56512,0.212121212 34.8333333,0.212121212 Z M34.8333333,24.6060606 L3.16666667,24.6060606 L3.16666667,3.39393939 L34.8333333,3.39393939 L34.8333333,24.6060606 Z" id="Fill-1"></path>
+                <polygon id="Fill-2" points="5.27777778 7.63636364 9.5 7.63636364 9.5 5.51515152 5.27777778 5.51515152"></polygon>
+                <polygon id="Fill-3" points="11.6111111 22.4848485 15.8333333 22.4848485 15.8333333 20.3636364 11.6111111 20.3636364"></polygon>
+                <polygon id="Fill-4" points="5.27777778 22.4848485 9.5 22.4848485 9.5 20.3636364 5.27777778 20.3636364"></polygon>
+                <polygon id="Fill-5" points="11.6111111 7.63636364 15.8333333 7.63636364 15.8333333 5.51515152 11.6111111 5.51515152"></polygon>
+                <polygon id="Fill-6" points="9.5 20.3636364 11.6111111 20.3636364 11.6111111 7.63636364 9.5 7.63636364"></polygon>
+            </g>
+            <g id="Icon-Skeleton">
+                <g id="Group-" stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle">
+                        <use fill-opacity="0" fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke-opacity="0.5" stroke="#333333" stroke-width="1" x="0.5" y="0.5" width="72" height="72"></rect>
+                    </g>
+                </g>
+                <text id="Icon-Label" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#CFD0D3">
+                    <tspan x="20.0788574" y="67">Textbox</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,16 @@
+<!-- 区域选择器 -->
+<h3 class="section-title" style="margin:0;">{{componentAttr?(componentAttr.title?componentAttr.title:''):''}}</h3>
+<ngx-dnd-container dropZone="{{selectedViewMode === 'edit'?'builder-target':''}}"
+                   class="form-view-border"
+                   id='canNotBeModify'
+                   tabIndex='0'
+                   (keydown)='ondelete($event)'
+                   (mouseenter)="isCanDelete=true"
+                   (mouseleave)="isCanDelete=false"
+                   [model]="model"
+                   [removeOnSpill]="true"
+                   [template]="template"
+                   [droppableItemClass]="droppableItemClass"
+                   (drag)="log($event)" (drop)="drop($event)" (over)="log($event)" (out)="log($event)"
+                   (remove)="log($event)">
+</ngx-dnd-container>

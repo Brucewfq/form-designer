@@ -1,0 +1,30 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.1//EN'
+  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<svg class="icon" height="73" p-id="1837" style="" t="1515661082121" version="1.1" viewBox="-650 -600 2500 2500" width="73" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<style type="text/css"/>
+	</defs>
+	<g xmlns="http://www.w3.org/2000/svg" id="Custom-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Element-Icons" transform="translate(-26.000000, -720.000000)"/>
+        <g id="Textbox">
+            <g fill="#CFD0D3" transform="translate(18.000000, 18.000000)" id="Icon">
+                <path d="M310.303 372.364H124.121c-17.129 0-31.03 13.901-31.03 31.03v186.182c0 17.128 13.901 31.03 31.03 31.03h186.182c17.129 0 31.03-13.902 31.03-31.03V403.394c0-17.129-13.901-31.03-31.03-31.03z m-15.515 217.212H139.636c-17.128 0-15.515 1.613-15.515-15.515V418.909c0-17.129-1.613-15.515 15.515-15.515h155.152c17.129 0 15.515-1.614 15.515 15.515v155.152c0 17.128 1.614 15.515-15.515 15.515z m124.121-46.546h480.97V512h-480.97v31.03z m0 124.122h480.97v-31.03h-480.97v31.03z m0 139.636h480.97v-31.03h-480.97v31.03z m0-403.394h480.97v-31.03h-480.97v31.03z m574.06-232.727h-15.514V46.545c0-17.128-13.902-31.03-31.03-31.03H775.757c-17.13 0-31.03 13.902-31.03 31.03v124.122H605.09V46.545c0-17.128-13.902-31.03-31.03-31.03H403.394c-17.129 0-31.03 13.902-31.03 31.03v124.122H248.242V46.545c0-17.128-13.901-31.03-31.03-31.03H31.03C13.902 15.515 0 29.417 0 46.545V992.97c0 17.128 13.902 31.03 31.03 31.03h961.94c17.128 0 31.03-13.902 31.03-31.03V201.697c0-17.129-13.902-31.03-31.03-31.03z m0 791.272c0 17.13-13.9 31.03-31.03 31.03H62.061c-17.13 0-31.03-13.9-31.03-31.03V77.576c0-17.129 13.9-31.03 31.03-31.03h124.12c17.13 0 31.031 13.901 31.031 31.03v124.121H961.94c17.13 0 31.03 13.902 31.03 31.03V961.94z" fill="#CFD0D3" p-id="1838"/>
+            </g>
+            <g id="Icon-Skeleton">
+                <g id="Group-" stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle">
+                        <use fill-opacity="0" fill="#D8D8D8" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path-1"/>
+                        <rect stroke-opacity="0.5" stroke="#333333" stroke-width="1" x="0.5" y="0.5" width="72" height="72"/>
+                    </g>
+                </g>
+                <text id="Icon-Label" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#CFD0D3">
+                    <tspan x="20.0788574" y="67">Textbox</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
+
+

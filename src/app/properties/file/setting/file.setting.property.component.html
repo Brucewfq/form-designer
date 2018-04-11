@@ -1,0 +1,19 @@
+<div class=" saveas-view-container">
+  <p-panel>
+    <div class="item">
+      <h3 class="item-title">fileSize:</h3>
+      <p-dropdown [options]="fileSize" [(ngModel)]="requestDTO.size" [style]="{'width':'150px'}" placeholder="Select a size"></p-dropdown>
+    </div>
+    <div class="item">
+      <h3 class="item-title">fileType:</h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder="None required"
+             disabled = 'true'
+             pInputText
+             [(ngModel)]="requestDTO.type">
+    </div>
+    <button pButton type="button"  label="finish" (click)="finish($event)" class="ui-button-success"></button>
+    <button pButton type="button"  label="cancel" (click)="cancel($event)" class="ui-button-warn"></button>
+  </p-panel>

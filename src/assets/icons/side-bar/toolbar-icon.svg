@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="73px" height="73px" viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45 (43475) - http://www.bohemiancoding.com/sketch -->
+    <title>Toolbar</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="73" height="73"></rect>
+    </defs>
+    <g id="Custom-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Element-Icons" transform="translate(-17.000000, -1767.000000)"></g>
+        <g id="Toolbar">
+            <g id="Icon-Skeleton">
+                <g id="Group-" stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle">
+                        <use fill-opacity="0" fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke-opacity="0.5" stroke="#333333" stroke-width="1" x="0.5" y="0.5" width="72" height="72"></rect>
+                    </g>
+                </g>
+                <text id="Icon-Label" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#CFD0D3">
+                    <tspan x="20.8325195" y="67">Toolbar</tspan>
+                </text>
+            </g>
+            <g id="Icon" transform="translate(4.000000, 23.000000)" fill="#D8D8D8">
+                <path d="M0,0 L65,0 L65,14 L0,14 L0,0 Z M1.00858377,0.961217533 L1.00858377,12.9612175 L64.2685821,12.9612175 L64.2685821,0.961217533 L1.00858377,0.961217533 Z M2,2 L5.01287565,2 L5.01287565,2.98060877 L2,2.98060877 L2,2 Z M2,11 L5.01287565,11 L5.01287565,11.9806088 L2,11.9806088 L2,11 Z M6,2 L9.01287565,2 L9.01287565,2.98060877 L6,2.98060877 L6,2 Z M6,11 L9.01287565,11 L9.01287565,11.9806088 L6,11.9806088 L6,11 Z M10,2 L13.0128757,2 L13.0128757,2.98060877 L10,2.98060877 L10,2 Z M10,11 L13.0128757,11 L13.0128757,11.9806088 L10,11.9806088 L10,11 Z M14,2 L17.0128757,2 L17.0128757,2.98060877 L14,2.98060877 L14,2 Z M14,11 L17.0128757,11 L17.0128757,11.9806088 L14,11.9806088 L14,11 Z M18,2 L21.0128757,2 L21.0128757,2.98060877 L18,2.98060877 L18,2 Z M18,11 L21.0128757,11 L21.0128757,11.9806088 L18,11.9806088 L18,11 Z M20.9806088,4 L20.9806088,7.01287565 L20,7.01287565 L20,4 L20.9806088,4 Z M2.99674221,2.98386656 L2.99674221,5.99674221 L2.01613344,5.99674221 L2.01613344,2.98386656 L2.99674221,2.98386656 Z M20.9806088,8 L20.9806088,11.0128757 L20,11.0128757 L20,8 L20.9806088,8 Z M2.99674221,6.98386656 L2.99674221,9.99674221 L2.01613344,9.99674221 L2.01613344,6.98386656 L2.99674221,6.98386656 Z" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

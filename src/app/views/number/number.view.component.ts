@@ -1,25 +1,22 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BaseComponent} from '../../base/baseComponent';
 
 @Component({
-    selector: 'app-number-view',
-    templateUrl: './number.view.component.html'
+  selector: 'app-number-view',
+  templateUrl: './number.view.component.html'
 })
 
-export class NumberViewComponent {
-
-  @Input() model: any;
-
-  @Input() template: any;
-
-  constructor() {
-
+export class NumberViewComponent extends BaseComponent implements OnInit {
+  defaults: any = {
+    fieldLabel: 'Number',
+    labelAlign: 'left',
+    allowDecimals: true,
+    editable: true
   };
 
-  drop(e: any) {
-    this.log(e);
-  };
-
-  log(e: any) {
-    console.log(e.type, e);
+  ngOnInit() {
+    if (this.model.attr) {
+      this.beforeInitDefault(this.model, this.defaults);
+    }
   }
 }

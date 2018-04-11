@@ -1,0 +1,48 @@
+<!-- label属性编辑控件 -->
+<div class="component-property-content">
+  <p-tabView>
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="image.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+      <div class="property-item">
+        <h3 class="first">FileName</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="true" pInputText [(ngModel)]="image.fileName">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Width</h3>
+        <input class="value" type="text" size="30"
+               (blur)="onChange()"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]" pInputText
+               [(ngModel)]="imageSize.width">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <input class="value" type="text" size="30"
+               (blur)="onChange()"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]" pInputText
+               [(ngModel)]="imageSize.height">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Upload</h3>
+        <button class="value ui-button-info"
+                [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]" pButton
+                type="button" label="upload"
+                style="'position:relative">
+          <span>   upload   </span>
+          <p-fileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize="20"
+                        (onUpload)="onUpload($event)" (onSelect)="onSelect($event)"
+                        style="position:absolute; left: 0; top: 0; width:100%; height: 100%;opacity: 0; ">
+          </p-fileUpload>
+        </button>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+

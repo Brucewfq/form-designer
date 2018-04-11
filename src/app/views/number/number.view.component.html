@@ -1,6 +1,11 @@
 <!-- Number -->
-<span class="ui-float-label">
-    <input id="float-input" type="number" size="30" pInputText>
-    <label for="float-input">Number</label>
-</span>
+<div class="component-view-wrap-container" [ngStyle]="{'height': model.attr.height +'px'}">
+  <h3 class="first title"><span style="color:red"
+                                *ngIf="model.attr.required">*</span>{{ model.attr.fieldLabel }}:</h3>
+  <input id="float-input" type="number" size="30" pInputText class="content"
+         maxLength="{{model.attr.maxLength}}"
+         min="{{model.attr.minValue}}"
+         max="{{model.attr.maxValue}}"
+         placeholder="{{ model.attr.placeHolder ? model.attr.placeHolder : '' }}">
+</div>
 <!-- Number -->

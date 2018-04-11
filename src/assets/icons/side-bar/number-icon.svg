@@ -1,0 +1,27 @@
+<svg width="73px" height="73px" viewBox="0 0 73 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Number Icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="73" height="73"></rect>
+    </defs>
+    <g id="Custom-Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Element-Icons" transform="translate(-26.000000, -601.000000)"></g>
+        <g id="Number-Icon">
+            <g id="Icon-Skeleton">
+                <g id="Group-" stroke-width="1" fill-rule="evenodd">
+                    <g id="Rectangle">
+                        <use fill-opacity="0" fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke-opacity="0.5" stroke="#333333" stroke-width="1" x="0.5" y="0.5" width="72" height="72"></rect>
+                    </g>
+                </g>
+                <text id="Icon-Label" font-family="Helvetica-Bold, Helvetica" font-size="9" font-weight="bold" fill="#CFD0D3">
+                    <tspan x="19.9975586" y="67">Number</tspan>
+                </text>
+            </g>
+            <g id="Icon" transform="translate(23.000000, 15.000000)" fill="#CFD0D3">
+                <path d="M28.0000003,12 L28.0000003,8 L22.9961603,8 L23.9961603,0 L19.9961603,0 L18.9961603,8 L10.9974403,8 L11.9974403,0 L7.99744032,0 L6.99744032,8 L0,8 L0,12 L6.49888032,12 L5.50137632,20 L0.000256,20 L0.000256,24 L5.00025632,24 L4.00025632,32 L8.00025632,32 L9.00025632,24 L17.0002563,24 L15.9977603,32 L20.0003203,32 L21.0003203,24 L28.0003203,24 L28.0003203,20 L21.5004803,20 L22.4967363,12 L28.0000003,12 Z M17.5001603,20 L9.50016032,20 L10.4976643,12 L18.4951043,12 L17.5001603,20 Z" id="Page-1"></path>
+            </g>
+        </g>
+    </g>
+</svg>

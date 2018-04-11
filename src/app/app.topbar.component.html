@@ -1,45 +1,108 @@
 <div class="layout-topbar">
-    <img alt="logo" src="assets/layout/images/k2.png" class="mobile-logo"/>
-    
-    <a href="#" class="menu-btn" (click)="app.onMenuButtonClick($event)">
-        <i class="material-icons">&#xE5D2;</i>
-    </a>
+  <img alt="logo" src="assets/layout/images/k2.png" class="mobile-logo"/>
 
-    <a href="#" class="topbar-menu-btn" (click)="app.onTopbarMobileMenuButtonClick($event)">
-        <i class="material-icons">&#xE853;</i>
-    </a>
-    <div class="layout-topbar-menu-wrapper">
-        <ul class="topbar-menu fadeInDown" [ngClass]="{'topbar-menu-active': app.topbarMenuActive}" (click)="app.onTopbarMenuClick($event)">
-            <li #settings [ngClass]="{'active-topmenuitem':app.activeTopbarItem === settings}" (click)="app.onTopbarRootItemClick($event, settings)">
-                <a href="#">
-                    <i class="topbar-icon material-icons">content_copy</i>
-                    <span class="topbar-item-name">Settings</span>
-                </a>
-            </li> 
-            <li #undo [ngClass]="{'active-topmenuitem':app.activeTopbarItem === undo}" (click)="app.onTopbarRootItemClick($event, settings)">
-                <a href="#">
-                    <i class="topbar-icon material-icons">undo</i>
-                    <span class="topbar-item-name">undo</span>
-                </a>
-            </li>
-            <li #redo [ngClass]="{'active-topmenuitem':app.activeTopbarItem === redo}" (click)="app.onTopbarRootItemClick($event, settings)">
-                <a href="#">
-                    <i class="topbar-icon material-icons">redo</i>
-                    <span class="topbar-item-name">redo</span>
-                </a>
-            </li>
-            <li #redo [ngClass]="{'active-topmenuitem':app.activeTopbarItem === redo}" (click)="app.onTopbarRootItemClick($event, settings)">
-                <a href="#">
-                    <i class="topbar-icon material-icons">content_paste</i>
-                    <span class="topbar-item-name">content_paste</span>
-                </a>
-            </li>
-            <li #share [ngClass]="{'active-topmenuitem':app.activeTopbarItem === redo}" (click)="app.onTopbarRootItemClick($event, settings)">
-                <a href="#">
-                    <i class="easyui-icon icon-save"></i>
-                    <span class="topbar-item-name">share</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+  <a href="#" class="menu-btn" (click)="app.onMenuButtonClick($event)">
+    <i class="material-icons">&#xE5D2;</i>
+  </a>
+
+  <a href="#" class="topbar-menu-btn" (click)="app.onTopbarMobileMenuButtonClick($event)">
+    <i class="material-icons">&#xE853;</i>
+  </a>
+  <div class="layout-topbar-menu-wrapper">
+    <ul class="topbar-menu fadeInDown" [ngClass]="{'topbar-menu-active': app.topbarMenuActive}"
+        (click)="app.onTopbarMenuClick($event)">
+      <!--<li #preview [ngClass]="{'active-topmenuitem':app.activeTopbarItem === preview}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'preview')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/preview.svg" alt="">
+          <span class="item-name">preview</span>
+        </a>
+      </li>
+      <li #deploy [ngClass]="{'active-topmenuitem':app.activeTopbarItem === deploy}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'deploy')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/cloud_upload.svg" alt="">
+          <span class="item-name">deploy</span>
+        </a>
+      </li>-->
+      <!--  <li #objlist [ngClass]="{'active-topmenuitem':app.activeTopbarItem === objlist}"
+           (click)="app.onTopbarRootItemClick($event, settings, 'objlist')">
+         <a href="#">
+           <img class="item-icon" src="../assets/icons/objlist.svg" alt="">
+           <span class="item-name">objlist</span>
+         </a>
+       </li>
+       <li #pages [ngClass]="{'active-topmenuitem':app.activeTopbarItem === pages}"
+           (click)="app.onTopbarRootItemClick($event, settings, 'pages')">
+         <a href="#">
+           <img class="item-icon" src="../assets/icons/pages-icon.svg" alt="">
+           <span class="item-name">pages</span>
+         </a>
+       </li>
+       <li #conditions [ngClass]="{'active-topmenuitem':app.activeTopbarItem === conditions}"
+           (click)="app.onTopbarRootItemClick($event, settings, 'conditions')">
+         <a href="#">
+           <img class="item-icon" src="../assets/icons/transform.svg" alt="">
+           <span class="item-name">conditions</span>
+         </a>
+       </li> -->
+      <!--<li #load [ngClass]="{'active-topmenuitem':app.activeTopbarItem === load}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'load')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/open.svg" alt="">
+          <span class="item-name">load</span>
+        </a>
+      </li>
+      <li #saveAs [ngClass]="{'active-topmenuitem':app.activeTopbarItem === saveAs}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'saveAs')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/forms.svg" alt="">
+          <span class="item-name">saveAs</span>
+        </a>
+      </li>
+
+      <li #save [ngClass]="{'active-topmenuitem':app.activeTopbarItem === save}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'save')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/save.svg" alt="">
+          <span class="item-name">save</span>
+        </a>
+      </li>-->
+      <li #paste [ngClass]="{'active-topmenuitem':app.activeTopbarItem === paste}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'paste')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/clipboard-paste-button.svg" alt="">
+          <span class="item-name">paste</span>
+        </a>
+      </li>
+      <li #settings [ngClass]="{'active-topmenuitem':app.activeTopbarItem === settings}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'copy')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/copy-content.svg" alt="">
+          <span class="item-name">copy</span>
+        </a>
+      </li>
+      <li #redo [ngClass]="{'active-topmenuitem':app.activeTopbarItem === redo}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'redo')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/redo.svg" alt="">
+          <span class="item-name">redo</span>
+        </a>
+      </li>
+      <li #undo [ngClass]="{'active-topmenuitem':app.activeTopbarItem === undo}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'undo')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/undo.svg" alt="">
+          <span class="item-name">undo</span>
+        </a>
+      </li>
+      <li #new [ngClass]="{'active-topmenuitem':app.activeTopbarItem === window}"
+          (click)="app.onTopbarRootItemClick($event, settings, 'window')">
+        <a href="#">
+          <img class="item-icon" src="../assets/icons/new.svg" alt="">
+          <span class="item-name">window</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -1,25 +1,20 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BaseComponent} from '../../base/baseComponent';
 
 @Component({
-    selector: 'app-textbox-view',
-    templateUrl: './textbox.view.component.html'
+  selector: 'app-textbox-view',
+  templateUrl: './textbox.view.component.html'
 })
 
-export class TextboxViewComponent {
-
-  @Input() model: any;
-
-  @Input() template: any;
-
-  constructor() {
-
+export class TextboxViewComponent extends BaseComponent implements OnInit {
+  defaults: any = {
+    fieldLabel: 'Textbox',
+    editable: true,
+    labelAlign: 'left'
   };
-
-  drop(e: any) {
-    this.log(e);
-  };
-
-  log(e: any) {
-    console.log(e.type, e);
+  ngOnInit() {
+    if (this.model.attr) {
+      this.beforeInitDefault(this.model, this.defaults);
+    }
   }
 }

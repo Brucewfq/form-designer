@@ -1,0 +1,79 @@
+<!-- section属性编辑控件 -->
+<div class="component-property-content">
+  <p-tabView>
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">Title</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]" pInputText
+               [(ngModel)]="section.title">
+      </div>
+      <div class="property-item" *ngIf="section.title && false">
+        <h3 class="first">TitleAlign</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.labelAligns"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="section.titleAlign"
+                      placeholder="Select align" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item" *ngIf="section.title && false">
+        <h3 class="first">TitleWeight</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.fontWeight"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="section.titleWeight"
+                      placeholder="Select align" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item" *ngIf="section.title && false">
+        <h3 class="first">TitleSize</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.fontSize"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="section.titleSize"
+                      placeholder="Select align" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="section.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <input class="value" type="number" min="0.0" size="30" placeholder="" pInputText
+               [(ngModel)]="section.height"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Layout</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.layout"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="section.layout"
+                      placeholder="Select align" [style]="{'width':'150px'}" appendTo="body"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LayoutColumns</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="section.layoutColumns" [min]="0" [max]="10"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LayoutGap</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="section.layoutGap" [min]="0" [max]="100"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+<app-multilingual (doClose)="closeMultilingual()" [top]="top" [visible]="displayMultilingual"></app-multilingual>

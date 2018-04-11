@@ -1,6 +1,13 @@
 <!-- textbox -->
-<span class="ui-float-label">
-    <input id="float-input" type="text" size="30" pInputText>
-    <label for="float-input">Textbox</label>
-</span>
+<div class="component-view-wrap-container" [ngStyle]="{'height': model.attr.height +'px'}">
+  <h3 class="title" [ngStyle]="{'textAlign': model.attr.labelAlign }"><span style="color:red"
+                                                                            *ngIf="model.attr.required">*</span>{{
+    model.attr.fieldLabel }}:</h3>
+  <input type="text" pInputText
+         maxLength='{{model.attr.maxLength||2000}}'
+         [minLength]='model.attr.minLength'
+         placeholder="{{ model.attr.placeHolder ? model.attr.placeHolder : '' }}"
+         class="content">
+  <!--<label>{{model.attr?(model.attr.fieldLabel?model.attr.fieldLabel:'Textbox'):'Textbox'}}</label>-->
+</div>
 <!-- textbox -->

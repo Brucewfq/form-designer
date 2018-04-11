@@ -1,0 +1,69 @@
+<div *ngIf="dataDictPost.dataSource.selectedDataSourceType==='DataDict'">
+  <div class="property-item">
+    <h3 class="first">dataSource</h3>
+    <div class="value">
+      <input type="text" class="value" pInputText placeholder=""
+             [ngModel]="dataDictPost.dataSource.dataDict&&dataDictPost.dataSource.dataDict.name?dataDictPost.dataSource.dataDict.name:''"
+             readonly
+             style="width:60%;float: left;">
+      <button pButton class="value" type="button" label="dict" style="width:35%;" (click)='showDataDict()'></button>
+    </div>
+  </div>
+  <div class="property-item">
+    <h3 class="first">Value Field</h3>
+    <div class="value">
+      <p-dropdown [options]="dataDictProperties" [(ngModel)]="dataDictPost.valueField"
+                  [disabled]="dataDictProperties.length===0"
+                  placeholder="Select a Type"
+                  [style]="{'width':'150px'}"></p-dropdown>
+    </div>
+  </div>
+  <div class="property-item">
+    <h3 class="first">Display Field</h3>
+    <div class="value">
+      <p-dropdown [options]="dataDictProperties" [(ngModel)]="dataDictPost.displayField"
+                  [disabled]="dataDictProperties.length===0"
+                  placeholder="Select a Type"
+                  [style]="{'width':'150px'}"></p-dropdown>
+    </div>
+  </div>
+</div>
+
+
+<div class="data-bind-wrap smart-ds-tree-dialog-container service-tree-dialog-container" *ngIf="displayDialog">
+  <p-dialog header="data-dict" [(visible)]="displayDialog" width="800" height="480">
+    <!--<div class="item" style="margin:19px 46px 0 46px;color:#000;">
+      <h3 class="item-title" style="text-align: left;"><span style="color: red">*</span>name:</h3>
+      <input type="text" pInputText placeholder="" class="content">
+    </div>-->
+
+    <div style="min-height: 300px;max-height: 400px;overflow: auto;">
+      <p-tree [value]="dataDictTree" selectionMode="single" [(selection)]="selectedDict"
+              (onNodeSelect)="onRestNodeSelect($event)"></p-tree>
+    </div>
+
+    <!--<div style="padding:0;padding-left: 46px;">-->
+    <!--<h3 style="display: block;margin:1em 0 0.5em 0;color:#000;"></h3>-->
+    <!--<section class='boxer content-section implementation' style="width:700px;">-->
+    <!--<p-dataTable-->
+    <!--[value]="objectDatas"-->
+    <!--[styleClass]="'autoTable'"-->
+    <!--[(selection)]="selectedDict"-->
+    <!--(onRowSelect)="onRowSelect($event)"-->
+    <!--[rows]="5"-->
+    <!--[paginator]="true"-->
+    <!--selectionMode="single"-->
+    <!--dataKey="id"-->
+    <!--#dt>-->
+    <!--<p-column field="id"-->
+    <!--header="code">-->
+    <!--</p-column>-->
+    <!--<p-column field="name" header="name"></p-column>-->
+    <!--<p-column field="description" header="description"></p-column>-->
+    <!--</p-dataTable>-->
+    <!--</section>-->
+    <!--</div>-->
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>

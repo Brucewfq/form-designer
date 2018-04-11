@@ -13,7 +13,7 @@ export class SelectEventWigetComponent implements OnInit{
 
     ops: any[];
 
-    selectedOption: any;
+  selectedOption: any;
 
     @Input()
     parentType: string;

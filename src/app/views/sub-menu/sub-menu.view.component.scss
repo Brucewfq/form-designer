@@ -1,0 +1,36 @@
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.layout-sub-menu-wrapper {
+  box-sizing: border-box;
+  .sub-menu {
+    width: 240px;
+    height: 120px;
+    padding: 0 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+    li {
+      width: 25%;
+      float: left;
+      overflow: hidden;
+      border: 1px solid #444444;
+      box-sizing: border-box;
+      text-align: center;
+      border-top: none;
+      border-right: 0;
+      &:last-child, &:nth-child(4) {
+        border-right: 1px solid #444444;
+      }
+      .item-icon {
+        width: 30px;
+        margin-top: 5px;
+      }
+      .item-name {
+        color: #ffffff;
+      }
+    }
+  }
+}

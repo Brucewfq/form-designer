@@ -1,35 +1,58 @@
 <!-- label属性编辑控件 -->
-<p-panel>
-  <p-header>
-    <div class="ui-helper-clearfix">
-      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Label setting</span>
-    </div>
-  </p-header>
+<div class="component-property-content">
   <p-tabView>
-    <p-tabPanel header="GENERAL">
-      <h3 class="first">Label<span style="color: red">*</span></h3>
-      <input type="text" size="30" placeholder="label" pInputText [(ngModel)]="label.label">
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">FieldLabel</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="label.fieldLabel">
+      </div>
 
-      <h3 class="first">Name<span style="color: red">*</span></h3>
-      <input type="text" size="30"  placeholder="label" pInputText [(ngModel)]="label.name">
+      <div class="property-item">
+        <h3 class="first">InitValue</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="label.initValue">
+      </div>
 
-      <h3 class="first">Hint</h3>
-      <input type="text" size="30"  placeholder="Hint" pInputText [(ngModel)]="label.Hint">
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="label.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
 
+      <div class="property-item">
+        <h3 class="first">DataBind</h3>
+        <div class="value">
+          <input type="text" class="value" pInputText placeholder="" [ngModel]="label.bindPath" readonly
+                 style="width:60%;float: left;">
+          <button pButton class="value" type="button" label="Bind" style="width:35%;" (click)='showBind()'
+                  [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"></button>
+        </div>
+      </div>
     </p-tabPanel>
-    <p-tabPanel header="ADVANCED">
-      <h3 class="first">Access Control</h3>
-      <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="label.access"></p-inputSwitch>
-
-      <h3 class="first">Data Type<span style="color: red">*</span></h3>
-      <p-dropdown [options]="dataTypes" [(ngModel)]="selectedDataType" placeholder="Select a Data Type" [style]="{'width':'150px'}"></p-dropdown>
-
-      <h3 class="first">Format</h3>
-      <input type="text" size="30" placeholder="Format" pInputText [(ngModel)]="label.rormat">
-
+    <p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventDatas" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
     </p-tabPanel>
   </p-tabView>
-  <p-footer>
-    <app-wiget-property-bottom (cFinish)="clickFinish(e)" (cQuickFinish)="clickQuickFinish(e)"></app-wiget-property-bottom>
-  </p-footer>
-</p-panel>
+</div>
+<div *ngIf="displayDialog" class="data-bind-wrap">
+  <p-dialog header="DataBind" [(visible)]="displayDialog" width="800" height="450">
+    <app-tab-panel [isShowTree]="false"
+                   [isShowService]="false"
+                   [defaultTabTitle]="defaultTabTitle"
+                   [smartDsData]="treeData"
+                   [curPomBindSmartDs]="label.bindPath"
+                   [(pullCopyTemp)]='pullCopyTemp'></app-tab-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>

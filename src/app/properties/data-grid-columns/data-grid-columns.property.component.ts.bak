@@ -1,0 +1,185 @@
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {DataGridColumnsService} from './data-grid-columns.property.componment.service';
+
+@Component({
+	selector: 'app-data-grid-columns-property',
+	templateUrl: './data-grid-columns.property.component.html',
+	providers: [DataGridColumnsService],
+	styles: [`
+		.delete, .edit, .top, .bottom, .add {
+			display:inline-block;
+			width:20px;
+			height:30px;
+		}
+		.add {
+			background:url('./../assets/icons/add.svg') no-repeat center;
+		}
+		.delete {
+			background:url('./../assets/icons/deletex.svg') no-repeat center;
+		}
+		.edit {
+			background:url('./../assets/icons/editPan.svg') no-repeat center;
+		}
+		.top {
+			background:url('./../assets/icons/topEchor.svg') no-repeat center;
+		}
+		.bottom {
+			background:url('./../assets/icons/botEchor.svg') no-repeat center;
+		}
+		.ui-float-label {
+			width:100%;
+			height:50px;
+			margin-bottom:10px;
+		}
+		.ui-widget-content{
+			border:1px solid #ccc;
+		}
+	`]
+})
+
+
+export class DataGridColumnsPropertyCom implements OnInit {
+	@Input() dataModel: any;
+	@Input() dataName: any;
+	@Input() eventName:any;
+	@Input() bindSource: any;
+	@Output() editData = new EventEmitter();
+	@Output() closeDialog = new EventEmitter();
+  	@Output() getCurrDataBy = new EventEmitter<any>();
+
+	fields: any[] = [];
+	remoteObj: any = {};
+	// currentSource: any = {};
+	columnAttrs: any[] = [];
+
+	cols: any[] = [];
+	pageNum: number = 0;
+	stepIndex: number = 0;
+	stepTotal:number = 2;
+	currentField: number = -1;
+
+	attribute: any = {
+		field: '',
+		title: '',
+		template: '',
+		formating: ''
+	};
+
+	objectMsg = {};
+
+	constructor (private dataGridColumnsService: DataGridColumnsService) {}
+
+	ngOnInit () {
+	 	if (this.sources.length > 0) {
+			for (let i = 0; i < this.sources.length; i++) {
+				if (this.eventName === this.sources[i].name) {
+				  this.getSource(this.sources[i]);
+				}
+			}
+	 	}
+
+	    this.cols = [
+	    	{field: 'id', header: 'id'},
+            {field: 'name', header: 'name'}
+	    ]
+	}
+
+	get sources () {
+	    let remoteSource = [];
+	     if (this.bindSource[0].children) {
+	      let children = this.bindSource[0].children;
+
+	      for (let i = 0; i < children.length; i++) {
+	        let label = children[i].children[0].name;
+	        remoteSource.push({...children[i].children[0], label});
+	      }
+	    }
+	    return remoteSource;
+	}
+
+	showTable (res: any) {
+		for (let i = 0; i < res.length; i++) {
+			let {id, name, dataType, nameDesc:dataIndex } = res[i];
+			this.columnAttrs.push({
+				id, name, dataType, dataIndex: dataIndex[0].value
+			})
+		}
+	}
+
+	getSource (obj: any) {
+		let {objectName, objectId} = obj.attr.dataSource;
+		this.dataGridColumnsService.getObjlist(objectName).then((res)=>{
+			this.showTable(res.attrs);
+		}).catch((err)=> {
+			console.info('err', err);
+		})
+	}
+
+	add () {
+		this.columnAttrs.push( {id : '', name : ''});
+	}
+
+	edit (i: number){
+		this.pageNum = 1;
+		this.currentField = i;
+	}
+
+	toTop (i: number) {
+		let curr = this.columnAttrs[i];
+		if (i>0) {
+			this.columnAttrs[i] = this.columnAttrs[i-1];
+			this.columnAttrs[i-1] = curr;
+		}
+	}
+
+	toBot (i: number) {
+		let curr = this.columnAttrs[i];
+		let len = this.columnAttrs.length;
+
+		if (i < len-1) {
+			this.columnAttrs[i] = this.columnAttrs[i+1];
+			this.columnAttrs[i+1] = curr;
+		}
+	}
+
+	delete (i) {
+		this.columnAttrs.pop();
+	}
+
+	cancel (e: any) {
+		this.clearStatu();
+	}
+
+	previous () {
+		this.stepIndex && this.stepIndex--
+	}
+
+	next () {
+		if (this.stepIndex < this.stepTotal - 1) {
+			this.stepIndex++;
+		}
+	}
+
+	save () {
+		let obj = this.columnAttrs[this.currentField];
+		let {template, formating, field, title} = this.attribute;
+		let curr = Object.assign({}, obj, {
+			title,
+			id: field
+		})
+		this.clearStatu();
+		this.columnAttrs.splice(this.currentField, 1, curr);
+	}
+
+	clearStatu () {
+		this.pageNum = 0;
+		this.stepIndex = 0;
+	}
+
+	doSave () {
+		let {columnAttrs, dataName, dataModel} = this;
+		let attr = Object.assign({}, {...dataModel.attr}, { columnAttrs })
+	    this.editData.emit({attr, dataName});
+	    this.closeDialog.emit();
+	}
+}

@@ -1,0 +1,17 @@
+.ui-datatable table { 
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    border: 1px solid #cacaca;
+}
+
+.ui-widget-content:hover {
+  cursor: pointer;
+  background-color: #e8e8e8;
+   color: #000
+}
+
+tr.ui-state-highlight {
+  background: #7CB342;
+  color:#fff
+}

@@ -1,0 +1,152 @@
+<!-- textbox属性编辑控件 -->
+<div class="component-property-content">
+  <p-tabView [styleClass]="property-container">
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">FieldLabel</h3>
+        <input class="value" type="text" size="30" placeholder="" pInputText
+               [(ngModel)]="chooseBox.fieldLabel"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange('fieldLabel', {})">
+      </div>
+      <div class="property-item">
+        <h3 class="first">PlaceHolder</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="chooseBox.placeHolder"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">InitValue</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="chooseBox.initValue"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Name</h3>
+        <input class="value" type="text" size="30" placeholder="" pInputText
+               [(ngModel)]="chooseBox.name"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Required</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="chooseBox.required"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Editable</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="chooseBox.editable"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelWidth</h3>
+        <input class="value" type="number" min="0.0" size="30" placeholder="" pInputText
+               [(ngModel)]="chooseBox.labelWidth"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelAlign</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.labelAligns"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="chooseBox.labelAlign"
+                      placeholder="Select align" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Width</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="chooseBox.width" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="chooseBox.height" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">MinLength</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="chooseBox.minLength" [min]="0" [max]="chooseBox.maxLength"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">MaxLength</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="chooseBox.maxLength" [min]="chooseBox.minLength" [max]="100"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Cls</h3>
+        <div class="value">
+          <input class="value" type="text" size="30" placeholder="" pInputText
+                 [(ngModel)]="chooseBox.cls"
+                 [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                 (ngModelChange)="onChange('name', {variable: true})">
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">EmptyText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="chooseBox.emptyText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">InvalidText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="chooseBox.invalidText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">DataBind</h3>
+        <div class="value">
+          <input type="text" class="value" pInputText placeholder="" [ngModel]="chooseBox.bindPath" readonly
+                 style="width:60%;float: left;">
+          <button pButton class="value" type="button" label="Bind" style="width:35%;" (click)='showBind()'
+                  [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"></button>
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventDatas" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+<div *ngIf="displayDialog" class="data-bind-wrap">
+  <p-dialog header="DataBind" [(visible)]="displayDialog" width="800" height="450">
+    <app-tab-panel [isShowTree]="false"
+                   [isShowService]="false"
+                   [defaultTabTitle]="defaultTabTitle"
+                   [smartDsData]="treeData"
+                   [curPomBindSmartDs]="chooseBox.bindPath"
+                   [(pullCopyTemp)]='pullCopyTemp'></app-tab-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>

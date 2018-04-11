@@ -1,0 +1,37 @@
+<!-- 数据绑定属性 -->
+<div class='deploy-view-container'>
+  <p-panel>
+    <div class="item">
+      <h3 class="item-title">formName:<span class='required'>*</span></h3>
+      <input class="content"
+             type="text"
+             size="30"
+             placeholder=""
+             pInputText
+             [(ngModel)]="form.name"
+             (ngModelChange)='onchange()'>
+    </div>
+
+    <div class="item">
+      <div style="float: left;width:50%;">
+        <h3 class="item-title" style="margin-right:60px;">project:</h3>
+        <p-dropdown
+          [options]="projectOptions"
+          [(ngModel)]="form.projectId"
+          [style]="{'width':'150px'}" appendTo="body">
+        </p-dropdown>
+      </div>
+      <div style="float: left;width:50%;">
+        <h3 class="item-title" style="margin-right:60px;">category:</h3>
+        <p-dropdown
+          [options]="categoryOptions"
+          [(ngModel)]="form.category"
+          [style]="{'width':'150px'}" appendTo="body">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <button pButton type="button" (click)="createNewForm($event)" label="create"
+            class="ui-button-success"></button>
+  </p-panel>
+</div>

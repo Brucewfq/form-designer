@@ -1,0 +1,26 @@
+<!-- 数据绑定属性 -->
+<div class='deploy-view-container'>
+  <p-panel>
+    <div class="item">
+      <div style="float: left;width:50%;">
+        <h3 class="item-title" style="margin-right:60px;">project:</h3>
+        <p-dropdown
+          [options]="projectOptions"
+          [(ngModel)]="requestDTO.projectId"
+          [style]="{'width':'150px'}" appendTo="body">
+        </p-dropdown>
+      </div>
+      <div style="float: left;width:50%;">
+        <h3 class="item-title" style="margin-right:60px;">category:</h3>
+        <p-dropdown
+          [options]="categoryOptions"
+          [(ngModel)]="requestDTO.category"
+          [style]="{'width':'150px'}" appendTo="body">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <button pButton type="button" label="save" (click)="save()"
+            class="ui-button-success"></button>
+  </p-panel>
+</div>

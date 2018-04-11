@@ -1,0 +1,175 @@
+<!-- Date属性编辑控件 -->
+<div class="component-property-content">
+  <p-tabView>
+    <p-tabPanel headerStyleClass="tab-header-general">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div class="property-item">
+        <h3 class="first">FieldLabel</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="date.fieldLabel">
+      </div>
+
+      <div class="property-item">
+        <h3 class="first">Name<span style="color: red">*</span></h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               pInputText [(ngModel)]="date.name"
+               (ngModelChange)="onChange('name', {checkExistAttrName: true, variable: true})">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Format</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.dataFormat" [editable]="true"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="date.format"
+                      placeholder="Select align" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">InitValue</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="date.initValue">
+      </div>
+      <div class="property-item">
+        <h3 class="first">PlaceHolder</h3>
+        <input class="value" type="text" size="30"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()" pInputText [(ngModel)]="date.placeHolder">
+      </div>
+      <div class="property-item">
+        <h3 class="first">Required</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="date.required"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Editable</h3>
+        <div class="value">
+          <p-inputSwitch onLabel="Yes" offLabel="No" (ngModelChange)="onChange()"
+                         [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                         [(ngModel)]="date.editable"></p-inputSwitch>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelWidth</h3>
+        <input class="value" type="number" min="0.0" size="30" placeholder="" pInputText
+               [(ngModel)]="date.labelWidth"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">LabelAlign</h3>
+        <div class="value">
+          <p-dropdown [options]="commonAttrs.labelAligns"
+                      [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                      [(ngModel)]="date.labelAlign"
+                      placeholder="Select align" [style]="{'width':'150px'}"></p-dropdown>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Width</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="date.width" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Height</h3>
+        <div class="value">
+          <p-spinner size="30" [(ngModel)]="date.height" [min]="0" [max]="2000"
+                     [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                     (ngModelChange)="onChange()"></p-spinner>
+        </div>
+      </div>
+      <!--<div class="property-item">-->
+      <!--<h3 class="first">MinLength</h3>-->
+      <!--<div class="value">-->
+      <!--<p-spinner size="30" [(ngModel)]="date.minLength" [min]="0" [max]="date.maxLength"-->
+      <!--[disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"-->
+      <!--(ngModelChange)="onChange()"></p-spinner>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="property-item">-->
+      <!--<h3 class="first">MaxLength</h3>-->
+      <!--<div class="value">-->
+      <!--<p-spinner size="30" [(ngModel)]="date.maxLength" [min]="date.minLength" [max]="100"-->
+      <!--[disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"-->
+      <!--(ngModelChange)="onChange()"></p-spinner>-->
+      <!--</div>-->
+      <!--</div>-->
+      <div class="property-item">
+        <h3 class="first">MinValue</h3>
+        <div class="value">
+          <p-calendar [(ngModel)]="dataModel.attr.minValue" dateFormat="{{dataModel.attr.format}}"
+                      [showIcon]="true" appendTo="body"></p-calendar>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">MaxValue</h3>
+        <div class="value">
+          <p-calendar [(ngModel)]="dataModel.attr.maxValue" dateFormat="{{dataModel.attr.format}}"
+                      [minDate]="dataModel.attr.minValue"
+                      [showIcon]="true" appendTo="body"></p-calendar>
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">Cls</h3>
+        <div class="value">
+          <input class="value" type="text" size="30" placeholder="" pInputText
+                 [(ngModel)]="date.cls"
+                 [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+                 (ngModelChange)="onChange('name', {variable: true})">
+        </div>
+      </div>
+      <div class="property-item">
+        <h3 class="first">EmptyText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="date.emptyText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">InvalidText</h3>
+        <input class="value" type="text" placeholder="" pInputText
+               [(ngModel)]="date.invalidText"
+               [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"
+               (ngModelChange)="onChange()">
+      </div>
+      <div class="property-item">
+        <h3 class="first">DataBind</h3>
+        <div class="value">
+          <input type="text" class="value" pInputText placeholder="" [ngModel]="date.bindPath" readonly
+                 style="width:60%;float: left;">
+          <button pButton class="value" type="button" label="Bind" style="width:35%;" (click)='showBind()'
+                  [disabled]="selectedViewMode!=='edit' || dataModel.attr.readOnly[selectedViewMode]"></button>
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel headerStyleClass="tab-header-event">
+      <p-dataTable [value]="eventDatas" selectionMode="single" [(selection)]="selectedEvent" class="custom-code"
+                   (onRowSelect)="chooseEvent($event)" dataKey="id">
+        <p-column field="name" header=""></p-column>
+        <p-column field="desc" header=""></p-column>
+      </p-dataTable>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+<div *ngIf="displayDialog" class="data-bind-wrap">
+  <p-dialog header="DataBind" [(visible)]="displayDialog" width="800" height="450">
+    <app-tab-panel [isShowTree]="false"
+                   [isShowService]="false"
+                   [defaultTabTitle]="defaultTabTitle"
+                   [smartDsData]="treeData"
+                   [curPomBindSmartDs]="date.bindPath"
+                   [(pullCopyTemp)]='pullCopyTemp'></app-tab-panel>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                               (docloseDialog)="doCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>
+
