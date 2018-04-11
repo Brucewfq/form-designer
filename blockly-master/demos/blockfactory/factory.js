@@ -136,7 +136,7 @@ function formatJson_(blockType, rootBlock) {
       lastInput = contentsBlock;
     }
     contentsBlock = contentsBlock.nextConnection &&
-        contentsBlock.nextConnection.targetBlock();
+      contentsBlock.nextConnection.targetBlock();
   }
   // Remove last input if dummy and not empty.
   if (lastInput && lastInput.type == 'input_dummy') {
@@ -162,21 +162,21 @@ function formatJson_(blockType, rootBlock) {
   switch (rootBlock.getFieldValue('CONNECTIONS')) {
     case 'LEFT':
       JS.output =
-          JSON.parse(getOptTypesFrom(rootBlock, 'OUTPUTTYPE') || 'null');
+        JSON.parse(getOptTypesFrom(rootBlock, 'OUTPUTTYPE') || 'null');
       break;
     case 'BOTH':
       JS.previousStatement =
-          JSON.parse(getOptTypesFrom(rootBlock, 'TOPTYPE') || 'null');
+        JSON.parse(getOptTypesFrom(rootBlock, 'TOPTYPE') || 'null');
       JS.nextStatement =
-          JSON.parse(getOptTypesFrom(rootBlock, 'BOTTOMTYPE') || 'null');
+        JSON.parse(getOptTypesFrom(rootBlock, 'BOTTOMTYPE') || 'null');
       break;
     case 'TOP':
       JS.previousStatement =
-          JSON.parse(getOptTypesFrom(rootBlock, 'TOPTYPE') || 'null');
+        JSON.parse(getOptTypesFrom(rootBlock, 'TOPTYPE') || 'null');
       break;
     case 'BOTTOM':
       JS.nextStatement =
-          JSON.parse(getOptTypesFrom(rootBlock, 'BOTTOMTYPE') || 'null');
+        JSON.parse(getOptTypesFrom(rootBlock, 'BOTTOMTYPE') || 'null');
       break;
   }
   // Generate colour.
@@ -202,9 +202,11 @@ function formatJavaScript_(blockType, rootBlock) {
   code.push("Blockly.Blocks['" + blockType + "'] = {");
   code.push("  init: function() {");
   // Generate inputs.
-  var TYPES = {'input_value': 'appendValueInput',
-               'input_statement': 'appendStatementInput',
-               'input_dummy': 'appendDummyInput'};
+  var TYPES = {
+    'input_value': 'appendValueInput',
+    'input_statement': 'appendStatementInput',
+    'input_dummy': 'appendDummyInput'
+  };
   var contentsBlock = rootBlock.getInputTargetBlock('INPUTS');
   while (contentsBlock) {
     if (!contentsBlock.disabled && !contentsBlock.getInheritedDisabled()) {
@@ -230,7 +232,7 @@ function formatJavaScript_(blockType, rootBlock) {
       code[code.length - 1] += ';';
     }
     contentsBlock = contentsBlock.nextConnection &&
-        contentsBlock.nextConnection.targetBlock();
+      contentsBlock.nextConnection.targetBlock();
   }
   // Generate inline/external switch.
   if (rootBlock.getFieldValue('INLINE') == 'EXT') {
@@ -302,38 +304,38 @@ function getFieldsJs_(block) {
         case 'field_input':
           // Result: new Blockly.FieldTextInput('Hello'), 'GREET'
           fields.push('new Blockly.FieldTextInput(' +
-              escapeString(block.getFieldValue('TEXT')) + '), ' +
-              escapeString(block.getFieldValue('FIELDNAME')));
+            escapeString(block.getFieldValue('TEXT')) + '), ' +
+            escapeString(block.getFieldValue('FIELDNAME')));
           break;
         case 'field_angle':
           // Result: new Blockly.FieldAngle(90), 'ANGLE'
           fields.push('new Blockly.FieldAngle(' +
-              parseFloat(block.getFieldValue('ANGLE')) + '), ' +
-              escapeString(block.getFieldValue('FIELDNAME')));
+            parseFloat(block.getFieldValue('ANGLE')) + '), ' +
+            escapeString(block.getFieldValue('FIELDNAME')));
           break;
         case 'field_checkbox':
           // Result: new Blockly.FieldCheckbox('TRUE'), 'CHECK'
           fields.push('new Blockly.FieldCheckbox(' +
-              escapeString(block.getFieldValue('CHECKED')) + '), ' +
-              escapeString(block.getFieldValue('FIELDNAME')));
+            escapeString(block.getFieldValue('CHECKED')) + '), ' +
+            escapeString(block.getFieldValue('FIELDNAME')));
           break;
         case 'field_colour':
           // Result: new Blockly.FieldColour('#ff0000'), 'COLOUR'
           fields.push('new Blockly.FieldColour(' +
-              escapeString(block.getFieldValue('COLOUR')) + '), ' +
-              escapeString(block.getFieldValue('FIELDNAME')));
+            escapeString(block.getFieldValue('COLOUR')) + '), ' +
+            escapeString(block.getFieldValue('FIELDNAME')));
           break;
         case 'field_date':
           // Result: new Blockly.FieldDate('2015-02-04'), 'DATE'
           fields.push('new Blockly.FieldDate(' +
-              escapeString(block.getFieldValue('DATE')) + '), ' +
-              escapeString(block.getFieldValue('FIELDNAME')));
+            escapeString(block.getFieldValue('DATE')) + '), ' +
+            escapeString(block.getFieldValue('FIELDNAME')));
           break;
         case 'field_variable':
           // Result: new Blockly.FieldVariable('item'), 'VAR'
           var varname = escapeString(block.getFieldValue('TEXT') || null);
           fields.push('new Blockly.FieldVariable(' + varname + '), ' +
-              escapeString(block.getFieldValue('FIELDNAME')));
+            escapeString(block.getFieldValue('FIELDNAME')));
           break;
         case 'field_dropdown':
           // Result:
@@ -341,12 +343,12 @@ function getFieldsJs_(block) {
           var options = [];
           for (var i = 0; i < block.optionCount_; i++) {
             options[i] = '[' + escapeString(block.getFieldValue('USER' + i)) +
-                ', ' + escapeString(block.getFieldValue('CPU' + i)) + ']';
+              ', ' + escapeString(block.getFieldValue('CPU' + i)) + ']';
           }
           if (options.length) {
             fields.push('new Blockly.FieldDropdown([' +
-                options.join(', ') + ']), ' +
-                escapeString(block.getFieldValue('FIELDNAME')));
+              options.join(', ') + ']), ' +
+              escapeString(block.getFieldValue('FIELDNAME')));
           }
           break;
         case 'field_image':
@@ -356,7 +358,7 @@ function getFieldsJs_(block) {
           var height = Number(block.getFieldValue('HEIGHT'));
           var alt = escapeString(block.getFieldValue('ALT'));
           fields.push('new Blockly.FieldImage(' +
-              src + ', ' + width + ', ' + height + ', ' + alt + ')');
+            src + ', ' + width + ', ' + height + ', ' + alt + ')');
           break;
       }
     }
@@ -426,7 +428,7 @@ function getFieldsJson_(block) {
           var options = [];
           for (var i = 0; i < block.optionCount_; i++) {
             options[i] = [block.getFieldValue('USER' + i),
-                block.getFieldValue('CPU' + i)];
+              block.getFieldValue('CPU' + i)];
           }
           if (options.length) {
             fields.push({
@@ -523,10 +525,11 @@ function updateGenerator(block) {
     name = name.toLowerCase().replace(/\W/g, '_');
     return '  var ' + root + '_' + name;
   }
+
   var language = document.getElementById('language').value;
   var code = [];
   code.push("Blockly." + language + "['" + block.type +
-            "'] = function(block) {");
+    "'] = function(block) {");
 
   // Generate getters for any fields or inputs.
   for (var i = 0, input; input = block.inputList[i]; i++) {
@@ -538,41 +541,41 @@ function updateGenerator(block) {
       if (field instanceof Blockly.FieldVariable) {
         // Subclass of Blockly.FieldDropdown, must test first.
         code.push(makeVar('variable', name) +
-                  " = Blockly." + language +
-                  ".variableDB_.getName(block.getFieldValue('" + name +
-                  "'), Blockly.Variables.NAME_TYPE);");
+          " = Blockly." + language +
+          ".variableDB_.getName(block.getFieldValue('" + name +
+          "'), Blockly.Variables.NAME_TYPE);");
       } else if (field instanceof Blockly.FieldAngle) {
         // Subclass of Blockly.FieldTextInput, must test first.
         code.push(makeVar('angle', name) +
-                  " = block.getFieldValue('" + name + "');");
+          " = block.getFieldValue('" + name + "');");
       } else if (Blockly.FieldDate && field instanceof Blockly.FieldDate) {
         // Blockly.FieldDate may not be compiled into Blockly.
         code.push(makeVar('date', name) +
-                  " = block.getFieldValue('" + name + "');");
+          " = block.getFieldValue('" + name + "');");
       } else if (field instanceof Blockly.FieldColour) {
         code.push(makeVar('colour', name) +
-                  " = block.getFieldValue('" + name + "');");
+          " = block.getFieldValue('" + name + "');");
       } else if (field instanceof Blockly.FieldCheckbox) {
         code.push(makeVar('checkbox', name) +
-                  " = block.getFieldValue('" + name + "') == 'TRUE';");
+          " = block.getFieldValue('" + name + "') == 'TRUE';");
       } else if (field instanceof Blockly.FieldDropdown) {
         code.push(makeVar('dropdown', name) +
-                  " = block.getFieldValue('" + name + "');");
+          " = block.getFieldValue('" + name + "');");
       } else if (field instanceof Blockly.FieldTextInput) {
         code.push(makeVar('text', name) +
-                  " = block.getFieldValue('" + name + "');");
+          " = block.getFieldValue('" + name + "');");
       }
     }
     var name = input.name;
     if (name) {
       if (input.type == Blockly.INPUT_VALUE) {
         code.push(makeVar('value', name) +
-                  " = Blockly." + language + ".valueToCode(block, '" + name +
-                  "', Blockly." + language + ".ORDER_ATOMIC);");
+          " = Blockly." + language + ".valueToCode(block, '" + name +
+          "', Blockly." + language + ".ORDER_ATOMIC);");
       } else if (input.type == Blockly.NEXT_STATEMENT) {
         code.push(makeVar('statements', name) +
-                  " = Blockly." + language + ".statementToCode(block, '" +
-                  name + "');");
+          " = Blockly." + language + ".statementToCode(block, '" +
+          name + "');");
       }
     }
   }
@@ -617,7 +620,7 @@ function updatePreview() {
         {rtl: rtl,
          media: '../../media/',
          scrollbars: true});
-    oldDir = newDir;
+    // oldDir = newDir;
   }
   previewWorkspace.clear();
 
@@ -653,7 +656,7 @@ function updatePreview() {
     if (format == 'JSON') {
       var json = JSON.parse(code);
       Blockly.Blocks[json.id || UNNAMED] = {
-        init: function() {
+        init: function () {
           this.jsonInit(json);
         }
       };
@@ -667,7 +670,7 @@ function updatePreview() {
     var blockType = null;
     for (var type in Blockly.Blocks) {
       if (typeof Blockly.Blocks[type].init == 'function' &&
-          Blockly.Blocks[type] != backupBlocks[type]) {
+        Blockly.Blocks[type] != backupBlocks[type]) {
         blockType = type;
         break;
       }
@@ -730,27 +733,29 @@ function disableEnableLink() {
 /**
  * Initialize Blockly and layout.  Called on page load.
  */
-function init() {
+function init(obj) {
   if ('BlocklyStorage' in window) {
     BlocklyStorage.HTTPREQUEST_ERROR =
-        'There was a problem with the request.\n';
+      'There was a problem with the request.\n';
     BlocklyStorage.LINK_ALERT =
-        'Share your blocks with this link:\n\n%1';
+      'Share your blocks with this link:\n\n%1';
     BlocklyStorage.HASH_ERROR =
-        'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-    BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
-        'Perhaps it was created with a different version of Blockly?';
+      'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+    BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n' +
+      'Perhaps it was created with a different version of Blockly?';
     var linkButton = document.getElementById('linkButton');
     linkButton.style.display = 'inline-block';
     linkButton.addEventListener('click',
-        function() {BlocklyStorage.link(mainWorkspace);});
+      function () {
+        BlocklyStorage.link(mainWorkspace);
+      });
     disableEnableLink();
   }
 
   document.getElementById('helpButton').addEventListener('click',
-    function() {
+    function () {
       open('https://developers.google.com/blockly/custom-blocks/block-factory',
-           'BlockFactoryHelp');
+        'BlockFactoryHelp');
     });
 
   var expandList = [
@@ -761,7 +766,7 @@ function init() {
     document.getElementById('languageTA'),
     document.getElementById('generatorPre')
   ];
-  var onresize = function(e) {
+  var onresize = function (e) {
     for (var i = 0, expand; expand = expandList[i]; i++) {
       expand.style.width = (expand.parentNode.offsetWidth - 2) + 'px';
       expand.style.height = (expand.parentNode.offsetHeight - 2) + 'px';
@@ -771,28 +776,27 @@ function init() {
   window.addEventListener('resize', onresize);
 
   var toolbox = document.getElementById('toolbox');
-  mainWorkspace = Blockly.inject('blockly',
-      {toolbox: toolbox, media: '../../media/'});
+  mainWorkspace = Blockly.inject('blockly', obj);
 
   // Create the root block.
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {
     BlocklyStorage.retrieveXml(window.location.hash.substring(1),
-                               mainWorkspace);
+      mainWorkspace);
   } else {
     var xml = '<xml><block type="factory_base" deletable="false" movable="false"></block></xml>';
+    console.log(mainWorkspace)
     Blockly.Xml.domToWorkspace(mainWorkspace, Blockly.Xml.textToDom(xml));
   }
 
   mainWorkspace.addChangeListener(updateLanguage);
   document.getElementById('direction')
-      .addEventListener('change', updatePreview);
+    .addEventListener('change', updatePreview);
   document.getElementById('languageTA')
-      .addEventListener('change', updatePreview);
+    .addEventListener('change', updatePreview);
   document.getElementById('languageTA')
-      .addEventListener('keyup', updatePreview);
+    .addEventListener('keyup', updatePreview);
   document.getElementById('format')
-      .addEventListener('change', formatChange);
+    .addEventListener('change', formatChange);
   document.getElementById('language')
-      .addEventListener('change', updatePreview);
+    .addEventListener('change', updatePreview);
 }
-window.addEventListener('load', init);

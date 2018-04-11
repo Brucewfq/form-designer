@@ -1,0 +1,90 @@
+<table id="blockly_code_index" width="100%" height="100%">
+  <tr id="tabRow" height="1em">
+    <td id="tab_blocks" class="tabon" width="100px">Blocks</td>
+    <td class="tabmin">&nbsp;</td>
+    <td id="tab_javascript" class="taboff">JavaScript</td>
+    <td class="tabmin">&nbsp;</td>
+    <td id="tab_xml" class="taboff">XML</td>
+    <td class="tabmax">
+      <button id="trashButton" class="notext" title="...">
+        <img src='assets/media/1x1.gif' class="trash icon21">
+      </button>
+      <button id="runButton" style="display: none;" class="notext primary" title="...">
+        <img src='assets/media/1x1.gif' class="run icon21">
+      </button>
+    </td>
+  </tr>
+  <tr>
+    <td height="400px" colspan="6" id="content_area">
+    <td>
+  </tr>
+</table>
+<div id="content_blocks" class="content"></div>
+<pre id="content_javascript" class="content"></pre>
+<textarea id="content_xml" class="content" wrap="off"></textarea>
+<div id="tool_box_div" style="top: 38px; left: 0px; position: absolute;">
+</div>
+<app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doClickFinish()"
+                           (docloseDialog)="docloseDialog()"></app-wiget-property-bottom>
+
+<div class="data-bind-wrap smart-ds-tree-dialog-container" *ngIf="showWinDialog">
+  <p-dialog header="component" [(visible)]="showWinDialog" width="800">
+    <p-dataTable [value]="items" selectionMode="single" [(selection)]="selectedData"
+                 (onRowSelect)="onRowSelect($event)"
+                 [style]="{'margin-top':'50px'}">
+      <p-header>{{defaultTabTitle}}</p-header>
+      <p-column field="name" header="Name"></p-column>
+      <p-column field="title" header="Title"></p-column>
+      <p-column field="id" header="id"></p-column>
+    </p-dataTable>
+  </p-dialog>
+</div>
+
+<div class="data-bind-wrap smart-ds-tree-dialog-container" *ngIf="displayDialog">
+  <p-dialog header="component" [(visible)]="displayDialog" width="900">
+    <p-treeTable [value]="items" selectionMode="single" [(selection)]="selectedData"
+                 (onNodeSelect)="nodeSelect($event)"
+                 [style]="{'margin-top':'50px'}">
+      <p-header>{{defaultTabTitle}}</p-header>
+      <p-column field="name" header="Name"></p-column>
+      <p-column field="inputType" header="InputType"></p-column>
+      <p-column field="fieldLabel" header="FieldLabel"></p-column>
+      <p-column field="parentName" header="ParentName"></p-column>
+      <p-column field="id" header="Id"></p-column>
+    </p-treeTable>
+  </p-dialog>
+</div>
+<div class="data-bind-wrap smart-ds-tree-dialog-container" *ngIf="jsAreaShow">
+  <p-dialog header="js code" [(visible)]="jsAreaShow" width="800">
+    <textarea [rows]="25" [cols]="30" style="max-height: 400px" pInputTextarea [(ngModel)]="jsArea"></textarea>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doAreaClickFinish()"
+                               (docloseDialog)="doAreaCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>
+<div class="data-bind-wrap smart-ds-tree-dialog-container" *ngIf="chooseRestShow">
+  <p-dialog header="choose rest" [(visible)]="chooseRestShow" width="1000">
+    <div style="display: flex" class="rest-label-tree">
+      <div style="flex: 1">
+        <p-tree [value]="restLabelDatas" selectionMode="single" [(selection)]="selectedRestNode"
+                (onNodeSelect)="onRestNodeSelect($event)"></p-tree>
+      </div>
+      <div style="flex: 4" class="rest-data-container">
+        <p-dataTable [(value)]="restItems" [styleClass]="'autoTable'"
+                     [(selection)]="selectedObject"
+                     [rows]="7"
+                     [paginator]="true"
+                     selectionMode="single"
+                     [globalFilter]="gb"
+                     dataKey="id">
+          <p-column field="id" header="id"></p-column>
+          <!--<p-column field="apiUrl" header="apiUrl"></p-column>-->
+          <p-column field="displayName.zh_CN" header="displayName"></p-column>
+          <p-column field="nameSpace" header="nameSpace"></p-column>
+          <p-column field="description.zh_CN" header="description"></p-column>
+        </p-dataTable>
+      </div>
+    </div>
+    <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="doRestClickFinish()"
+                               (docloseDialog)="doRestCloseDialog()"></app-wiget-property-bottom>
+  </p-dialog>
+</div>

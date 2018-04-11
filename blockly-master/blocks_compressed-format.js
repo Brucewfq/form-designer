@@ -1170,7 +1170,7 @@ Blockly.Blocks.procedures_defnoreturn = {
             c.connect(e.previousConnection);
             c = e.nextConnection
         }
-        Blockly.Procedures.mutateCallers(this.getFieldValue("NAME"), this.workspace, this.arguments_, null);
+        Blockly.Procedures.mutateCallers(this, this.workspace, this.arguments_, null);
         return b
     },
     compose: function(a) {
@@ -1180,7 +1180,7 @@ Blockly.Blocks.procedures_defnoreturn = {
         this.paramIds_.push(b.id),
         b = b.nextConnection && b.nextConnection.targetBlock();
         this.updateParams_();
-        Blockly.Procedures.mutateCallers(this.getFieldValue("NAME"), this.workspace, this.arguments_, this.paramIds_);
+        Blockly.Procedures.mutateCallers(this, this.workspace, this.arguments_, this.paramIds_);
         a = a.getFieldValue("STATEMENTS");
         if (null !== a && (a = "TRUE" == a, this.hasStatements_ != a)) if (a) this.setStatements_(!0),
         a = this.getInput("STACK").connection,

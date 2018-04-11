@@ -57,7 +57,6 @@ BlocklyStorage.backupOnUnload = function(opt_workspace) {
  */
 BlocklyStorage.restoreBlocks = function(opt_workspace) {
   var url = window.location.href.split('#')[0];
-  debugger
   if ('localStorage' in window && window.localStorage[url]) {
     var workspace = opt_workspace || Blockly.getMainWorkspace();
     var xml = Blockly.Xml.textToDom(window.localStorage[url]);
@@ -102,7 +101,6 @@ BlocklyStorage.httpRequest_ = null;
  * @private
  */
 BlocklyStorage.makeRequest_ = function(url, name, content, workspace) {
-  debugger
   if (BlocklyStorage.httpRequest_) {
     // AJAX call is in-flight.
     BlocklyStorage.httpRequest_.abort();
@@ -123,7 +121,6 @@ BlocklyStorage.makeRequest_ = function(url, name, content, workspace) {
  * @private
  */
 BlocklyStorage.handleRequest_ = function() {
-  debugger
   if (BlocklyStorage.httpRequest_.readyState == 4) {
     // if (BlocklyStorage.httpRequest_.status != 200) {
     //   BlocklyStorage.alert(BlocklyStorage.HTTPREQUEST_ERROR + '\n' +

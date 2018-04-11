@@ -1,5 +1,4 @@
-<h3 class="first">Blockly</h3>
-<table id="blockly_code_index" width="100%" height="100%">
+<table id="blockly_code_index" width="100%" height="100%" style="display: none;">
   <tr id="tabRow" height="1em">
     <td id="tab_blocks" class="tabon" width="100px">Blocks</td>
     <td class="tabmin">&nbsp;</td>
@@ -17,12 +16,19 @@
   </tr>
   <tr>
     <td height="400px" colspan="6" id="content_area">
-     <td>
+    <td>
   </tr>
 </table>
-<div id="content_blocks" class="content"></div>
-<pre id="content_javascript" class="content"></pre>
-<textarea id="content_xml" class="content" wrap="off"></textarea>
-<div id="tool_box_div" style="top: 35px; left: 0px; position: absolute;">
+<div id="content_blocks" class="content" style="display: none;"></div>
+<pre id="content_javascript" class="content" style="display: none;"></pre>
+<textarea id="content_xml" class="content" wrap="off" style="display: none;"></textarea>
+<div id="tool_box_div" style="top: 35px; left: 0px; position: absolute;display: none;">
 </div>
+<div style="padding:10px 15px;">
+  <!--<h3 class="first">Blockly</h3>-->
+  <textarea rows="15" cols="30" pInputTextarea [(ngModel)]="blockly"
+            style="resize:none;border:1px solid #cccccc;margin-bottom: 15px;"></textarea>
+  <app-wiget-property-bottom [dontShowQuick]="true" (cFinish)="clickFinish()" (docloseDialog)="docloseDialog()"></app-wiget-property-bottom>
+</div>
+
 

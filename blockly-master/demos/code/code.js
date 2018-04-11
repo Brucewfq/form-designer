@@ -167,7 +167,7 @@ Code.changeLanguage = function() {
 
   var languageMenu = document.getElementById('languageMenu');
   var newLang = encodeURIComponent(
-      languageMenu.options[languageMenu.selectedIndex].value);
+    languageMenu.options[languageMenu.selectedIndex].value);
   var search = window.location.search;
   if (search.length <= 1) {
     search = '?lang=' + newLang;
@@ -178,7 +178,7 @@ Code.changeLanguage = function() {
   }
 
   window.location = window.location.protocol + '//' +
-      window.location.host + window.location.pathname + search;
+    window.location.host + window.location.pathname + search;
 };
 
 /**
@@ -221,10 +221,15 @@ Code.getBBox_ = function(element) {
   var width = element.offsetWidth;
   var x = 0;
   var y = 0;
-  if (element.offsetParent) {
+  while(element){
+    if (element.offsetParent) {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+    } else {
+      x -= 15;
+      y -= 35;
+    }
     element = element.offsetParent;
-    x += element.offsetLeft;
-    y += (element.offsetTop+25);
   }
   return {
     height: height,
@@ -252,17 +257,17 @@ Code.selected = 'blocks';
  * Switch the visible pane when a tab is clicked.
  * @param {string} clickedName Name of tab clicked.
  */
-Code.tabClick = function(clickedName) {
+Code.tabClick = function(clickedName, dxml) {
   // If the XML tab was open, save and render the content.
   if (document.getElementById('tab_xml').className == 'tabon') {
     var xmlTextarea = document.getElementById('content_xml');
-    var xmlText = xmlTextarea.value;
+    var xmlText = xmlTextarea.value || dxml;
     var xmlDom = null;
     try {
       xmlDom = Blockly.Xml.textToDom(xmlText);
     } catch (e) {
       var q =
-          window.confirm(MSG['badXml'].replace('%1', e));
+        window.confirm(MSG['badXml'].replace('%1', e));
       if (!q) {
         // Leave the user on the XML tab.
         return;
@@ -289,7 +294,7 @@ Code.tabClick = function(clickedName) {
   document.getElementById('tab_' + clickedName).className = 'tabon';
   // Show the selected pane.
   document.getElementById('content_' + clickedName).style.visibility =
-      'visible';
+    'visible';
   Code.renderContent();
   if (clickedName == 'blocks') {
     Code.workspace.setVisible(true);
@@ -344,10 +349,12 @@ Code.renderContent = function() {
   }
 };
 
+// var isLoad = false;
 /**
  * Initialize Blockly.  Called on page load.
  */
-Code.init = function(obj) {
+Code.init = function(obj, defaultxml) {
+  // isLoad = false;
   var rtl = Code.isRtl();
   var container = document.getElementById('content_area');
   var onresize = function(e) {
@@ -363,44 +370,40 @@ Code.init = function(obj) {
       el.style.width = bBox.width + 'px';
       el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
     }
+
     // Make the 'Blocks' tab line up with the toolbox.
     if (Code.workspace && Code.workspace.toolbox_.width) {
       document.getElementById('tab_blocks').style.minWidth =
-          (Code.workspace.toolbox_.width - 38) + 'px';
-          // Account for the 19 pixel margin and on each side.
-      var el = document.getElementById('tool_box_div');
-      el.style.top = bBox.y + 'px';
-      el.style.left = bBox.x + 'px';
+        (Code.workspace.toolbox_.width - 38) + 'px';
+      // Account for the 19 pixel margin and on each side.
     }
   };
   onresize();
   window.addEventListener('resize', onresize, false);
   //var toolbox = document.getElementById('toolbox');
   Code.workspace = Blockly.inject('content_blocks',
-      {grid:
-          {spacing: 25,
-           length: 3,
-           colour: '#ccc',
-           snap: true},
-       media: obj.media,
-       rtl: rtl,
-       toolbox: obj.toolbox
-      });
-
-
+    {grid:
+      {spacing: 25,
+        length: 3,
+        colour: '#ccc',
+        snap: true},
+      media: obj.media,
+      rtl: rtl,
+      toolbox: obj.toolbox,
+      zoom:
+        {controls: true,
+          wheel: true}
+    });
   // Add to reserved word list: Local variables in execution environment (runJS)
   // and the infinite loop detection function.
   Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
-
-  //Code.loadBlocks('');
-
   // if ('BlocklyStorage' in window) {
   //   // Hook a save function onto unload.
   //   BlocklyStorage.backupOnUnload(Code.workspace);
   // }
-
+  // Code.loadBlocks(defaultxml);
   Code.bindClick('trashButton',
-      function() {Code.discard(); Code.renderContent();});
+    function() {Code.discard(); Code.renderContent();});
   Code.bindClick('runButton', Code.runJS);
   // Disable the link button if page isn't backed by App Engine storage.
   //var linkButton = document.getElementById('linkButton');
@@ -418,13 +421,17 @@ Code.init = function(obj) {
   for (var i = 0; i < Code.TABS_.length; i++) {
     var name = Code.TABS_[i];
     Code.bindClick('tab_' + name,
-        function(name_) {return function() {Code.tabClick(name_);};}(name));
+      function(name_) {return function() {Code.tabClick(name_);};}(name));
   }
 
   Code.tabClick(Code.selected);
-
   // Lazy-load the syntax-highlighting.
   //window.setTimeout(Code.importPrettify, 1);
+  window.setTimeout(function() {
+    if (defaultxml) {
+      Code.loadBlocks(defaultxml);
+    }
+  }, 100);
 };
 
 /**
@@ -472,7 +479,7 @@ Code.initLanguage = function() {
   document.getElementById('trashButton').title = MSG['trashTooltip'];
 
   var categories = ['catLogic', 'catLoops', 'catMath', 'catText', 'catLists',
-                    'catColour', 'catVariables', 'catFunctions'];
+    'catColour', 'catVariables', 'catFunctions'];
   for (var i = 0, cat; cat = categories[i]; i++) {
     document.getElementById(cat).setAttribute('name', MSG[cat]);
   }
@@ -513,7 +520,7 @@ Code.runJS = function() {
 Code.discard = function() {
   var count = Code.workspace.getAllBlocks().length;
   if (count < 2 ||
-      window.confirm(Blockly.Msg.DELETE_ALL_BLOCKS.replace('%1', count))) {
+    window.confirm(Blockly.Msg.DELETE_ALL_BLOCKS.replace('%1', count))) {
     Code.workspace.clear();
     if (window.location.hash) {
       window.location.hash = '';
