@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "formDesigner",
       "assets": [
         "assets",
         "upload.php",
@@ -27,19 +27,23 @@
           "../node_modules/nanoscroller/bin/css/nanoscroller.css"
       ],
       "scripts": [
-          "../node_modules/jquery/dist/jquery.js",
+          "../node_modules/jquery/dist/jquery.min.js",
           "../node_modules/nanoscroller/bin/javascripts/jquery.nanoscroller.js",
           "../node_modules/moment/moment.js",
           "../node_modules/chart.js/dist/Chart.js",
           "../node_modules/fullcalendar/dist/fullcalendar.js",
           "../node_modules/quill/dist/quill.js",
-                  "../blockly-master/blockly_compressed-format.js",
-                  "../blockly-master/blocks_compressed.js",
-                  "../blockly-master/javascript_compressed.js",
-                  "../blockly-master/msg/js/en.js",
-                  "../blockly-master/demos/code/code.js",
-                  "../blockly-master/demos/prettify.js",
-                  "../blockly-master/buildBlockly.js",
+          "../blockly-master/blockly_compressed-format.js",
+          "../blockly-master/blocks_compressed-format.js",
+          "../blockly-master/javascript_compressed.js",
+          "../blockly-master/msg/js/en.js",
+          "../blockly-master/demos/code/code.js",
+          "../blockly-master/demos/prettify.js",
+          "../blockly-master/buildBlockly.js",
+          "../blockly-master/component.js",
+          "../blockly-master/generators/javascript/component.js",
+          "../blockly-master/core/field_dialog.js",
+          "../blockly-master/core/utils.js",
           "assets/layout/script/ripple.js"
       ],
       "environmentSource": "environments/environment.ts",

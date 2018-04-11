@@ -1,4 +1,4 @@
-# 表单设计器angular版本
+# PAI表单设计器angular版本
 ------
 ### 开发运行环境
 
@@ -18,32 +18,46 @@
 
     `npm config set prefix 你的绝对路径`
     
-3. 设置环境变量
+3. 设置node-sass下载地址
+
+    `npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/`
+    
+    [参考网址](https://www.cnblogs.com/savokiss/p/6474673.html)
+    
+4. 设置phantomjs下载地址
+
+    `npm config set phantomjs_cdnurl http://cnpmjs.org/downloads`
+    
+5. 设置环境变量
 
     在环境变量中将[你的绝对路径]添加到PATH最后
     
-4. 安装淘宝cnpm命令，主要用于安装node-sass
+6. 安装淘宝cnpm命令，主要用于安装node-sass
 
     `npm install -g cnpm --registry=https://registry.npm.taobao.org`
     
-5. 安装node-sass
+7. 安装node-sass
 
-    `cnpm install –g node-sass`
+    `npm install -g node-sass`
 
-6. 安装angular-cli
+8. 安装angular-cli
 
     `npm install -g @angular/cli`
     
     验证是否安装成功：`ng -v`
     
-7. 在项目根目录下执行安装命令
+9. 安装yarn
 
-    `npm install`
-8. 在项目根目录下执行启动命令
-
-    `npm start`
+    `npm install -g yarn`
     
-9. 在浏览器中运行
+10. 在项目根目录下执行安装命令
+
+    `yarn install`
+11. 在项目根目录下执行启动命令
+
+    `yarn start`
+    
+12. 在浏览器中运行
 
     [http://localhost:4201](http://localhost:4201)
 
@@ -54,7 +68,7 @@
 
 1. 安装typescript
 
-    `npm install -g typescript typings`
+    `cnpm install -g typescript typings`
 
 2. 在项目根目录下执行命令
 
